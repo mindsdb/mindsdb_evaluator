@@ -1,12 +1,11 @@
 from sklearn.metrics import f1_score
 
 
-def evaluate_multilabel_accuracy(true_values, predictions, **kwargs):
+def evaluate_multilabel_accuracy(y_true, y_pred, **kwargs):
     """
     Evaluates accuracy for multilabel/tag prediction.
 
-    :return: weighted f1 score of predictions and ground truths.
+    :return: weighted f1 score of y_pred and ground truths.
     """
-    pred_values = predictions['prediction']
-    return f1_score(true_values, pred_values, average='weighted')
-
+    pred_values = y_pred['prediction']
+    return f1_score(y_true, pred_values, average='weighted')

@@ -100,7 +100,7 @@ If you have additional questions or you want to chat with MindsDB core team, you
     <a href="https://join.slack.com/t/mindsdbcommunity/shared_invite/zt-o8mrmx3l-5ai~5H66s6wlxFfBMVI6wQ" target="_blank"><img src="https://img.shields.io/badge/slack-@mindsdbcommunity-blueviolet.svg?logo=slack " alt="MindsDB Community"></a>
     </embed>
 
-To get updates on MindsDB’s latest announcements, releases, and events, sign up for our `Monthly Community Newsletter <https://mindsdb.com/newsletter/?utm_medium=community&utm_source=github&utm_campaign=lightwood%20repo>`_.
+To get updates on MindsDB’s latest announcements, releases, and events, sign up for our `Monthly Community Newsletter <https://mindsdb.com/newsletter/?utm_medium=community&utm_source=github>`_.
 
 Join our mission of democratizing machine learning and allowing developers to become data scientists!
 

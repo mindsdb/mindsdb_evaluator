@@ -3,5 +3,5 @@
 
 The ``accuracy`` module contains accuracy functions for regression, classification and forecasting machine learning models.
 
-.. automodule:: base
+.. automodule:: accuracy
    :members:

@@ -1,0 +1,350 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Accuracy &mdash; mindsdb_evaluator 23.1.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Calibration" href="calibration.html" />
+    <link rel="prev" title="MindsDB Evaluator" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/mindsdblogo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                23.1.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Accuracy</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#accuracy.complementary_smape_array_accuracy">complementary_smape_array_accuracy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accuracy.evaluate_accuracy">evaluate_accuracy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accuracy.evaluate_array_accuracy">evaluate_array_accuracy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accuracy.evaluate_cat_array_accuracy">evaluate_cat_array_accuracy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accuracy.evaluate_multilabel_accuracy">evaluate_multilabel_accuracy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accuracy.evaluate_num_array_accuracy">evaluate_num_array_accuracy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accuracy.evaluate_regression_accuracy">evaluate_regression_accuracy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="calibration.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Calibration</span></code></a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mindsdb_evaluator</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">Accuracy</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/accuracy.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="accuracy">
+<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">Accuracy</span></code><a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> module contains accuracy functions for regression, classification and forecasting machine learning models.</p>
+<span class="target" id="module-accuracy"></span><dl class="py function">
+<dt class="sig sig-object py" id="accuracy.complementary_smape_array_accuracy">
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">complementary_smape_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#complementary_smape_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.complementary_smape_array_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>This metric is used in forecasting tasks. It returns <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">(sMAPE/2)</span></code>, where <code class="docutils literal notranslate"><span class="pre">sMAPE</span></code> is the symmetrical mean absolute percentage error of the forecast versus actual measurements in the time series.</p>
+<p>As such, its domain is 0-1 bounded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="accuracy.evaluate_accuracy">
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy_functions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_analysis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_decimals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/general.html#evaluate_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatcher for accuracy evaluation.
+:type data: <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>
+:param data: original dataframe.
+:type predictions: <code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code>
+:param predictions: output of a lightwood predictor for the input <cite>data</cite>.
+:type target: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>
+:param target: target column name.
+:type accuracy_functions: <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]
+:param accuracy_functions: list of accuracy function names. Support currently exists for <cite>scikit-learn</cite>’s <cite>metrics</cite> module, plus any custom methods that Lightwood exposes.
+:type ts_analysis: <code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>]
+:param ts_analysis: <cite>lightwood.data.timeseries_analyzer</cite> output, used to compute time series task accuracy.
+:type n_decimals: <code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]
+:param n_decimals: used to round accuracies.
+:rtype: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]
+:return: accuracy metric for a dataset and predictions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="accuracy.evaluate_array_accuracy">
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_array_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default time series forecasting accuracy method.
+Returns mean score over all timesteps in the forecasting horizon, as determined by the <cite>base_acc_fn</cite> (R2 score by default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="accuracy.evaluate_cat_array_accuracy">
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_cat_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_cat_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_cat_array_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate accuracy in categorical time series forecasting tasks.</p>
+<p>Balanced accuracy is computed for each timestep (as determined by <cite>timeseries_settings.horizon</cite>),
+and the final accuracy is the reciprocal of the average score through all timesteps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="accuracy.evaluate_multilabel_accuracy">
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_multilabel_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/classification.html#evaluate_multilabel_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_multilabel_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates accuracy for multilabel/tag prediction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>weighted f1 score of predictions and ground truths.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="accuracy.evaluate_num_array_accuracy">
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_num_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_num_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_num_array_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate accuracy in numerical array prediction tasks.</p>
+<p>Scores are computed for each array index (as determined by the prediction length),
+and the final accuracy is the reciprocal of the average R2 score through all steps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="accuracy.evaluate_regression_accuracy">
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_regression_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/regression.html#evaluate_regression_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_regression_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates accuracy for regression tasks.
+If predictions have a lower and upper bound, then <cite>within-bound</cite> accuracy is computed: whether the ground truth value falls within the predicted region.
+If not, then a (positive bounded) R2 score is returned instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>accuracy score as defined above.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="calibration.html" class="btn btn-neutral float-right" title="Calibration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="MindsDB Evaluator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, MindsDB.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

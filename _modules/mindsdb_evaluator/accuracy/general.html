@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mindsdb_evaluator.accuracy.general &mdash; mindsdb_evaluator 23.1.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/mindsdblogo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                23.1.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../accuracy.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Accuracy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../calibration.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Calibration</span></code></a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mindsdb_evaluator</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>mindsdb_evaluator.accuracy.general</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for mindsdb_evaluator.accuracy.general</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">mindsdb_evaluator.accuracy.forecasting</span> <span class="kn">import</span> \
+    <span class="n">evaluate_array_accuracy</span><span class="p">,</span> \
+    <span class="n">evaluate_num_array_accuracy</span><span class="p">,</span> \
+    <span class="n">evaluate_cat_array_accuracy</span><span class="p">,</span> \
+    <span class="n">complementary_smape_array_accuracy</span>
+
+
+<div class="viewcode-block" id="evaluate_accuracy"><a class="viewcode-back" href="../../../accuracy.html#accuracy.evaluate_accuracy">[docs]</a><span class="k">def</span> <span class="nf">evaluate_accuracy</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+                      <span class="n">predictions</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
+                      <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                      <span class="n">accuracy_functions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+                      <span class="n">ts_analysis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
+                      <span class="n">n_decimals</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dispatcher for accuracy evaluation.</span>
+<span class="sd">    :param data: original dataframe.</span>
+<span class="sd">    :param predictions: output of a lightwood predictor for the input `data`.</span>
+<span class="sd">    :param target: target column name.</span>
+<span class="sd">    :param accuracy_functions: list of accuracy function names. Support currently exists for `scikit-learn`&#39;s `metrics` module, plus any custom methods that Lightwood exposes.</span>
+<span class="sd">    :param ts_analysis: `lightwood.data.timeseries_analyzer` output, used to compute time series task accuracy.</span>
+<span class="sd">    :param n_decimals: used to round accuracies.</span>
+<span class="sd">    :return: accuracy metric for a dataset and predictions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+    <span class="n">score_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">accuracy_function_str</span> <span class="ow">in</span> <span class="n">accuracy_functions</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;array_accuracy&#39;</span> <span class="ow">in</span> <span class="n">accuracy_function_str</span> <span class="ow">or</span> <span class="n">accuracy_function_str</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;bounded_ts_accuracy&#39;</span><span class="p">,):</span>
+            <span class="k">if</span> <span class="n">ts_analysis</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">ts_analysis</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tss&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">ts_analysis</span><span class="p">[</span><span class="s1">&#39;tss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">is_timeseries</span><span class="p">:</span>
+                <span class="c1"># normal array, needs to be expanded</span>
+                <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">target</span><span class="p">]</span>
+                <span class="n">true_values</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">target</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">horizon</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">predictions</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="n">predictions</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">gby</span> <span class="o">=</span> <span class="n">ts_analysis</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tss&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">group_by</span> <span class="k">if</span> <span class="n">ts_analysis</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tss&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">group_by</span> <span class="k">else</span> <span class="p">[]</span>
+                <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">target</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s1">_timestep_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">horizon</span><span class="p">)]</span> <span class="o">+</span> <span class="n">gby</span>
+                <span class="n">true_values</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span>
+
+            <span class="n">true_values</span> <span class="o">=</span> <span class="n">true_values</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">predictions</span> <span class="o">=</span> <span class="n">predictions</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># split array cells into columns</span>
+
+            <span class="k">if</span> <span class="n">accuracy_function_str</span> <span class="o">==</span> <span class="s1">&#39;evaluate_array_accuracy&#39;</span><span class="p">:</span>
+                <span class="n">acc_fn</span> <span class="o">=</span> <span class="n">evaluate_array_accuracy</span>
+            <span class="k">elif</span> <span class="n">accuracy_function_str</span> <span class="o">==</span> <span class="s1">&#39;evaluate_num_array_accuracy&#39;</span><span class="p">:</span>
+                <span class="n">acc_fn</span> <span class="o">=</span> <span class="n">evaluate_num_array_accuracy</span>
+            <span class="k">elif</span> <span class="n">accuracy_function_str</span> <span class="o">==</span> <span class="s1">&#39;evaluate_cat_array_accuracy&#39;</span><span class="p">:</span>
+                <span class="n">acc_fn</span> <span class="o">=</span> <span class="n">evaluate_cat_array_accuracy</span>
+            <span class="k">elif</span> <span class="n">accuracy_function_str</span> <span class="o">==</span> <span class="s1">&#39;complementary_smape_array_accuracy&#39;</span><span class="p">:</span>
+                <span class="n">acc_fn</span> <span class="o">=</span> <span class="n">complementary_smape_array_accuracy</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not retrieve accuracy function: </span><span class="si">{</span><span class="n">accuracy_function_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">score_dict</span><span class="p">[</span><span class="n">accuracy_function_str</span><span class="p">]</span> <span class="o">=</span> <span class="n">acc_fn</span><span class="p">(</span><span class="n">true_values</span><span class="p">,</span>
+                                                       <span class="n">predictions</span><span class="p">,</span>
+                                                       <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">cols</span><span class="p">],</span>
+                                                       <span class="n">ts_analysis</span><span class="o">=</span><span class="n">ts_analysis</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">true_values</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;lightwood.helpers.accuracy&#39;</span><span class="p">),</span> <span class="n">accuracy_function_str</span><span class="p">):</span>
+                <span class="n">accuracy_function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;lightwood.helpers.accuracy&#39;</span><span class="p">),</span>
+                                            <span class="n">accuracy_function_str</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">accuracy_function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;sklearn.metrics&#39;</span><span class="p">),</span> <span class="n">accuracy_function_str</span><span class="p">)</span>
+            <span class="n">score_dict</span><span class="p">[</span><span class="n">accuracy_function_str</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_function</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">true_values</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">predictions</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">fn</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">score_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">score_dict</span><span class="p">[</span><span class="n">fn</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">n_decimals</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">score_dict</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, MindsDB.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

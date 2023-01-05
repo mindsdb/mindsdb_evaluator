@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Accuracy &mdash; mindsdb_evaluator 0.0.2 documentation</title>
+  <title>Accuracy &mdash; mindsdb_evaluator 0.0.3 documentation</title>
   
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                0.0.2
+                0.0.3
               </div>
             
           
@@ -205,8 +205,9 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> module contains accuracy functions for regression, classification and forecasting machine learning models.</p>
 <span class="target" id="module-accuracy"></span><dl class="py function">
 <dt class="sig sig-object py" id="accuracy.complementary_smape_array_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">complementary_smape_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#complementary_smape_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.complementary_smape_array_accuracy" title="Permalink to this definition">¶</a></dt>
-<dd><p>This metric is used in forecasting tasks. It returns <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">(sMAPE/2)</span></code>, where <code class="docutils literal notranslate"><span class="pre">sMAPE</span></code> is the symmetrical mean absolute percentage error of the forecast versus actual measurements in the time series.</p>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">complementary_smape_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#complementary_smape_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.complementary_smape_array_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forecast accuracy metric.</p>
+<p>It returns <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">(sMAPE/2)</span></code>, where <code class="docutils literal notranslate"><span class="pre">sMAPE</span></code> is the symmetrical mean absolute percentage error of the forecast versus actual measurements in the time series.</p>
 <p>As such, its domain is 0-1 bounded.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -217,7 +218,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy_functions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_analysis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_decimals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/general.html#evaluate_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_accuracy" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_analysis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_decimals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/general.html#evaluate_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_accuracy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dispatcher for accuracy evaluation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -225,25 +226,25 @@
 <li><p><strong>data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – original dataframe.</p></li>
 <li><p><strong>predictions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code>) – output of a machine learning model for the input <cite>data</cite>.</p></li>
 <li><p><strong>target</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – target column name.</p></li>
-<li><p><strong>accuracy_functions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – list of accuracy function names. Support currently exists for <cite>scikit-learn</cite>’s <cite>metrics</cite> module, plus any custom methods that Lightwood exposes.</p></li>
+<li><p><strong>accuracy_function</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – either a metric from the <cite>accuracy</cite> module or <cite>scikit-learn.metric</cite>.</p></li>
 <li><p><strong>ts_analysis</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>]) – <cite>lightwood.data.timeseries_analyzer</cite> output, used to compute time series task accuracy.</p></li>
 <li><p><strong>n_decimals</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – used to round accuracies.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]</p>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>accuracy metric for a dataset and predictions.</p>
+<dd class="field-odd"><p>accuracy score, given input data and model predictions.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_array_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_array_accuracy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Default time series forecasting accuracy method.
-Returns mean score over all timesteps in the forecasting horizon, as determined by the <cite>base_acc_fn</cite> (R2 score by default).</p>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_array_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default forecasting accuracy metric.</p>
+<p>Yields mean score over all timesteps in the forecast, as determined by the <cite>base_acc_fn</cite> (R2 score by default).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -253,9 +254,9 @@ Returns mean score over all timesteps in the forecasting horizon, as determined 
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_cat_array_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_cat_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_cat_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_cat_array_accuracy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate accuracy in categorical time series forecasting tasks.</p>
-<p>Balanced accuracy is computed for each timestep (as determined by <cite>timeseries_settings.horizon</cite>),
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_cat_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_cat_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_cat_array_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Categorical forecast accuracy metric.</p>
+<p>Balanced accuracy is computed for each timestep (as determined by the forecast length)
 and the final accuracy is the reciprocal of the average score through all timesteps.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -266,20 +267,20 @@ and the final accuracy is the reciprocal of the average score through all timest
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_multilabel_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_multilabel_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/classification.html#evaluate_multilabel_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_multilabel_accuracy" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_multilabel_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/classification.html#evaluate_multilabel_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_multilabel_accuracy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluates accuracy for multilabel/tag prediction.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>weighted f1 score of predictions and ground truths.</p>
+<dd class="field-odd"><p>weighted f1 score of y_pred and ground truths.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_num_array_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_num_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_num_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_num_array_accuracy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate accuracy in numerical array prediction tasks.</p>
-<p>Scores are computed for each array index (as determined by the prediction length),
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_num_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_num_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_num_array_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numerical forecast accuracy metric.</p>
+<p>Scores are computed for each array index (as determined by the forecast length),
 and the final accuracy is the reciprocal of the average R2 score through all steps.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -290,7 +291,7 @@ and the final accuracy is the reciprocal of the average R2 score through all ste
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_regression_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_regression_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/regression.html#evaluate_regression_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_regression_accuracy" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_regression_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/regression.html#evaluate_regression_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_regression_accuracy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluates accuracy for regression tasks.
 If predictions have a lower and upper bound, then <cite>within-bound</cite> accuracy is computed: whether the ground truth value falls within the predicted region.
 If not, then a (positive bounded) R2 score is returned instead.</p>

@@ -3,8 +3,8 @@ from sklearn.metrics import r2_score
 
 
 def evaluate_regression_accuracy(
-        true_values,
-        predictions,
+        y_true,
+        y_pred,
         **kwargs
 ):
     """
@@ -14,11 +14,10 @@ def evaluate_regression_accuracy(
 
     :return: accuracy score as defined above. 
     """  # noqa
-    if 'lower' and 'upper' in predictions:
-        Y = np.array(true_values).astype(float)
-        within = ((Y >= predictions['lower']) & (Y <= predictions['upper']))
+    if 'lower' and 'upper' in y_pred:
+        y = np.array(y_true).astype(float)
+        within = ((y >= y_pred['lower']) & (y <= y_pred['upper']))
         return sum(within) / len(within)
     else:
-        r2 = r2_score(true_values, predictions['prediction'])
+        r2 = r2_score(y_true, y_pred['prediction'])
         return max(r2, 0)
-

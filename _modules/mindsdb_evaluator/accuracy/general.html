@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>mindsdb_evaluator.accuracy.general &mdash; mindsdb_evaluator 0.0.1 documentation</title>
+  <title>mindsdb_evaluator.accuracy.general &mdash; mindsdb_evaluator 0.0.2 documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.0.1
+                0.0.2
               </div>
             
           
@@ -184,8 +184,9 @@
                       <span class="n">n_decimals</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dispatcher for accuracy evaluation.</span>
+
 <span class="sd">    :param data: original dataframe.</span>
-<span class="sd">    :param predictions: output of a lightwood predictor for the input `data`.</span>
+<span class="sd">    :param predictions: output of a machine learning model for the input `data`.</span>
 <span class="sd">    :param target: target column name.</span>
 <span class="sd">    :param accuracy_functions: list of accuracy function names. Support currently exists for `scikit-learn`&#39;s `metrics` module, plus any custom methods that Lightwood exposes.</span>
 <span class="sd">    :param ts_analysis: `lightwood.data.timeseries_analyzer` output, used to compute time series task accuracy.</span>
@@ -226,8 +227,8 @@
                                                        <span class="n">ts_analysis</span><span class="o">=</span><span class="n">ts_analysis</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">true_values</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;lightwood.helpers.accuracy&#39;</span><span class="p">),</span> <span class="n">accuracy_function_str</span><span class="p">):</span>
-                <span class="n">accuracy_function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;lightwood.helpers.accuracy&#39;</span><span class="p">),</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;mindsdb_evaluator.accuracy&#39;</span><span class="p">),</span> <span class="n">accuracy_function_str</span><span class="p">):</span>
+                <span class="n">accuracy_function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;mindsdb_evaluator.accuracy&#39;</span><span class="p">),</span>
                                             <span class="n">accuracy_function_str</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">accuracy_function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;sklearn.metrics&#39;</span><span class="p">),</span> <span class="n">accuracy_function_str</span><span class="p">)</span>

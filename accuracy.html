@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Accuracy &mdash; mindsdb_evaluator 0.0.1 documentation</title>
+  <title>Accuracy &mdash; mindsdb_evaluator 0.0.2 documentation</title>
   
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                0.0.1
+                0.0.2
               </div>
             
           
@@ -218,21 +218,25 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_accuracy">
 <span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy_functions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_analysis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_decimals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/general.html#evaluate_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_accuracy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dispatcher for accuracy evaluation.
-:type data: <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>
-:param data: original dataframe.
-:type predictions: <code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code>
-:param predictions: output of a lightwood predictor for the input <cite>data</cite>.
-:type target: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>
-:param target: target column name.
-:type accuracy_functions: <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]
-:param accuracy_functions: list of accuracy function names. Support currently exists for <cite>scikit-learn</cite>’s <cite>metrics</cite> module, plus any custom methods that Lightwood exposes.
-:type ts_analysis: <code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>]
-:param ts_analysis: <cite>lightwood.data.timeseries_analyzer</cite> output, used to compute time series task accuracy.
-:type n_decimals: <code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]
-:param n_decimals: used to round accuracies.
-:rtype: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]
-:return: accuracy metric for a dataset and predictions.</p>
+<dd><p>Dispatcher for accuracy evaluation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – original dataframe.</p></li>
+<li><p><strong>predictions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code>) – output of a machine learning model for the input <cite>data</cite>.</p></li>
+<li><p><strong>target</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – target column name.</p></li>
+<li><p><strong>accuracy_functions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – list of accuracy function names. Support currently exists for <cite>scikit-learn</cite>’s <cite>metrics</cite> module, plus any custom methods that Lightwood exposes.</p></li>
+<li><p><strong>ts_analysis</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>]) – <cite>lightwood.data.timeseries_analyzer</cite> output, used to compute time series task accuracy.</p></li>
+<li><p><strong>n_decimals</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – used to round accuracies.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>accuracy metric for a dataset and predictions.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">

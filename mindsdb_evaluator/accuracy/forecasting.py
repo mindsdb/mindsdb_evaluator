@@ -107,5 +107,5 @@ def complementary_smape_array_accuracy(
 def smape(y_true: np.ndarray, y_pred: np.ndarray):
     thres = 1e9
     num = abs(y_pred - y_true)
-    den = (abs(y_true) + abs(y_pred))/2
-    return min(np.average(num/den), thres)
+    den = (abs(y_true) + abs(y_pred)) / 2
+    return min(np.average(num / den), thres)

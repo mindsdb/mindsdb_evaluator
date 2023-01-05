@@ -3,7 +3,6 @@ from copy import deepcopy
 import numpy as np
 import pandas as pd
 from sklearn.metrics import r2_score, balanced_accuracy_score
-from sktime.performance_metrics.forecasting import mean_absolute_percentage_error  # TODO: refactor this out
 
 
 def evaluate_array_accuracy(
@@ -101,5 +100,12 @@ def complementary_smape_array_accuracy(
         y_true[nans] = 0
         y_pred[nans] = 0
 
-    smape_score = mean_absolute_percentage_error(y_true, y_pred, symmetric=True)
+    smape_score = smape(y_true, y_pred)
     return 1 - smape_score / 2
+
+
+def smape(y_true: np.ndarray, y_pred: np.ndarray):
+    thres = 1e9
+    num = abs(y_pred - y_true)
+    den = (abs(y_true) + abs(y_pred))/2
+    return min(np.average(num/den), thres)

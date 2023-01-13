@@ -96,13 +96,14 @@ def complementary_smape_array_accuracy(
     y_true = y_true.values
     y_pred = y_pred.values
     if np.isnan(y_true).any():
-        # convert all nan indexes to zero pairs that don't contribute to the metric
+        # convert all nan indexes to non-zero equal pairs that don't contribute to the metric
         nans = np.isnan(y_true)
-        y_true[nans] = 0
-        y_pred[nans] = 0
+        y_true[nans] = 1
+        y_pred[nans] = 1
 
     smape_score = smape(y_true, y_pred)
-    return 1 - smape_score / 2
+    csmape = 1 - smape_score / 2
+    return csmape
 
 
 def smape(y_true: np.ndarray, y_pred: np.ndarray):

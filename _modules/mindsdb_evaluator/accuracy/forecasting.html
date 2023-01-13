@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>mindsdb_evaluator.accuracy.forecasting &mdash; mindsdb_evaluator 0.0.3 documentation</title>
+  <title>mindsdb_evaluator.accuracy.forecasting &mdash; mindsdb_evaluator 0.0.4 documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.0.3
+                0.0.4
               </div>
             
           
@@ -262,13 +262,14 @@
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">values</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">values</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
-        <span class="c1"># convert all nan indexes to zero pairs that don&#39;t contribute to the metric</span>
+        <span class="c1"># convert all nan indexes to non-zero equal pairs that don&#39;t contribute to the metric</span>
         <span class="n">nans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
-        <span class="n">y_true</span><span class="p">[</span><span class="n">nans</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">y_pred</span><span class="p">[</span><span class="n">nans</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">y_true</span><span class="p">[</span><span class="n">nans</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">y_pred</span><span class="p">[</span><span class="n">nans</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
     <span class="n">smape_score</span> <span class="o">=</span> <span class="n">smape</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">smape_score</span> <span class="o">/</span> <span class="mi">2</span></div>
+    <span class="n">csmape</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">smape_score</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">csmape</span></div>
 
 
 <span class="k">def</span> <span class="nf">smape</span><span class="p">(</span><span class="n">y_true</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>

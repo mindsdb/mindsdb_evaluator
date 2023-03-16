@@ -7,17 +7,17 @@ from mindsdb_evaluator.accuracy.regression import evaluate_regression_accuracy
 class TestRegressionAccuracies(unittest.TestCase):
     def test_evaluate_regression_accuracy(self):
         # vacuous case: with complete range provided
-        true = np.array([1,2,3])
+        true = np.array([1, 2, 3])
         pred_true = {'lower': np.min(true), 'upper': np.max(true)}
         self.assertEqual(evaluate_regression_accuracy(true, pred_true), 1.0)
 
         # vacuous case: without complete range provided
-        true = np.array([1,2,3])
+        true = np.array([1, 2, 3])
         pred_true = {'prediction': true}
         self.assertEqual(evaluate_regression_accuracy(true, pred_true), 1.0)
 
         # edge case: y_pred range provided falls outside of the span of y_true
-        y_true = np.array([100.0,200.0,300.0])
+        y_true = np.array([100.0, 200.0, 300.0])
         pred = np.array([0.0, 10.0, 20.0])
         y_pred = {'lower': np.min(pred), 'upper': np.max(pred)}
         self.assertEqual(evaluate_regression_accuracy(y_true, y_pred), 0.0)
@@ -53,7 +53,7 @@ class TestRegressionAccuracies(unittest.TestCase):
         self.assertAlmostEqual(evaluate_regression_accuracy(y_true, y_pred), 0.9230769231, 10)
 
         # edge case
-        y_true = np.array([1,2,3])
-        pred = np.array([3,2,1])
+        y_true = np.array([1, 2, 3])
+        pred = np.array([3, 2, 1])
         y_pred = {'prediction': pred}
         self.assertEqual(evaluate_regression_accuracy(y_true, y_pred), 0.0)

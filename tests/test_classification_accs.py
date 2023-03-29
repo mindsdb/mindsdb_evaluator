@@ -1,10 +1,6 @@
 import unittest
 import numpy as np
-import sys
-
-sys.path.insert(0, "../mindsdb_evaluator/accuracy")
-from classification import evaluate_multilabel_accuracy, evaluate_top_k_accuracy
-# from mindsdb_evaluator.accuracy.classification import evaluate_multilabel_accuracy, evaluate_top_k_accuracy
+from mindsdb_evaluator.accuracy.classification import evaluate_multilabel_accuracy, evaluate_top_k_accuracy
 
 
 class TestClassificationAccuracies(unittest.TestCase):

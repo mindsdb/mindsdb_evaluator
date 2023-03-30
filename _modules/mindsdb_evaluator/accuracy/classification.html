@@ -164,7 +164,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for mindsdb_evaluator.accuracy.classification</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span>
+<span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">top_k_accuracy_score</span>
 
 
 <div class="viewcode-block" id="evaluate_multilabel_accuracy"><a class="viewcode-back" href="../../../accuracy.html#accuracy.evaluate_multilabel_accuracy">[docs]</a><span class="k">def</span> <span class="nf">evaluate_multilabel_accuracy</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -175,6 +175,17 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pred_values</span> <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="s1">&#39;prediction&#39;</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pred_values</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="evaluate_top_k_accuracy"><a class="viewcode-back" href="../../../accuracy.html#accuracy.evaluate_top_k_accuracy">[docs]</a><span class="k">def</span> <span class="nf">evaluate_top_k_accuracy</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Evaluates the number of times where the correct label is among the top k labels</span>
+
+<span class="sd">    :return: top k accuracy score of y_pred and ground truths.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pred_values</span> <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="s1">&#39;prediction&#39;</span><span class="p">]</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;k&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">top_k_accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pred_values</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

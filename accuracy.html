@@ -106,6 +106,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#accuracy.evaluate_multilabel_accuracy">evaluate_multilabel_accuracy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#accuracy.evaluate_num_array_accuracy">evaluate_num_array_accuracy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#accuracy.evaluate_regression_accuracy">evaluate_regression_accuracy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accuracy.evaluate_top_k_accuracy">evaluate_top_k_accuracy</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="calibration.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Calibration</span></code></a></li>
@@ -274,6 +275,17 @@ If not, then a (positive bounded) R2 score is returned instead.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>accuracy score as defined above.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="accuracy.evaluate_top_k_accuracy">
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_top_k_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/classification.html#evaluate_top_k_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_top_k_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the number of times where the correct label is among the top k labels</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>top k accuracy score of y_pred and ground truths.</p>
 </dd>
 </dl>
 </dd></dl>

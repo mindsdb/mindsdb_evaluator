@@ -12,8 +12,8 @@ from mindsdb_evaluator.accuracy.forecasting import \
 
 def evaluate_accuracy(data: pd.DataFrame,
                       predictions: pd.Series,
-                      target: str,
                       accuracy_function: str,
+                      target: Optional[str] = None,
                       ts_analysis: Optional[dict] = {},
                       n_decimals: Optional[int] = 3) -> float:
     """
@@ -76,7 +76,12 @@ def evaluate_accuracies(data: pd.DataFrame,
                         n_decimals: Optional[int] = 3) -> Dict[str, float]:
     score_dict = {}
     for accuracy_function in accuracy_functions:
-        score = evaluate_accuracy(data, predictions, target, accuracy_function, ts_analysis, n_decimals)
+        score = evaluate_accuracy(data,
+                                  predictions,
+                                  accuracy_function,
+                                  target=target,
+                                  ts_analysis=ts_analysis,
+                                  n_decimals=n_decimals)
         score_dict[accuracy_function] = score
 
     return score_dict

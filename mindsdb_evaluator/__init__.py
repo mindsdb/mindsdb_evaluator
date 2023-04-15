@@ -1,7 +1,7 @@
 from mindsdb_evaluator.accuracy import *  # noqa
 from mindsdb_evaluator.calibration import *  # noqa
 
-__version__ = '0.0.6'
+__version__ = '0.0.7'
 name = "mindsdb_evaluator"
 
 __all__ = ['name', '__version__']

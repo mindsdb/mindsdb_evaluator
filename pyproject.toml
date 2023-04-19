@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mindsdb-evaluator"
-version = "0.0.7"
+version = "0.0.8"
 description = "Model evaluation for Machine Learning pipelines."
 authors = ["MindsDB Inc. <hello@mindsdb.com>"]
 license = "GPL-3.0"

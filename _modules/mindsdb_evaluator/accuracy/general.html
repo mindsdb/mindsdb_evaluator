@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>mindsdb_evaluator.accuracy.general &mdash; mindsdb_evaluator 0.0.7 documentation</title>
+  <title>mindsdb_evaluator.accuracy.general &mdash; mindsdb_evaluator 0.0.8 documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.0.7
+                0.0.8
               </div>
             
           
@@ -229,7 +229,14 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">accuracy_function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;sklearn.metrics&#39;</span><span class="p">),</span> <span class="n">accuracy_function</span><span class="p">)</span>
 
-        <span class="n">score</span> <span class="o">=</span> <span class="n">accuracy_function</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="n">accuracy_function</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;mix of label input&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">accuracy_function</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">y_true</span><span class="p">],</span>
+                                          <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">y_pred</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">e</span>
 
     <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">n_decimals</span><span class="p">)</span></div>
 

@@ -63,7 +63,14 @@ def evaluate_accuracy(data: pd.DataFrame,
         else:
             accuracy_function = getattr(importlib.import_module('sklearn.metrics'), accuracy_function)
 
-        score = accuracy_function(y_true, y_pred)
+        try:
+            score = accuracy_function(y_true, y_pred)
+        except ValueError as e:
+            if 'mix of label input' in str(e).lower():
+                score = accuracy_function([str(y) for y in y_true],
+                                          [str(y) for y in y_pred])
+            else:
+                raise e
 
     return round(score, n_decimals)
 

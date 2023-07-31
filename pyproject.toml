@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mindsdb-evaluator"
-version = "0.0.9"
+version = "0.0.10"
 description = "Model evaluation for Machine Learning pipelines."
 authors = ["MindsDB Inc. <hello@mindsdb.com>"]
 license = "GPL-3.0"
@@ -8,12 +8,12 @@ readme = "README.md"
 packages = [{include = "mindsdb_evaluator"}]
 
 [tool.poetry.dependencies]
-python = ">=3.7,<3.10"
-type-infer = ">=0.0.9"
+python = ">=3.8,<3.12"
+type-infer = ">=0.0.14"
 numpy = "^1"
 pandas = "^1"
 scikit-learn = ">=0.24.2"
-dataprep-ml = ">=0.0.8"
+dataprep-ml = ">=0.0.16"
 
 
 [build-system]

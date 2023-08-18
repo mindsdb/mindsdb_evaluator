@@ -95,9 +95,9 @@ def complementary_smape_array_accuracy(
     # nan check
     y_true = y_true.values
     y_pred = y_pred.values
-    if np.isnan(y_true).any():
+    nans = pd.isna(y_true)
+    if nans.any():
         # convert all nan indexes to non-zero equal pairs that don't contribute to the metric
-        nans = np.isnan(y_true)
         y_true[nans] = 1
         y_pred[nans] = 1
 

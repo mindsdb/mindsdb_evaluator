@@ -1,6 +1,7 @@
 import importlib
 from typing import List, Dict, Optional
 
+import numpy as np
 import pandas as pd
 
 from mindsdb_evaluator.accuracy.forecasting import \
@@ -10,12 +11,17 @@ from mindsdb_evaluator.accuracy.forecasting import \
     complementary_smape_array_accuracy
 
 
+SCORE_TYPES = (float, np.float16, np.float32, np.float64, np.float128,
+               int, np.int8, np.int16, np.int32, np.int64)
+
+
 def evaluate_accuracy(data: pd.DataFrame,
                       predictions: pd.Series,
                       accuracy_function: str,
                       target: Optional[str] = None,
                       ts_analysis: Optional[dict] = {},
-                      n_decimals: Optional[int] = 3) -> float:
+                      n_decimals: Optional[int] = 3,
+                      fn_kwargs: Optional[dict] = {}) -> float:
     """
     Dispatcher for accuracy evaluation.
 
@@ -25,6 +31,7 @@ def evaluate_accuracy(data: pd.DataFrame,
     :param accuracy_function: either a metric from the `accuracy` module or `scikit-learn.metric`.
     :param ts_analysis: `lightwood.data.timeseries_analyzer` output, used to compute time series task accuracy.
     :param n_decimals: used to round accuracies.
+    :param fn_kwargs: additional arguments to be passed to the accuracy function.
     
     :return: accuracy score, given input data and model predictions.
     """  # noqa
@@ -53,7 +60,9 @@ def evaluate_accuracy(data: pd.DataFrame,
         else:
             raise Exception(f"Could not retrieve accuracy function: {accuracy_function}")
 
-        score = acc_fn(y_true, y_pred, data=data[cols], ts_analysis=ts_analysis)
+        fn_kwargs['data'] = data[cols]
+        fn_kwargs['ts_analysis'] = ts_analysis
+        score = acc_fn(y_true, y_pred, **fn_kwargs)
     else:
         y_true = data[target].tolist()
         y_pred = list(predictions)
@@ -64,11 +73,14 @@ def evaluate_accuracy(data: pd.DataFrame,
             accuracy_function = getattr(importlib.import_module('sklearn.metrics'), accuracy_function)
 
         try:
-            score = accuracy_function(y_true, y_pred)
+            score = accuracy_function(y_true, y_pred, **fn_kwargs)
+            assert type(score) in SCORE_TYPES, f"Accuracy function `{accuracy_function.__name__}` returned invalid type {type(score)}"  # noqa
         except ValueError as e:
             if 'mix of label input' in str(e).lower():
+                # mixed types, try to convert to string  # TODO: should this be a burden on the evaluator?
                 score = accuracy_function([str(y) for y in y_true],
-                                          [str(y) for y in y_pred])
+                                          [str(y) for y in y_pred],
+                                          **fn_kwargs)
             else:
                 raise e
 

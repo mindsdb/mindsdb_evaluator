@@ -4,6 +4,7 @@ from typing import List, Dict, Optional
 import numpy as np
 import pandas as pd
 
+from mindsdb_evaluator.helpers.general import filter_fn_args
 from mindsdb_evaluator.accuracy.forecasting import \
     evaluate_array_accuracy, \
     evaluate_num_array_accuracy, \
@@ -62,6 +63,7 @@ def evaluate_accuracy(data: pd.DataFrame,
 
         fn_kwargs['data'] = data[cols]
         fn_kwargs['ts_analysis'] = ts_analysis
+        fn_kwargs = filter_fn_args(acc_fn, fn_kwargs)
         score = acc_fn(y_true, y_pred, **fn_kwargs)
     else:
         y_true = data[target].tolist()
@@ -73,11 +75,13 @@ def evaluate_accuracy(data: pd.DataFrame,
             accuracy_function = getattr(importlib.import_module('sklearn.metrics'), accuracy_function)
 
         try:
+            fn_kwargs = filter_fn_args(accuracy_function, fn_kwargs)
             score = accuracy_function(y_true, y_pred, **fn_kwargs)
             assert type(score) in SCORE_TYPES, f"Accuracy function `{accuracy_function.__name__}` returned invalid type {type(score)}"  # noqa
         except ValueError as e:
             if 'mix of label input' in str(e).lower():
                 # mixed types, try to convert to string  # TODO: should this be a burden on the evaluator?
+                fn_kwargs = filter_fn_args(accuracy_function, fn_kwargs)
                 score = accuracy_function([str(y) for y in y_true],
                                           [str(y) for y in y_pred],
                                           **fn_kwargs)

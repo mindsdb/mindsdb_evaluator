@@ -5,7 +5,6 @@ from sklearn.metrics import r2_score
 def evaluate_regression_accuracy(
         y_true,
         y_pred,
-        **kwargs
 ):
     """
     Evaluates accuracy for regression tasks.

@@ -100,7 +100,7 @@ def evaluate_accuracies(data: pd.DataFrame,
     score_dict = {}
     for accuracy_function in accuracy_functions:
         fn_kwargs = {}
-        if isinstance(accuracy_function, Module):
+        if not isinstance(accuracy_function, str):
             fn_kwargs = accuracy_function['args']
             accuracy_function = accuracy_function['module']
         score = evaluate_accuracy(data,

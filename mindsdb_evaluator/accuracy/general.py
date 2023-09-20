@@ -1,10 +1,10 @@
 import importlib
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Union
 
 import numpy as np
 import pandas as pd
 
-from mindsdb_evaluator.helpers.general import filter_fn_args
+from mindsdb_evaluator.helpers.general import Module, filter_fn_args
 from mindsdb_evaluator.accuracy.forecasting import \
     evaluate_array_accuracy, \
     evaluate_num_array_accuracy, \
@@ -94,17 +94,23 @@ def evaluate_accuracy(data: pd.DataFrame,
 def evaluate_accuracies(data: pd.DataFrame,
                         predictions: pd.Series,
                         target: str,
-                        accuracy_functions: List[str],
+                        accuracy_functions: List[Union[str, Module]],
                         ts_analysis: Optional[dict] = {},
                         n_decimals: Optional[int] = 3) -> Dict[str, float]:
     score_dict = {}
     for accuracy_function in accuracy_functions:
+        fn_kwargs = {}
+        if isinstance(accuracy_function, Module):
+            fn_kwargs = accuracy_function['args']
+            accuracy_function = accuracy_function['module']
         score = evaluate_accuracy(data,
                                   predictions,
                                   accuracy_function,
                                   target=target,
                                   ts_analysis=ts_analysis,
-                                  n_decimals=n_decimals)
+                                  n_decimals=n_decimals,
+                                  fn_kwargs=fn_kwargs,
+                                  )
         score_dict[accuracy_function] = score
 
     return score_dict

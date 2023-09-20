@@ -1,6 +1,6 @@
 import unittest
 import pandas as pd
-from mindsdb_evaluator import evaluate_accuracy
+from mindsdb_evaluator import evaluate_accuracy, evaluate_accuracies
 
 
 class TestSklearnMetrics(unittest.TestCase):
@@ -64,3 +64,10 @@ class TestSklearnMetrics(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, expected_err_str):
             evaluate_accuracy(self.data, self.pred, 'recall_score', self.target,
                               fn_kwargs={'average': 'binary'})
+
+    def test_sklearn_wrapped_with_args(self):
+        acc_fn = 'recall_score'
+        acc_fns = [{"module": acc_fn, "args": {'average': 'macro'}}]
+        acc = evaluate_accuracies(self.data, self.pred, self.target, acc_fns)
+        print(acc)
+        self.assertAlmostEqual(acc[acc_fn], 0.333)

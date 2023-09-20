@@ -167,8 +167,10 @@
 <span></span><span class="kn">import</span> <span class="nn">importlib</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
+<span class="kn">from</span> <span class="nn">mindsdb_evaluator.helpers.general</span> <span class="kn">import</span> <span class="n">filter_fn_args</span>
 <span class="kn">from</span> <span class="nn">mindsdb_evaluator.accuracy.forecasting</span> <span class="kn">import</span> \
     <span class="n">evaluate_array_accuracy</span><span class="p">,</span> \
     <span class="n">evaluate_num_array_accuracy</span><span class="p">,</span> \
@@ -176,12 +178,17 @@
     <span class="n">complementary_smape_array_accuracy</span>
 
 
+<span class="n">SCORE_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float128</span><span class="p">,</span>
+               <span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+
 <div class="viewcode-block" id="evaluate_accuracy"><a class="viewcode-back" href="../../../accuracy.html#accuracy.evaluate_accuracy">[docs]</a><span class="k">def</span> <span class="nf">evaluate_accuracy</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
                       <span class="n">predictions</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
                       <span class="n">accuracy_function</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                       <span class="n">target</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                       <span class="n">ts_analysis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
-                      <span class="n">n_decimals</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+                      <span class="n">n_decimals</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+                      <span class="n">fn_kwargs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dispatcher for accuracy evaluation.</span>
 
@@ -191,6 +198,7 @@
 <span class="sd">    :param accuracy_function: either a metric from the `accuracy` module or `scikit-learn.metric`.</span>
 <span class="sd">    :param ts_analysis: `lightwood.data.timeseries_analyzer` output, used to compute time series task accuracy.</span>
 <span class="sd">    :param n_decimals: used to round accuracies.</span>
+<span class="sd">    :param fn_kwargs: additional arguments to be passed to the accuracy function.</span>
 <span class="sd">    </span>
 <span class="sd">    :return: accuracy score, given input data and model predictions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
@@ -219,7 +227,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not retrieve accuracy function: </span><span class="si">{</span><span class="n">accuracy_function</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="n">score</span> <span class="o">=</span> <span class="n">acc_fn</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">cols</span><span class="p">],</span> <span class="n">ts_analysis</span><span class="o">=</span><span class="n">ts_analysis</span><span class="p">)</span>
+        <span class="n">fn_kwargs</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span>
+        <span class="n">fn_kwargs</span><span class="p">[</span><span class="s1">&#39;ts_analysis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts_analysis</span>
+        <span class="n">fn_kwargs</span> <span class="o">=</span> <span class="n">filter_fn_args</span><span class="p">(</span><span class="n">acc_fn</span><span class="p">,</span> <span class="n">fn_kwargs</span><span class="p">)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">acc_fn</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">y_true</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
         <span class="n">y_pred</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
@@ -230,11 +241,16 @@
             <span class="n">accuracy_function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;sklearn.metrics&#39;</span><span class="p">),</span> <span class="n">accuracy_function</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">score</span> <span class="o">=</span> <span class="n">accuracy_function</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+            <span class="n">fn_kwargs</span> <span class="o">=</span> <span class="n">filter_fn_args</span><span class="p">(</span><span class="n">accuracy_function</span><span class="p">,</span> <span class="n">fn_kwargs</span><span class="p">)</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="n">accuracy_function</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="ow">in</span> <span class="n">SCORE_TYPES</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Accuracy function `</span><span class="si">{</span><span class="n">accuracy_function</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">` returned invalid type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">score</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>  <span class="c1"># noqa</span>
         <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">if</span> <span class="s1">&#39;mix of label input&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="c1"># mixed types, try to convert to string  # TODO: should this be a burden on the evaluator?</span>
+                <span class="n">fn_kwargs</span> <span class="o">=</span> <span class="n">filter_fn_args</span><span class="p">(</span><span class="n">accuracy_function</span><span class="p">,</span> <span class="n">fn_kwargs</span><span class="p">)</span>
                 <span class="n">score</span> <span class="o">=</span> <span class="n">accuracy_function</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">y_true</span><span class="p">],</span>
-                                          <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">y_pred</span><span class="p">])</span>
+                                          <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">y_pred</span><span class="p">],</span>
+                                          <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">e</span>
 

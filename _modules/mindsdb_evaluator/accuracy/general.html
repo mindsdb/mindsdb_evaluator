@@ -165,12 +165,12 @@
             
   <h1>Source code for mindsdb_evaluator.accuracy.general</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">importlib</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="kn">from</span> <span class="nn">mindsdb_evaluator.helpers.general</span> <span class="kn">import</span> <span class="n">filter_fn_args</span>
+<span class="kn">from</span> <span class="nn">mindsdb_evaluator.helpers.general</span> <span class="kn">import</span> <span class="n">Module</span><span class="p">,</span> <span class="n">filter_fn_args</span>
 <span class="kn">from</span> <span class="nn">mindsdb_evaluator.accuracy.forecasting</span> <span class="kn">import</span> \
     <span class="n">evaluate_array_accuracy</span><span class="p">,</span> \
     <span class="n">evaluate_num_array_accuracy</span><span class="p">,</span> \
@@ -260,17 +260,23 @@
 <span class="k">def</span> <span class="nf">evaluate_accuracies</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
                         <span class="n">predictions</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
                         <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                        <span class="n">accuracy_functions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+                        <span class="n">accuracy_functions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Module</span><span class="p">]],</span>
                         <span class="n">ts_analysis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
                         <span class="n">n_decimals</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
     <span class="n">score_dict</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">accuracy_function</span> <span class="ow">in</span> <span class="n">accuracy_functions</span><span class="p">:</span>
+        <span class="n">fn_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">accuracy_function</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">fn_kwargs</span> <span class="o">=</span> <span class="n">accuracy_function</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">]</span>
+            <span class="n">accuracy_function</span> <span class="o">=</span> <span class="n">accuracy_function</span><span class="p">[</span><span class="s1">&#39;module&#39;</span><span class="p">]</span>
         <span class="n">score</span> <span class="o">=</span> <span class="n">evaluate_accuracy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span>
                                   <span class="n">predictions</span><span class="p">,</span>
                                   <span class="n">accuracy_function</span><span class="p">,</span>
                                   <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span>
                                   <span class="n">ts_analysis</span><span class="o">=</span><span class="n">ts_analysis</span><span class="p">,</span>
-                                  <span class="n">n_decimals</span><span class="o">=</span><span class="n">n_decimals</span><span class="p">)</span>
+                                  <span class="n">n_decimals</span><span class="o">=</span><span class="n">n_decimals</span><span class="p">,</span>
+                                  <span class="n">fn_kwargs</span><span class="o">=</span><span class="n">fn_kwargs</span><span class="p">,</span>
+                                  <span class="p">)</span>
         <span class="n">score_dict</span><span class="p">[</span><span class="n">accuracy_function</span><span class="p">]</span> <span class="o">=</span> <span class="n">score</span>
 
     <span class="k">return</span> <span class="n">score_dict</span>

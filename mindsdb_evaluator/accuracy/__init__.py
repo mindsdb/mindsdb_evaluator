@@ -1,3 +1,4 @@
+# flake8: noqa  # otherwise F401 is triggered when adding all metrics from sklearn, even though no overwrites happen
 import importlib
 from sklearn.metrics import __all__ as __sklearn_accs__
 

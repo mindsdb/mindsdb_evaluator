@@ -1,6 +1,7 @@
-# flake8: noqa  # otherwise F401 is triggered when adding all metrics from sklearn, even though no overwrites happen
-import importlib
-from sklearn.metrics import __all__ as __sklearn_accs__
+from sklearn.metrics import accuracy_score, auc, average_precision_score, balanced_accuracy_score, \
+    f1_score, mean_absolute_error, mean_squared_error, mean_squared_log_error, median_absolute_error, \
+    mean_absolute_percentage_error, precision_score, r2_score, recall_score, roc_auc_score, silhouette_score, \
+    top_k_accuracy_score
 
 from mindsdb_evaluator.accuracy.general import evaluate_accuracy, evaluate_accuracies
 from mindsdb_evaluator.accuracy.regression import evaluate_regression_accuracy
@@ -12,12 +13,33 @@ from mindsdb_evaluator.accuracy.forecasting import \
     complementary_smape_array_accuracy
 
 
-__sklearn_accs__ = [acc for acc in __sklearn_accs__ if acc[0].lower() == acc[0]]
+__all__ = [
+    # internal
+    'evaluate_accuracy',
+    'evaluate_accuracies',
+    'evaluate_regression_accuracy',
+    'evaluate_multilabel_accuracy',
+    'evaluate_top_k_accuracy',
+    'evaluate_array_accuracy',
+    'evaluate_num_array_accuracy',
+    'evaluate_cat_array_accuracy',
+    'complementary_smape_array_accuracy',
 
-sk_metrics = importlib.import_module('sklearn.metrics')
-for skacc in __sklearn_accs__:
-    globals()[skacc] = getattr(sk_metrics, skacc)
-
-__all__ = ['evaluate_accuracy', 'evaluate_accuracies', 'evaluate_regression_accuracy', 'evaluate_multilabel_accuracy',
-           'evaluate_top_k_accuracy', 'evaluate_array_accuracy', 'evaluate_num_array_accuracy',
-           'evaluate_cat_array_accuracy', 'complementary_smape_array_accuracy'] + __sklearn_accs__
+    # sklearn
+    'accuracy_score',
+    'auc',
+    'average_precision_score',
+    'balanced_accuracy_score',
+    'f1_score',
+    'mean_absolute_error',
+    'mean_squared_error',
+    'mean_squared_log_error',
+    'median_absolute_error',
+    'mean_absolute_percentage_error',
+    'precision_score',
+    'r2_score',
+    'recall_score',
+    'roc_auc_score',
+    'silhouette_score',
+    'top_k_accuracy_score'
+]

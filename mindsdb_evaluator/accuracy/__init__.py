@@ -14,11 +14,10 @@ from mindsdb_evaluator.accuracy.forecasting import \
 
 __sklearn_accs__ = [acc for acc in __sklearn_accs__ if acc[0].lower() == acc[0]]
 
-# TODO: enable custom arg passing for sklearn metrics, and to_ordinal (stateful?)
 sk_metrics = importlib.import_module('sklearn.metrics')
 for skacc in __sklearn_accs__:
     globals()[skacc] = getattr(sk_metrics, skacc)
 
 __all__ = ['evaluate_accuracy', 'evaluate_accuracies', 'evaluate_regression_accuracy', 'evaluate_multilabel_accuracy',
            'evaluate_top_k_accuracy', 'evaluate_array_accuracy', 'evaluate_num_array_accuracy',
-           'evaluate_cat_array_accuracy', 'complementary_smape_array_accuracy'] + __sklearn_accs__  # noqa
+           'evaluate_cat_array_accuracy', 'complementary_smape_array_accuracy'] + __sklearn_accs__

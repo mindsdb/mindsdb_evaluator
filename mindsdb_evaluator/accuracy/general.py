@@ -3,6 +3,7 @@ from typing import List, Dict, Optional, Union
 
 import numpy as np
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder
 
 from mindsdb_evaluator.helpers.general import Module, filter_fn_args
 from mindsdb_evaluator.accuracy.forecasting import \
@@ -69,10 +70,9 @@ def evaluate_accuracy(data: pd.DataFrame,
         y_true = data[target].tolist()
         y_pred = list(predictions)
         if hasattr(importlib.import_module('mindsdb_evaluator.accuracy'), accuracy_function):
-            accuracy_function = getattr(importlib.import_module('mindsdb_evaluator.accuracy'),
-                                        accuracy_function)
+            accuracy_function = getattr(importlib.import_module('mindsdb_evaluator.accuracy'), accuracy_function)
         else:
-            accuracy_function = getattr(importlib.import_module('sklearn.metrics'), accuracy_function)
+            raise Exception(f"Could not retrieve accuracy function: {accuracy_function}")
 
         try:
             fn_kwargs = filter_fn_args(accuracy_function, fn_kwargs)
@@ -80,7 +80,7 @@ def evaluate_accuracy(data: pd.DataFrame,
             assert type(score) in SCORE_TYPES, f"Accuracy function `{accuracy_function.__name__}` returned invalid type {type(score)}"  # noqa
         except ValueError as e:
             if 'mix of label input' in str(e).lower():
-                # mixed types, try to convert to string  # TODO: should this be a burden on the evaluator?
+                # mixed types, try to convert to string. note: shouldn't happen anymore when labels are passed
                 fn_kwargs = filter_fn_args(accuracy_function, fn_kwargs)
                 score = accuracy_function([str(y) for y in y_true],
                                           [str(y) for y in y_pred],
@@ -96,7 +96,15 @@ def evaluate_accuracies(data: pd.DataFrame,
                         target: str,
                         accuracy_functions: List[Union[str, Module]],
                         ts_analysis: Optional[dict] = {},
+                        labels: Optional[list] = [],
                         n_decimals: Optional[int] = 3) -> Dict[str, float]:
+    # if a label list is provided, we need to encode the target and predictions accordingly
+    if labels:
+        le = LabelEncoder()
+        le.fit(labels)
+        data[target] = le.transform(data[target])
+        predictions = le.transform(predictions)
+
     score_dict = {}
     for accuracy_function in accuracy_functions:
         fn_kwargs = {}

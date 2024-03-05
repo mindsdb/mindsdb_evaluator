@@ -80,7 +80,7 @@ def evaluate_accuracy(data: pd.DataFrame,
             assert type(score) in SCORE_TYPES, f"Accuracy function `{accuracy_function.__name__}` returned invalid type {type(score)}"  # noqa
         except ValueError as e:
             if 'mix of label input' in str(e).lower():
-                # mixed types, try to convert to string  # TODO: should this be a burden on the evaluator? No, shouldn't
+                # mixed types, try to convert to string. note: shouldn't happen anymore when labels are passed
                 fn_kwargs = filter_fn_args(accuracy_function, fn_kwargs)
                 score = accuracy_function([str(y) for y in y_true],
                                           [str(y) for y in y_pred],

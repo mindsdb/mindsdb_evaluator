@@ -3,6 +3,7 @@ from typing import List, Dict, Optional, Union
 
 import numpy as np
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder
 
 from mindsdb_evaluator.helpers.general import Module, filter_fn_args
 from mindsdb_evaluator.accuracy.forecasting import \
@@ -95,7 +96,15 @@ def evaluate_accuracies(data: pd.DataFrame,
                         target: str,
                         accuracy_functions: List[Union[str, Module]],
                         ts_analysis: Optional[dict] = {},
+                        labels: Optional[list] = [],
                         n_decimals: Optional[int] = 3) -> Dict[str, float]:
+    # if a label list is provided, we need to encode the target and predictions accordingly
+    if labels:
+        le = LabelEncoder()
+        le.fit(labels)
+        data[target] = le.transform(data[target])
+        predictions = le.transform(predictions)
+
     score_dict = {}
     for accuracy_function in accuracy_functions:
         fn_kwargs = {}

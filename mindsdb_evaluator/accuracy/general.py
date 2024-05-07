@@ -13,8 +13,11 @@ from mindsdb_evaluator.accuracy.forecasting import \
     complementary_smape_array_accuracy
 
 
-SCORE_TYPES = (float, np.float16, np.float32, np.float64, np.float128,
+SCORE_TYPES = (float, np.float16, np.float32, np.float64,
                int, np.int8, np.int16, np.int32, np.int64)
+
+if hasattr(np, 'float128'):
+    SCORE_TYPES += (np.float128,)
 
 
 def evaluate_accuracy(data: pd.DataFrame,

@@ -11,6 +11,7 @@ from mindsdb_evaluator.accuracy.forecasting import \
     evaluate_num_array_accuracy, \
     evaluate_cat_array_accuracy, \
     complementary_smape_array_accuracy
+from mindsdb_evaluator.accuracy.llm_generation import evaluate_faithfulness
 
 
 SCORE_TYPES = (float, np.float16, np.float32, np.float64,
@@ -40,7 +41,16 @@ def evaluate_accuracy(data: pd.DataFrame,
     
     :return: accuracy score, given input data and model predictions.
     """  # noqa
-    if 'array_accuracy' in accuracy_function or accuracy_function in ('bounded_ts_accuracy',):
+    if accuracy_function == 'evaluate_faithfulness':
+        print(data)
+        context = list(data['contexts'])
+        question = list(data['question'])
+        ground_truth = list(data['ground_truth'])
+        answer = predictions.tolist()
+        score = evaluate_faithfulness(answer, context, question, ground_truth)
+        return score
+    elif 'array_accuracy' in accuracy_function or accuracy_function in ('bounded_ts_accuracy',):
+
         if ts_analysis is None or not ts_analysis.get('tss', False) or not ts_analysis['tss'].is_timeseries:
             # normal array, needs to be expanded
             cols = [target]
@@ -86,8 +96,8 @@ def evaluate_accuracy(data: pd.DataFrame,
                 # mixed types, try to convert to string. note: shouldn't happen anymore when labels are passed
                 fn_kwargs = filter_fn_args(accuracy_function, fn_kwargs)
                 score = accuracy_function([str(y) for y in y_true],
-                                          [str(y) for y in y_pred],
-                                          **fn_kwargs)
+                                        [str(y) for y in y_pred],
+                                        **fn_kwargs)
             else:
                 raise e
 

@@ -21,6 +21,13 @@ if hasattr(np, 'float128'):
     SCORE_TYPES += (np.float128,)
 
 
+def is_llm(metric: str) -> bool:
+    if metric in ['rag_faithfulness', 'rag_answer_relevancy', 'rag_context_precision', 'rag_context_recall']:
+        return True
+    else:
+        return False
+
+
 def evaluate_accuracy(data: pd.DataFrame,
                       predictions: pd.Series,
                       accuracy_function: str,
@@ -55,7 +62,6 @@ def evaluate_accuracy(data: pd.DataFrame,
                              fields['context'],
                              fields['question'],
                              fields['ground_truth'])
-        return score
     elif accuracy_function == 'rag_answer_relevancy':
         fields = rag_eval(data)
         score = evaluate_rag('answer_relevancy',
@@ -63,7 +69,6 @@ def evaluate_accuracy(data: pd.DataFrame,
                              fields['context'],
                              fields['question'],
                              fields['ground_truth'])
-        return score
     elif accuracy_function == 'rag_context_precision':
         fields = rag_eval(data)
         score = evaluate_rag('context_precision',
@@ -71,15 +76,13 @@ def evaluate_accuracy(data: pd.DataFrame,
                              fields['context'],
                              fields['question'],
                              fields['ground_truth'])
-        return score
-    elif accuracy_function == 'rag)context_recall':
+    elif accuracy_function == 'rag_context_recall':
         fields = rag_eval(data)
         score = evaluate_rag('context_recall',
                              fields['answer'],
                              fields['context'],
                              fields['question'],
                              fields['ground_truth'])
-        return score
     elif 'array_accuracy' in accuracy_function or accuracy_function in ('bounded_ts_accuracy',):
 
         if ts_analysis is None or not ts_analysis.get('tss', False) or not ts_analysis['tss'].is_timeseries:

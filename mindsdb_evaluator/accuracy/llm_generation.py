@@ -17,10 +17,13 @@ def evaluate_rag(metric: str,
                  ground_truth: List[str]) -> float:
     """
     Evaluate the LLM responses using RAGAS.
-    :return: score
+    param metric: which RAGAS metric to use
+    param predictions: the answers from the llm
+    param context: the context used by RAG
+    param question: the inputs to RAG
+    param ground_truth: the ground truth for responses
+    return: score
     """
-
-    # Create the dataset expected by RAGAS
     new_context = [[str(entry)] for entry in context]
 
     # Create the dataset expected by RAGAS
@@ -41,7 +44,7 @@ def evaluate_rag(metric: str,
 
     dataset = Dataset.from_dict(data, features=features)
 
-    # Calculate the faithfulness score
+    # Calculate the score based on the RAGAS metric
     if metric == 'faithfulness':
         ragas_metric = faithfulness
     elif metric == 'answer_relevancy':

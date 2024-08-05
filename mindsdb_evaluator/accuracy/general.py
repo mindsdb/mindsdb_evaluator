@@ -11,7 +11,7 @@ from mindsdb_evaluator.accuracy.forecasting import \
     evaluate_num_array_accuracy, \
     evaluate_cat_array_accuracy, \
     complementary_smape_array_accuracy
-from mindsdb_evaluator.accuracy.llm_generation import evaluate_faithfulness
+from mindsdb_evaluator.accuracy.llm_generation import evaluate_rag
 
 
 SCORE_TYPES = (float, np.float16, np.float32, np.float64,
@@ -41,13 +41,44 @@ def evaluate_accuracy(data: pd.DataFrame,
     
     :return: accuracy score, given input data and model predictions.
     """  # noqa
-    if accuracy_function == 'evaluate_faithfulness':
-        print(data)
+    def rag_eval(data: pd.DataFrame) -> dict:
         context = list(data['contexts'])
         question = list(data['question'])
         ground_truth = list(data['ground_truth'])
         answer = predictions.tolist()
-        score = evaluate_faithfulness(answer, context, question, ground_truth)
+        return {'context': context, 'question': question, 'ground_truth': ground_truth, 'answer': answer}
+
+    if accuracy_function == 'rag_faithfulness':
+        fields = rag_eval(data)
+        score = evaluate_rag('faithfulness',
+                             fields['answer'],
+                             fields['context'],
+                             fields['question'],
+                             fields['ground_truth'])
+        return score
+    elif accuracy_function == 'rag_answer_relevancy':
+        fields = rag_eval(data)
+        score = evaluate_rag('answer_relevancy',
+                             fields['answer'],
+                             fields['context'],
+                             fields['question'],
+                             fields['ground_truth'])
+        return score
+    elif accuracy_function == 'rag_context_precision':
+        fields = rag_eval(data)
+        score = evaluate_rag('context_precision',
+                             fields['answer'],
+                             fields['context'],
+                             fields['question'],
+                             fields['ground_truth'])
+        return score
+    elif accuracy_function == 'rag)context_recall':
+        fields = rag_eval(data)
+        score = evaluate_rag('context_recall',
+                             fields['answer'],
+                             fields['context'],
+                             fields['question'],
+                             fields['ground_truth'])
         return score
     elif 'array_accuracy' in accuracy_function or accuracy_function in ('bounded_ts_accuracy',):
 
@@ -96,8 +127,8 @@ def evaluate_accuracy(data: pd.DataFrame,
                 # mixed types, try to convert to string. note: shouldn't happen anymore when labels are passed
                 fn_kwargs = filter_fn_args(accuracy_function, fn_kwargs)
                 score = accuracy_function([str(y) for y in y_true],
-                                        [str(y) for y in y_pred],
-                                        **fn_kwargs)
+                                          [str(y) for y in y_pred],
+                                          **fn_kwargs)
             else:
                 raise e
 

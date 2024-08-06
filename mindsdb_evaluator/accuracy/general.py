@@ -58,7 +58,7 @@ def evaluate_accuracy(data: pd.DataFrame,
     if accuracy_function in ['rag_faithfulness', 'rag_answer_relevancy', 'rag_context_precision', 'rag_context_recall']:
         fields = rag_eval(data)
         metric = accuracy_function.replace('rag_', '')
-        score = evaluate_rag('faithfulness',
+        score = evaluate_rag(metric,
                              fields['answer'],
                              fields['context'],
                              fields['question'],

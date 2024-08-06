@@ -48,21 +48,21 @@ def evaluate_accuracy(data: pd.DataFrame,
     
     :return: accuracy score, given input data and model predictions.
     """  # noqa
-    def rag_eval_setup(data: pd.DataFrame) -> dict:
-        return {
-            'context': list(data['contexts']),
-            'question': list(data['question']),
-            'ground_truth': list(data['ground_truth']),
-            'answer': predictions.tolist()
-        }
-
-    def evaluate_rag_metric(metric: str, data: pd.DataFrame) -> float:
-        fields = rag_eval_setup(data)
-        return evaluate_rag(metric, fields['answer'], fields['context'], fields['question'], fields['ground_truth'])
+    def rag_eval(data: pd.DataFrame) -> dict:
+        context = list(data['contexts'])
+        question = list(data['question'])
+        ground_truth = list(data['ground_truth'])
+        answer = predictions.tolist()
+        return {'context': context, 'question': question, 'ground_truth': ground_truth, 'answer': answer}
 
     if accuracy_function in ['rag_faithfulness', 'rag_answer_relevancy', 'rag_context_precision', 'rag_context_recall']:
-        metric = accuracy_function.split('_')[-1]
-        score = evaluate_rag_metric(metric, data)
+        fields = rag_eval(data)
+        metric = accuracy_function.replace('rag_', '')
+        score = evaluate_rag('faithfulness',
+                             fields['answer'],
+                             fields['context'],
+                             fields['question'],
+                             fields['ground_truth'])
     elif 'array_accuracy' in accuracy_function or accuracy_function in ('bounded_ts_accuracy',):
 
         if ts_analysis is None or not ts_analysis.get('tss', False) or not ts_analysis['tss'].is_timeseries:

@@ -51,12 +51,9 @@ def evaluate_rag(metric: str,
         'context_precision': context_precision,
         'context_recall': context_recall}
 
-    ragas_metric = metrics_map.get(metric)
-    ragas_score = evaluate(dataset, metrics=[ragas_metric])
-
-    result = ragas_score.to_pandas()
-    filtered_scores = [score for score in result[metric] if not np.isnan(score)]
-    average = sum(filtered_scores) / len(filtered_scores) if filtered_scores else 0
+    ragas_score = evaluate(dataset, metrics=[metrics_map.get(metric)]).to_pandas()
+    result = [score for score in ragas_score[metric] if not np.isnan(score)]
+    average = sum(result) / len(result) if result else 0
 
     return average
 

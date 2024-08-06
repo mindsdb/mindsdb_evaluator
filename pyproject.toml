@@ -16,6 +16,7 @@ scikit-learn = ">=1.0"
 dataprep-ml = ">=0.0.17"
 datasets = "^2.20.0"
 ragas = "^0.1.13"
+pytest = "^8.3.2"
 
 
 [build-system]

@@ -45,14 +45,13 @@ def evaluate_rag(metric: str,
     dataset = Dataset.from_dict(data, features=features)
 
     # Calculate the score based on the RAGAS metric
-    if metric == 'faithfulness':
-        ragas_metric = faithfulness
-    elif metric == 'answer_relevancy':
-        ragas_metric = answer_relevancy
-    elif metric == 'context_precision':
-        ragas_metric = context_precision
-    elif metric == 'context_recall':
-        ragas_metric = context_recall
+    metrics_map = {
+        'faithfulness': faithfulness,
+        'answer_relevancy': answer_relevancy,
+        'context_precision': context_precision,
+        'context_recall': context_recall}
+
+    ragas_metric = metrics_map.get(metric)
     ragas_score = evaluate(dataset, metrics=[ragas_metric])
 
     result = ragas_score.to_pandas()

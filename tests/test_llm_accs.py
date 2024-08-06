@@ -1,13 +1,11 @@
 import unittest
-import os
 import pytest
 
 from mindsdb_evaluator.accuracy.llm_generation import evaluate_rag
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 
 class TestLLM(unittest.TestCase):
-    @pytest.mark.skipif(OPENAI_API_KEY is None, reason='Missing OpenAI API key (OPENAI_API_KEY env variable)')
+    @pytest.mark.skip(reason='Missing OpenAI API key (OPENAI_API_KEY env variable)')
     def test_evaluate_rag(self):
         question = ['What is the capital of France?']
         answer = ['The capital of France is Paris']

@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from datasets import Dataset, Features, Sequence, Value
 from ragas import evaluate
 from ragas.metrics import (
@@ -7,32 +8,42 @@ from ragas.metrics import (
     context_precision,
     context_recall
 )
-from typing import List
+
+
+def _setup_rag_eval(data: pd.DataFrame, predictions: pd.Series) -> dict:
+    """
+    param data: input data for RAGAS
+    param predictions: answers from the LLM
+    return: dict of the fields in the correct format
+    """
+    context = list(data['contexts'])
+    question = list(data['question'])
+    ground_truth = list(data['ground_truth'])
+    answer = predictions.tolist()
+    return {'contexts': context, 'question': question, 'ground_truth': ground_truth, 'answer': answer}
 
 
 def evaluate_rag(metric: str,
-                 predictions: List[str],
-                 context: List[str],
-                 question: List[str],
-                 ground_truth: List[str]) -> float:
+                 fields: dict) -> float:
     """
     Evaluate the LLM responses using RAGAS.
     param metric: which RAGAS metric to use
-    param predictions: the answers from the llm
-    param context: the context used by RAG
-    param question: the inputs to RAG
-    param ground_truth: the ground truth for responses
+    param fields: contains the input fields for RAGAS
     return: score
     """
-    new_context = [[str(entry)] for entry in context]
 
-    # Create the dataset expected by RAGAS
-    data = {
-        "question": question,
-        "contexts": new_context,
-        "answer": predictions,
-        "ground_truth": ground_truth
-    }
+    new_context = [[str(entry)] for entry in [fields['contexts']]]
+
+    try:
+        data = {
+            "question": [fields['question']],
+            "contexts": new_context,
+            "answer": [fields['answer']],
+            "ground_truth": [fields['ground_truth']],
+        }
+    except KeyError:
+        raise Exception(f'''To evaluate `{metric}`, check that your input data contains
+                        `question`, `context`, `ground_truth` and try again''')
 
     # Define the feature types
     features = Features({

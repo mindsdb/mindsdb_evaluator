@@ -11,7 +11,7 @@ from mindsdb_evaluator.accuracy.forecasting import \
     evaluate_num_array_accuracy, \
     evaluate_cat_array_accuracy, \
     complementary_smape_array_accuracy
-from mindsdb_evaluator.accuracy.llm_generation import evaluate_rag
+from mindsdb_evaluator.accuracy.llm_generation import evaluate_rag, _setup_rag_eval
 
 
 SCORE_TYPES = (float, np.float16, np.float32, np.float64,
@@ -19,13 +19,6 @@ SCORE_TYPES = (float, np.float16, np.float32, np.float64,
 
 if hasattr(np, 'float128'):
     SCORE_TYPES += (np.float128,)
-
-
-def is_llm(metric: str) -> bool:
-    if metric in ['rag_faithfulness', 'rag_answer_relevancy', 'rag_context_precision', 'rag_context_recall']:
-        return True
-    else:
-        return False
 
 
 def evaluate_accuracy(data: pd.DataFrame,
@@ -48,21 +41,11 @@ def evaluate_accuracy(data: pd.DataFrame,
     
     :return: accuracy score, given input data and model predictions.
     """  # noqa
-    def rag_eval(data: pd.DataFrame) -> dict:
-        context = list(data['contexts'])
-        question = list(data['question'])
-        ground_truth = list(data['ground_truth'])
-        answer = predictions.tolist()
-        return {'context': context, 'question': question, 'ground_truth': ground_truth, 'answer': answer}
 
     if accuracy_function in ['rag_faithfulness', 'rag_answer_relevancy', 'rag_context_precision', 'rag_context_recall']:
-        fields = rag_eval(data)
+        fields = _setup_rag_eval(data, predictions)
         metric = accuracy_function.replace('rag_', '')
-        score = evaluate_rag(metric,
-                             fields['answer'],
-                             fields['context'],
-                             fields['question'],
-                             fields['ground_truth'])
+        score = evaluate_rag(metric, fields)
     elif 'array_accuracy' in accuracy_function or accuracy_function in ('bounded_ts_accuracy',):
 
         if ts_analysis is None or not ts_analysis.get('tss', False) or not ts_analysis['tss'].is_timeseries:

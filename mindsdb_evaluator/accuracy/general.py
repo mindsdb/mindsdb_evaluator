@@ -11,6 +11,7 @@ from mindsdb_evaluator.accuracy.forecasting import \
     evaluate_num_array_accuracy, \
     evaluate_cat_array_accuracy, \
     complementary_smape_array_accuracy
+from mindsdb_evaluator.accuracy.llm_generation import evaluate_rag, _setup_rag_eval
 
 
 SCORE_TYPES = (float, np.float16, np.float32, np.float64,
@@ -40,7 +41,13 @@ def evaluate_accuracy(data: pd.DataFrame,
     
     :return: accuracy score, given input data and model predictions.
     """  # noqa
-    if 'array_accuracy' in accuracy_function or accuracy_function in ('bounded_ts_accuracy',):
+
+    if accuracy_function in ['rag_faithfulness', 'rag_answer_relevancy', 'rag_context_precision', 'rag_context_recall']:
+        fields = _setup_rag_eval(data, predictions)
+        metric = accuracy_function.replace('rag_', '')
+        score = evaluate_rag(metric, fields)
+    elif 'array_accuracy' in accuracy_function or accuracy_function in ('bounded_ts_accuracy',):
+
         if ts_analysis is None or not ts_analysis.get('tss', False) or not ts_analysis['tss'].is_timeseries:
             # normal array, needs to be expanded
             cols = [target]

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sklearn.metrics.cluster._unsupervised &mdash; mindsdb_evaluator 0.0.13 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+  <title>sklearn.metrics.cluster._unsupervised &mdash; mindsdb_evaluator 0.0.14 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
 
   
@@ -14,11 +14,11 @@
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=544df88d"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -38,7 +38,7 @@
               <img src="../../../../_static/mindsdblogo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.13
+                0.0.14
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -94,6 +94,7 @@
 
 <span class="kn">from</span> <span class="nn">...preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
 <span class="kn">from</span> <span class="nn">...utils</span> <span class="kn">import</span> <span class="n">_safe_indexing</span><span class="p">,</span> <span class="n">check_random_state</span><span class="p">,</span> <span class="n">check_X_y</span>
+<span class="kn">from</span> <span class="nn">...utils._array_api</span> <span class="kn">import</span> <span class="n">_atol_for_type</span>
 <span class="kn">from</span> <span class="nn">...utils._param_validation</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">Interval</span><span class="p">,</span>
     <span class="n">StrOptions</span><span class="p">,</span>
@@ -120,7 +121,9 @@
         <span class="p">)</span>
 
 
-<div class="viewcode-block" id="silhouette_score"><a class="viewcode-back" href="../../../../accuracy.html#accuracy.silhouette_score">[docs]</a><span class="nd">@validate_params</span><span class="p">(</span>
+<div class="viewcode-block" id="silhouette_score">
+<a class="viewcode-back" href="../../../../accuracy.html#accuracy.silhouette_score">[docs]</a>
+<span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="s2">&quot;sparse matrix&quot;</span><span class="p">],</span>
         <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
@@ -218,6 +221,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">X</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">silhouette_samples</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">))</span></div>
+
 
 
 <span class="k">def</span> <span class="nf">_silhouette_reduce</span><span class="p">(</span><span class="n">D_chunk</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">label_freqs</span><span class="p">):</span>
@@ -364,7 +368,8 @@
             <span class="s2">&quot;elements on the diagonal. Use np.fill_diagonal(X, 0).&quot;</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;f&quot;</span><span class="p">:</span>
-            <span class="n">atol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span> <span class="o">*</span> <span class="mi">100</span>
+            <span class="n">atol</span> <span class="o">=</span> <span class="n">_atol_for_type</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
             <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">diagonal</span><span class="p">())</span> <span class="o">&gt;</span> <span class="n">atol</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="n">error_msg</span>
         <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">diagonal</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>  <span class="c1"># integral dtype</span>

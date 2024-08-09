@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Accuracy &mdash; mindsdb_evaluator 0.0.13 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+  <title>Accuracy &mdash; mindsdb_evaluator 0.0.14 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css" />
 
   
@@ -15,11 +15,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=544df88d"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -43,7 +43,7 @@
               <img src="_static/mindsdblogo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.13
+                0.0.14
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -109,11 +109,11 @@
            <div itemprop="articleBody">
              
   <section id="accuracy">
-<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">Accuracy</span></code><a class="headerlink" href="#accuracy" title="Permalink to this heading"></a></h1>
+<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">Accuracy</span></code><a class="headerlink" href="#accuracy" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> module contains accuracy functions for regression, classification and forecasting machine learning models.</p>
-<span class="target" id="module-accuracy"></span><dl class="py function">
+<dl class="py function" id="module-accuracy">
 <dt class="sig sig-object py" id="accuracy.accuracy_score">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">accuracy_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_classification.html#accuracy_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.accuracy_score" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">accuracy_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_classification.html#accuracy_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.accuracy_score" title="Link to this definition"></a></dt>
 <dd><p>Accuracy classification score.</p>
 <p>In multilabel classification, this function computes subset accuracy:
 the set of labels predicted for a sample must <em>exactly</em> match the
@@ -138,7 +138,7 @@ of samples with <code class="docutils literal notranslate"><span class="pre">nor
 </p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dd class="field-odd"><p>float or int</p>
 </dd>
 </dl>
 <div class="admonition seealso">
@@ -154,9 +154,6 @@ of samples with <code class="docutils literal notranslate"><span class="pre">nor
 </dd>
 </dl>
 </div>
-<p class="rubric">Notes</p>
-<p>In binary classification, this function is equal to the <cite>jaccard_score</cite>
-function.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
@@ -177,7 +174,7 @@ function.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.auc">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">auc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_ranking.html#auc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.auc" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">auc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_ranking.html#auc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.auc" title="Link to this definition"></a></dt>
 <dd><p>Compute Area Under the Curve (AUC) using the trapezoidal rule.</p>
 <p>This is a general function, given points on a curve.  For computing the
 area under the ROC-curve, see <a class="reference internal" href="#accuracy.roc_auc_score" title="accuracy.roc_auc_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">roc_auc_score()</span></code></a>.  For an alternative
@@ -223,7 +220,7 @@ decreasing.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.average_precision_score">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">average_precision_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_score</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'macro'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_ranking.html#average_precision_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.average_precision_score" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">average_precision_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_score</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'macro'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_ranking.html#average_precision_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.average_precision_score" title="Link to this definition"></a></dt>
 <dd><p>Compute average precision (AP) from prediction scores.</p>
 <p>AP summarizes a precision-recall curve as the weighted mean of precisions
 achieved at each threshold, with the increase in recall from the previous
@@ -288,7 +285,7 @@ are weighted by the change in recall since the last operating point.</p>
 </div>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id2" role="note">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://en.wikipedia.org/w/index.php?title=Information_retrieval&amp;oldid=793358396#Average_precision">Wikipedia entry for the Average precision</a></p>
 </aside>
@@ -317,7 +314,7 @@ are weighted by the change in recall since the last operating point.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.balanced_accuracy_score">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">balanced_accuracy_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjusted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_classification.html#balanced_accuracy_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.balanced_accuracy_score" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">balanced_accuracy_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjusted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_classification.html#balanced_accuracy_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.balanced_accuracy_score" title="Link to this definition"></a></dt>
 <dd><p>Compute the balanced accuracy.</p>
 <p>The balanced accuracy in binary and multiclass classification problems to
 deal with imbalanced datasets. It is defined as the average of recall
@@ -325,7 +322,7 @@ obtained on each class.</p>
 <p>The best value is 1 and the worst value is 0 when <code class="docutils literal notranslate"><span class="pre">adjusted=False</span></code>.</p>
 <p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 0.20.</span></p>
+<p><span class="versionmodified added">Added in version 0.20.</span></p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -365,14 +362,14 @@ sample weights, and shares desirable properties with the binary case.
 See the <span class="xref std std-ref">User Guide</span>.</p>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id3" role="note">
+<aside class="footnote brackets" id="id3" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p>Brodersen, K.H.; Ong, C.S.; Stephan, K.E.; Buhmann, J.M. (2010).
 The balanced accuracy and its posterior distribution.
 Proceedings of the 20th International Conference on Pattern
 Recognition, 3121-24.</p>
 </aside>
-<aside class="footnote brackets" id="id4" role="note">
+<aside class="footnote brackets" id="id4" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
 <p>John. D. Kelleher, Brian Mac Namee, Aoife D’Arcy, (2015).
 <a class="reference external" href="https://mitpress.mit.edu/books/fundamentals-machine-learning-predictive-data-analytics">Fundamentals of Machine Learning for Predictive Data Analytics:
@@ -391,35 +388,35 @@ Algorithms, Worked Examples, and Case Studies</a>.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.complementary_smape_array_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">complementary_smape_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_analysis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#complementary_smape_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.complementary_smape_array_accuracy" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">complementary_smape_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_analysis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#complementary_smape_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.complementary_smape_array_accuracy" title="Link to this definition"></a></dt>
 <dd><p>Forecast accuracy metric.</p>
 <p>It returns <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">(sMAPE/2)</span></code>, where <code class="docutils literal notranslate"><span class="pre">sMAPE</span></code> is the symmetrical mean absolute percentage error of the forecast versus actual measurements in the time series.</p>
 <p>As such, its domain is 0-1 bounded.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_analysis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_decimals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fn_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/general.html#evaluate_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_accuracy" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_analysis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_decimals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fn_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/general.html#evaluate_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_accuracy" title="Link to this definition"></a></dt>
 <dd><p>Dispatcher for accuracy evaluation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – original dataframe.</p></li>
-<li><p><strong>predictions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code>) – output of a machine learning model for the input <cite>data</cite>.</p></li>
-<li><p><strong>target</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – target column name.</p></li>
-<li><p><strong>accuracy_function</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – either a metric from the <cite>accuracy</cite> module or <cite>scikit-learn.metric</cite>.</p></li>
-<li><p><strong>ts_analysis</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>]) – <cite>lightwood.data.timeseries_analyzer</cite> output, used to compute time series task accuracy.</p></li>
-<li><p><strong>n_decimals</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – used to round accuracies.</p></li>
-<li><p><strong>fn_kwargs</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>]) – additional arguments to be passed to the accuracy function.</p></li>
+<li><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span>) – original dataframe.</p></li>
+<li><p><strong>predictions</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></span>) – output of a machine learning model for the input <cite>data</cite>.</p></li>
+<li><p><strong>target</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – target column name.</p></li>
+<li><p><strong>accuracy_function</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – either a metric from the <cite>accuracy</cite> module or <cite>scikit-learn.metric</cite>.</p></li>
+<li><p><strong>ts_analysis</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>]</span>) – <cite>lightwood.data.timeseries_analyzer</cite> output, used to compute time series task accuracy.</p></li>
+<li><p><strong>n_decimals</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</span>) – used to round accuracies.</p></li>
+<li><p><strong>fn_kwargs</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>]</span>) – additional arguments to be passed to the accuracy function.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>accuracy score, given input data and model predictions.</p>
@@ -429,32 +426,32 @@ Algorithms, Worked Examples, and Case Studies</a>.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_array_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_acc_fn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_array_accuracy" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_acc_fn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_array_accuracy" title="Link to this definition"></a></dt>
 <dd><p>Default forecasting accuracy metric.</p>
 <p>Yields mean score over all timesteps in the forecast, as determined by the <cite>base_acc_fn</cite> (R2 score by default).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_cat_array_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_cat_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_analysis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_cat_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_cat_array_accuracy" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_cat_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_analysis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_cat_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_cat_array_accuracy" title="Link to this definition"></a></dt>
 <dd><p>Categorical forecast accuracy metric.</p>
 <p>Balanced accuracy is computed for each timestep (as determined by the forecast length)
 and the final accuracy is the reciprocal of the average score through all timesteps.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_multilabel_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_multilabel_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/classification.html#evaluate_multilabel_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_multilabel_accuracy" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_multilabel_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/classification.html#evaluate_multilabel_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_multilabel_accuracy" title="Link to this definition"></a></dt>
 <dd><p>Evaluates accuracy for multilabel/tag prediction.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -465,20 +462,20 @@ and the final accuracy is the reciprocal of the average score through all timest
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_num_array_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_num_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_num_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_num_array_accuracy" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_num_array_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/forecasting.html#evaluate_num_array_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_num_array_accuracy" title="Link to this definition"></a></dt>
 <dd><p>Numerical forecast accuracy metric.</p>
 <p>Scores are computed for each array index (as determined by the forecast length),
 and the final accuracy is the reciprocal of the average R2 score through all steps.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_regression_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_regression_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/regression.html#evaluate_regression_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_regression_accuracy" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_regression_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/regression.html#evaluate_regression_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_regression_accuracy" title="Link to this definition"></a></dt>
 <dd><p>Evaluates accuracy for regression tasks.
 If predictions have a lower and upper bound, then <cite>within-bound</cite> accuracy is computed: whether the ground truth value falls within the predicted region.
 If not, then a (positive bounded) R2 score is returned instead.</p>
@@ -491,7 +488,7 @@ If not, then a (positive bounded) R2 score is returned instead.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.evaluate_top_k_accuracy">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_top_k_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/classification.html#evaluate_top_k_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_top_k_accuracy" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">evaluate_top_k_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mindsdb_evaluator/accuracy/classification.html#evaluate_top_k_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.evaluate_top_k_accuracy" title="Link to this definition"></a></dt>
 <dd><p>Evaluates the number of times where the correct label is among the top k labels</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -502,7 +499,7 @@ If not, then a (positive bounded) R2 score is returned instead.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.f1_score">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">f1_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'binary'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_division</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'warn'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_classification.html#f1_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.f1_score" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">f1_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'binary'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_division</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'warn'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_classification.html#f1_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.f1_score" title="Link to this definition"></a></dt>
 <dd><p>Compute the F1 score, also known as balanced F-score or F-measure.</p>
 <p>The F1 score can be interpreted as a harmonic mean of the precision and
 recall, where an F1 score reaches its best value at 1 and worst score at 0.
@@ -575,7 +572,7 @@ predictions and labels are negative.</p>
 - If set to “warn”, this acts like 0, but a warning is also raised.
 - If set to <cite>np.nan</cite>, such values will be excluded from the average.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.3: </span><cite>np.nan</cite> option was added.</p>
+<p><span class="versionmodified added">Added in version 1.3: </span><cite>np.nan</cite> option was added.</p>
 </div>
 </p></li>
 </ul>
@@ -609,7 +606,7 @@ undefined. In such cases, by default f-score will be set to 0.0, and
 setting the <code class="docutils literal notranslate"><span class="pre">zero_division</span></code> parameter.</p>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id5" role="note">
+<aside class="footnote brackets" id="id5" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/F1_score">Wikipedia entry for the F1-score</a>.</p>
 </aside>
@@ -651,7 +648,7 @@ setting the <code class="docutils literal notranslate"><span class="pre">zero_di
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.mean_absolute_error">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">mean_absolute_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multioutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform_average'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_regression.html#mean_absolute_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.mean_absolute_error" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">mean_absolute_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multioutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform_average'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_regression.html#mean_absolute_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.mean_absolute_error" title="Link to this definition"></a></dt>
 <dd><p>Mean absolute error regression loss.</p>
 <p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
 <dl class="field-list simple">
@@ -703,7 +700,7 @@ weighted average of all output errors is returned.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.mean_absolute_percentage_error">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">mean_absolute_percentage_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multioutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform_average'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_regression.html#mean_absolute_percentage_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.mean_absolute_percentage_error" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">mean_absolute_percentage_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multioutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform_average'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_regression.html#mean_absolute_percentage_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.mean_absolute_percentage_error" title="Link to this definition"></a></dt>
 <dd><p>Mean absolute percentage error (MAPE) regression loss.</p>
 <p>Note here that the output is not a percentage in the range [0, 100]
 and a value of 100 does not mean 100% but 1e2. Furthermore, the output
@@ -712,7 +709,7 @@ metric) or when <cite>abs(y_true - y_pred)</cite> is large (which is common for 
 regression metrics). Read more in the
 <span class="xref std std-ref">User Guide</span>.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 0.24.</span></p>
+<p><span class="versionmodified added">Added in version 0.24.</span></p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -771,7 +768,7 @@ Note that we return a large value instead of <cite>inf</cite> when <cite>y_true<
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.mean_squared_error">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">mean_squared_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multioutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform_average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squared</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_regression.html#mean_squared_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.mean_squared_error" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">mean_squared_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multioutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform_average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squared</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_regression.html#mean_squared_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.mean_squared_error" title="Link to this definition"></a></dt>
 <dd><p>Mean squared error regression loss.</p>
 <p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
 <dl class="field-list simple">
@@ -826,7 +823,7 @@ array of floating point values, one for each individual target.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.mean_squared_log_error">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">mean_squared_log_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multioutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform_average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squared</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_regression.html#mean_squared_log_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.mean_squared_log_error" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">mean_squared_log_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multioutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform_average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squared</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_regression.html#mean_squared_log_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.mean_squared_log_error" title="Link to this definition"></a></dt>
 <dd><p>Mean squared logarithmic error regression loss.</p>
 <p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
 <dl class="field-list simple">
@@ -883,7 +880,7 @@ array of floating point values, one for each individual target.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.median_absolute_error">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">median_absolute_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multioutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform_average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_regression.html#median_absolute_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.median_absolute_error" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">median_absolute_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multioutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform_average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_regression.html#median_absolute_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.median_absolute_error" title="Link to this definition"></a></dt>
 <dd><p>Median absolute error regression loss.</p>
 <p>Median absolute error output is non-negative floating point. The best value
 is 0.0. Read more in the <span class="xref std std-ref">User Guide</span>.</p>
@@ -903,7 +900,7 @@ weights used to average errors.</p>
 </p></li>
 <li><p><strong>sample_weight</strong> (<em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – <p>Sample weights.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 0.24.</span></p>
+<p><span class="versionmodified added">Added in version 0.24.</span></p>
 </div>
 </p></li>
 </ul>
@@ -938,7 +935,7 @@ weighted average of all output errors is returned.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.precision_score">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">precision_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'binary'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_division</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'warn'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_classification.html#precision_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.precision_score" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">precision_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'binary'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_division</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'warn'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_classification.html#precision_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.precision_score" title="Link to this definition"></a></dt>
 <dd><p>Compute the precision.</p>
 <p>The precision is the ratio <code class="docutils literal notranslate"><span class="pre">tp</span> <span class="pre">/</span> <span class="pre">(tp</span> <span class="pre">+</span> <span class="pre">fp)</span></code> where <code class="docutils literal notranslate"><span class="pre">tp</span></code> is the number of
 true positives and <code class="docutils literal notranslate"><span class="pre">fp</span></code> the number of false positives. The precision is
@@ -1004,7 +1001,7 @@ meaningful for multilabel classification where this differs from
 - If set to “warn”, this acts like 0, but a warning is also raised.
 - If set to <cite>np.nan</cite>, such values will be excluded from the average.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.3: </span><cite>np.nan</cite> option was added.</p>
+<p><span class="versionmodified added">Added in version 1.3: </span><cite>np.nan</cite> option was added.</p>
 </div>
 </p></li>
 </ul>
@@ -1069,7 +1066,7 @@ modified with <code class="docutils literal notranslate"><span class="pre">zero_
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.r2_score">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">r2_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multioutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform_average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_finite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_regression.html#r2_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.r2_score" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">r2_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multioutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uniform_average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_finite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_regression.html#r2_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.r2_score" title="Link to this definition"></a></dt>
 <dd><p><span class="math notranslate nohighlight">\(R^2\)</span> (coefficient of determination) regression score function.</p>
 <p>Best possible score is 1.0 and it can be negative (because the
 model can be arbitrarily worse). In the general case when the true y is
@@ -1114,7 +1111,7 @@ perfect, <code class="docutils literal notranslate"><span class="pre">0.0</span>
 for hyperparameters’ search procedures (e.g. grid search
 cross-validation).</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.1.</span></p>
+<p><span class="versionmodified added">Added in version 1.1.</span></p>
 </div>
 </p></li>
 </ul>
@@ -1135,7 +1132,7 @@ actually be the square of a quantity R).</p>
 value if n_samples is less than two.</p>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id6" role="note">
+<aside class="footnote brackets" id="id6" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Coefficient_of_determination">Wikipedia entry on the Coefficient of determination</a></p>
 </aside>
@@ -1181,7 +1178,7 @@ value if n_samples is less than two.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.recall_score">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">recall_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'binary'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_division</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'warn'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_classification.html#recall_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.recall_score" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">recall_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'binary'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_division</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'warn'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_classification.html#recall_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.recall_score" title="Link to this definition"></a></dt>
 <dd><p>Compute the recall.</p>
 <p>The recall is the ratio <code class="docutils literal notranslate"><span class="pre">tp</span> <span class="pre">/</span> <span class="pre">(tp</span> <span class="pre">+</span> <span class="pre">fn)</span></code> where <code class="docutils literal notranslate"><span class="pre">tp</span></code> is the number of
 true positives and <code class="docutils literal notranslate"><span class="pre">fn</span></code> the number of false negatives. The recall is
@@ -1246,7 +1243,7 @@ meaningful for multilabel classification where this differs from
 - If set to “warn”, this acts like 0, but a warning is also raised.
 - If set to <cite>np.nan</cite>, such values will be excluded from the average.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.3: </span><cite>np.nan</cite> option was added.</p>
+<p><span class="versionmodified added">Added in version 1.3: </span><cite>np.nan</cite> option was added.</p>
 </div>
 </p></li>
 </ul>
@@ -1313,7 +1310,7 @@ average of the recall of each class for the multiclass task.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.roc_auc_score">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">roc_auc_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_score</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'macro'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_fpr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'raise'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_ranking.html#roc_auc_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.roc_auc_score" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">roc_auc_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_score</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'macro'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_fpr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'raise'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_ranking.html#roc_auc_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.roc_auc_score" title="Link to this definition"></a></dt>
 <dd><p>Compute Area Under the Receiver Operating Characteristic Curve (ROC AUC)     from prediction scores.</p>
 <p>Note: this implementation can be used with binary, multiclass and
 multilabel classification, but some restrictions apply (see Parameters).</p>
@@ -1429,32 +1426,32 @@ will ensure that random guessing will yield a score of 0 in expectation, and it 
 upper bounded by 1.</p>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id11" role="note">
+<aside class="footnote brackets" id="id11" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">Wikipedia entry for the Receiver operating characteristic</a></p>
 </aside>
-<aside class="footnote brackets" id="id12" role="note">
+<aside class="footnote brackets" id="id12" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/2668680">Analyzing a portion of the ROC curve. McClish, 1989</a></p>
 </aside>
-<aside class="footnote brackets" id="id13" role="note">
+<aside class="footnote brackets" id="id13" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">3</a><span class="fn-bracket">]</span></span>
 <p>Provost, F., Domingos, P. (2000). Well-trained PETs: Improving
 probability estimation trees (Section 6.2), CeDER Working Paper
 #IS-00-04, Stern School of Business, New York University.</p>
 </aside>
-<aside class="footnote brackets" id="id14" role="note">
+<aside class="footnote brackets" id="id14" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">4</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S016786550500303X">Fawcett, T. (2006). An introduction to ROC analysis. Pattern
 Recognition Letters, 27(8), 861-874.</a></p>
 </aside>
-<aside class="footnote brackets" id="id15" role="note">
+<aside class="footnote brackets" id="id15" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">5</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="http://link.springer.com/article/10.1023/A:1010920819831">Hand, D.J., Till, R.J. (2001). A Simple Generalisation of the Area
 Under the ROC Curve for Multiple Class Classification Problems.
 Machine Learning, 45(2), 171-186.</a></p>
 </aside>
-<aside class="footnote brackets" id="id16" role="note">
+<aside class="footnote brackets" id="id16" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Gini_coefficient">Wikipedia entry for the Gini coefficient</a></p>
 </aside>
@@ -1503,7 +1500,7 @@ Machine Learning, 45(2), 171-186.</a></p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.silhouette_score">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">silhouette_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/cluster/_unsupervised.html#silhouette_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.silhouette_score" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">silhouette_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/cluster/_unsupervised.html#silhouette_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.silhouette_score" title="Link to this definition"></a></dt>
 <dd><p>Compute the mean Silhouette Coefficient of all samples.</p>
 <p>The Silhouette Coefficient is calculated using the mean intra-cluster
 distance (<code class="docutils literal notranslate"><span class="pre">a</span></code>) and the mean nearest-cluster distance (<code class="docutils literal notranslate"><span class="pre">b</span></code>) for each
@@ -1548,13 +1545,13 @@ metric dependent. See the scipy docs for usage examples.</p></li>
 </dl>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id17" role="note">
+<aside class="footnote brackets" id="id17" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://www.sciencedirect.com/science/article/pii/0377042787901257">Peter J. Rousseeuw (1987). “Silhouettes: a Graphical Aid to the
 Interpretation and Validation of Cluster Analysis”. Computational
 and Applied Mathematics 20: 53-65.</a></p>
 </aside>
-<aside class="footnote brackets" id="id18" role="note">
+<aside class="footnote brackets" id="id18" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Silhouette_(clustering)">Wikipedia entry on the Silhouette Coefficient</a></p>
 </aside>
@@ -1573,7 +1570,7 @@ and Applied Mathematics 20: 53-65.</a></p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="accuracy.top_k_accuracy_score">
-<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">top_k_accuracy_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_score</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_ranking.html#top_k_accuracy_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.top_k_accuracy_score" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">accuracy.</span></span><span class="sig-name descname"><span class="pre">top_k_accuracy_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_score</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sklearn/metrics/_ranking.html#top_k_accuracy_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#accuracy.top_k_accuracy_score" title="Link to this definition"></a></dt>
 <dd><p>Top-k Accuracy classification score.</p>
 <p>This metric computes the number of times where the correct label is among
 the top <cite>k</cite> labels predicted (ranked by predicted scores). Note that the

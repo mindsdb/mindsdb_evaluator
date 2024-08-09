@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MindsDB Evaluator &mdash; mindsdb_evaluator 0.0.13 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+  <title>MindsDB Evaluator &mdash; mindsdb_evaluator 0.0.14 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css" />
 
   
@@ -15,12 +15,14 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=544df88d"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,7 +42,7 @@
               <img src="_static/mindsdblogo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.13
+                0.0.14
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -80,13 +82,13 @@
            <div itemprop="articleBody">
              
   <section id="mindsdb-evaluator">
-<h1>MindsDB Evaluator<a class="headerlink" href="#mindsdb-evaluator" title="Permalink to this heading"></a></h1>
+<h1>MindsDB Evaluator<a class="headerlink" href="#mindsdb-evaluator" title="Link to this heading"></a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Release<span class="colon">:</span></dt>
-<dd class="field-odd"><p>0.0.13</p>
+<dd class="field-odd"><p>0.0.14</p>
 </dd>
 <dt class="field-even">Date<span class="colon">:</span></dt>
-<dd class="field-even"><p>May 07, 2024</p>
+<dd class="field-even"><p>Aug 09, 2024</p>
 </dd>
 </dl>
 <div class="line-block">
@@ -94,7 +96,7 @@
 </div>
 <p>Welcome to the <code class="docutils literal notranslate"><span class="pre">mindsdb_evaluator</span></code> documentation. <code class="docutils literal notranslate"><span class="pre">mindsdb_evaluator</span></code> is a Python package aimed at simplifying accuracy and calibration evaluations for machine learning models.</p>
 <section id="quick-guide">
-<h2>Quick Guide<a class="headerlink" href="#quick-guide" title="Permalink to this heading"></a></h2>
+<h2>Quick Guide<a class="headerlink" href="#quick-guide" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#installation"><span class="std std-ref">Installation</span></a></p></li>
 <li><p><a class="reference internal" href="#quick-start"><span class="std std-ref">Quick start</span></a></p></li>
@@ -102,14 +104,14 @@
 </ul>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
 <p>You can install <code class="docutils literal notranslate"><span class="pre">mindsdb_evalutor</span></code> as follows:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>mindsdb_evaluator
 </pre></div>
 </div>
 <p>We recommend doing the above inside a newly-created python virtual environment.</p>
 <section id="setting-up-a-dev-environment">
-<h3>Setting up a dev environment<a class="headerlink" href="#setting-up-a-dev-environment" title="Permalink to this heading"></a></h3>
+<h3>Setting up a dev environment<a class="headerlink" href="#setting-up-a-dev-environment" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Clone the repository</p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">mindsdb_evaluator</span> <span class="pre">&amp;&amp;</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--editable</span> <span class="pre">.</span></code></p></li>
@@ -123,15 +125,15 @@
 </section>
 </section>
 <section id="quick-start">
-<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
 <p>Coming soon.</p>
 </section>
 <section id="contributions">
-<h2>Contributions<a class="headerlink" href="#contributions" title="Permalink to this heading"></a></h2>
+<h2>Contributions<a class="headerlink" href="#contributions" title="Link to this heading"></a></h2>
 <p>We love to receive contributions from the community and hear your opinions! We want to make contributing as easy as it can be.</p>
 <p>Please continue reading this guide if you are interested.</p>
 <section id="how-can-you-help-us">
-<h3>How can you help us?<a class="headerlink" href="#how-can-you-help-us" title="Permalink to this heading"></a></h3>
+<h3>How can you help us?<a class="headerlink" href="#how-can-you-help-us" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Report a bug</p></li>
 <li><p>Improve documentation</p></li>
@@ -143,7 +145,7 @@
 </ul>
 </section>
 <section id="code-contributions">
-<h3>Code contributions<a class="headerlink" href="#code-contributions" title="Permalink to this heading"></a></h3>
+<h3>Code contributions<a class="headerlink" href="#code-contributions" title="Link to this heading"></a></h3>
 <p>In general, we follow the <a class="reference external" href="https://docs.github.com/en/github/collaborating-with-pull-requests/getting-started/about-collaborative-development-models#fork-and-pull-model">fork-and-pull</a> git workflow. Here are the steps:</p>
 <ol class="arabic simple">
 <li><p>Fork the repository</p></li>
@@ -159,17 +161,17 @@
 </div>
 </section>
 <section id="feature-and-bug-reports">
-<h3>Feature and Bug reports<a class="headerlink" href="#feature-and-bug-reports" title="Permalink to this heading"></a></h3>
+<h3>Feature and Bug reports<a class="headerlink" href="#feature-and-bug-reports" title="Link to this heading"></a></h3>
 <p>We use GitHub issues to track bugs and features. Report them by opening a <a class="reference external" href="https://github.com/mindsdb/mindsdb_evaluator/issues/new/choose">new issue</a> and fill out all of the required inputs.</p>
 </section>
 <section id="code-review-process">
-<h3>Code review process<a class="headerlink" href="#code-review-process" title="Permalink to this heading"></a></h3>
+<h3>Code review process<a class="headerlink" href="#code-review-process" title="Link to this heading"></a></h3>
 <p>Pull request (PR) reviews are done on a regular basis. <strong>If your PR does not address a previous issue, please make an issue first</strong>.</p>
 <p>If your change can affect performance, we will run our private benchmark suite to validate it.</p>
 <p>Please, make sure you respond to our feedback/questions.</p>
 </section>
 <section id="community">
-<h3>Community<a class="headerlink" href="#community" title="Permalink to this heading"></a></h3>
+<h3>Community<a class="headerlink" href="#community" title="Link to this heading"></a></h3>
 <p>If you have additional questions or you want to chat with MindsDB core team, you can join our community:</p>
 <embed>
 <a href="https://join.slack.com/t/mindsdbcommunity/shared_invite/zt-o8mrmx3l-5ai~5H66s6wlxFfBMVI6wQ" target="_blank"><img src="https://img.shields.io/badge/slack-@mindsdbcommunity-blueviolet.svg?logo=slack " alt="MindsDB Community"></a>
@@ -177,12 +179,12 @@
 <p>Join our mission of democratizing machine learning and allowing developers to become data scientists!</p>
 </section>
 <section id="contributor-code-of-conduct">
-<h3>Contributor Code of Conduct<a class="headerlink" href="#contributor-code-of-conduct" title="Permalink to this heading"></a></h3>
+<h3>Contributor Code of Conduct<a class="headerlink" href="#contributor-code-of-conduct" title="Link to this heading"></a></h3>
 <p>Please note that this project is released with a <a class="reference external" href="https://github.com/mindsdb/mindsdb_evaluator/blob/stable/CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project, you agree to abide by its terms.</p>
 </section>
 </section>
 <section id="license">
-<h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
+<h2>License<a class="headerlink" href="#license" title="Link to this heading"></a></h2>
 <embed>
 <img src="https://img.shields.io/pypi/l/lightwood" alt="PyPI - License">
 </embed><div class="line-block">
@@ -190,7 +192,7 @@
 </div>
 </section>
 <section id="other-links">
-<h2>Other Links<a class="headerlink" href="#other-links" title="Permalink to this heading"></a></h2>
+<h2>Other Links<a class="headerlink" href="#other-links" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="accuracy.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Accuracy</span></code></a><ul>

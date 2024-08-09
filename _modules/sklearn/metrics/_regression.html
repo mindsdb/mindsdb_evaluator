@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sklearn.metrics._regression &mdash; mindsdb_evaluator 0.0.13 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+  <title>sklearn.metrics._regression &mdash; mindsdb_evaluator 0.0.14 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
       <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
 
   
@@ -14,11 +14,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=544df88d"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -38,7 +38,7 @@
               <img src="../../../_static/mindsdblogo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.13
+                0.0.14
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -114,6 +114,13 @@
 <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">xlogy</span>
 
 <span class="kn">from</span> <span class="nn">..exceptions</span> <span class="kn">import</span> <span class="n">UndefinedMetricWarning</span>
+<span class="kn">from</span> <span class="nn">..utils._array_api</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">_average</span><span class="p">,</span>
+    <span class="n">_find_matching_floating_dtype</span><span class="p">,</span>
+    <span class="n">get_namespace</span><span class="p">,</span>
+    <span class="n">get_namespace_and_device</span><span class="p">,</span>
+    <span class="n">size</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..utils._param_validation</span> <span class="kn">import</span> <span class="n">Hidden</span><span class="p">,</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">StrOptions</span><span class="p">,</span> <span class="n">validate_params</span>
 <span class="kn">from</span> <span class="nn">..utils.stats</span> <span class="kn">import</span> <span class="n">_weighted_percentile</span>
 <span class="kn">from</span> <span class="nn">..utils.validation</span> <span class="kn">import</span> <span class="p">(</span>
@@ -145,7 +152,7 @@
 <span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">_check_reg_targets</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;numeric&quot;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_check_reg_targets</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;numeric&quot;</span><span class="p">,</span> <span class="n">xp</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check that y_true and y_pred belong to the same regression task.</span>
 
 <span class="sd">    Parameters</span>
@@ -179,15 +186,17 @@
 <span class="sd">        just the corresponding argument if ``multioutput`` is a</span>
 <span class="sd">        correct keyword.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xp</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_namespace</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span><span class="p">,</span> <span class="n">xp</span><span class="o">=</span><span class="n">xp</span><span class="p">)</span>
+
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">y_true</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">y_true</span> <span class="o">=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">y_true</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -220,7 +229,9 @@
     <span class="k">return</span> <span class="n">y_type</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span>
 
 
-<div class="viewcode-block" id="mean_absolute_error"><a class="viewcode-back" href="../../../accuracy.html#accuracy.mean_absolute_error">[docs]</a><span class="nd">@validate_params</span><span class="p">(</span>
+<div class="viewcode-block" id="mean_absolute_error">
+<a class="viewcode-back" href="../../../accuracy.html#accuracy.mean_absolute_error">[docs]</a>
+<span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
         <span class="s2">&quot;y_pred&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
@@ -297,6 +308,7 @@
             <span class="n">multioutput</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">output_errors</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">multioutput</span><span class="p">)</span></div>
+
 
 
 <span class="nd">@validate_params</span><span class="p">(</span>
@@ -389,7 +401,9 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">output_errors</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">multioutput</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="mean_absolute_percentage_error"><a class="viewcode-back" href="../../../accuracy.html#accuracy.mean_absolute_percentage_error">[docs]</a><span class="nd">@validate_params</span><span class="p">(</span>
+<div class="viewcode-block" id="mean_absolute_percentage_error">
+<a class="viewcode-back" href="../../../accuracy.html#accuracy.mean_absolute_percentage_error">[docs]</a>
+<span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
         <span class="s2">&quot;y_pred&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
@@ -484,7 +498,10 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">output_errors</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">multioutput</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="mean_squared_error"><a class="viewcode-back" href="../../../accuracy.html#accuracy.mean_squared_error">[docs]</a><span class="nd">@validate_params</span><span class="p">(</span>
+
+<div class="viewcode-block" id="mean_squared_error">
+<a class="viewcode-back" href="../../../accuracy.html#accuracy.mean_squared_error">[docs]</a>
+<span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
         <span class="s2">&quot;y_pred&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
@@ -590,6 +607,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">output_errors</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">multioutput</span><span class="p">)</span></div>
 
 
+
 <span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
@@ -664,7 +682,9 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">output_errors</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">multioutput</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="mean_squared_log_error"><a class="viewcode-back" href="../../../accuracy.html#accuracy.mean_squared_log_error">[docs]</a><span class="nd">@validate_params</span><span class="p">(</span>
+<div class="viewcode-block" id="mean_squared_log_error">
+<a class="viewcode-back" href="../../../accuracy.html#accuracy.mean_squared_log_error">[docs]</a>
+<span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
         <span class="s2">&quot;y_pred&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
@@ -776,6 +796,7 @@
     <span class="p">)</span></div>
 
 
+
 <span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
@@ -849,7 +870,9 @@
     <span class="p">)</span>
 
 
-<div class="viewcode-block" id="median_absolute_error"><a class="viewcode-back" href="../../../accuracy.html#accuracy.median_absolute_error">[docs]</a><span class="nd">@validate_params</span><span class="p">(</span>
+<div class="viewcode-block" id="median_absolute_error">
+<a class="viewcode-back" href="../../../accuracy.html#accuracy.median_absolute_error">[docs]</a>
+<span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
         <span class="s2">&quot;y_pred&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
@@ -934,10 +957,12 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">output_errors</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">multioutput</span><span class="p">)</span></div>
 
 
+
 <span class="k">def</span> <span class="nf">_assemble_r2_explained_variance</span><span class="p">(</span>
-    <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">,</span> <span class="n">n_outputs</span><span class="p">,</span> <span class="n">multioutput</span><span class="p">,</span> <span class="n">force_finite</span>
+    <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">,</span> <span class="n">n_outputs</span><span class="p">,</span> <span class="n">multioutput</span><span class="p">,</span> <span class="n">force_finite</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">device</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Common part used by explained variance score and :math:`R^2` score.&quot;&quot;&quot;</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">numerator</span><span class="o">.</span><span class="n">dtype</span>
 
     <span class="n">nonzero_denominator</span> <span class="o">=</span> <span class="n">denominator</span> <span class="o">!=</span> <span class="mi">0</span>
 
@@ -948,12 +973,14 @@
         <span class="n">nonzero_numerator</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">!=</span> <span class="mi">0</span>
         <span class="c1"># Default = Zero Numerator = perfect predictions. Set to 1.0</span>
         <span class="c1"># (note: even if denominator is zero, thus avoiding NaN scores)</span>
-        <span class="n">output_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="n">n_outputs</span><span class="p">])</span>
+        <span class="n">output_scores</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="n">n_outputs</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
         <span class="c1"># Non-zero Numerator and Non-zero Denominator: use the formula</span>
         <span class="n">valid_score</span> <span class="o">=</span> <span class="n">nonzero_denominator</span> <span class="o">&amp;</span> <span class="n">nonzero_numerator</span>
+
         <span class="n">output_scores</span><span class="p">[</span><span class="n">valid_score</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span>
             <span class="n">numerator</span><span class="p">[</span><span class="n">valid_score</span><span class="p">]</span> <span class="o">/</span> <span class="n">denominator</span><span class="p">[</span><span class="n">valid_score</span><span class="p">]</span>
         <span class="p">)</span>
+
         <span class="c1"># Non-zero Numerator and Zero Denominator:</span>
         <span class="c1"># arbitrary set to 0.0 to avoid -inf scores</span>
         <span class="n">output_scores</span><span class="p">[</span><span class="n">nonzero_numerator</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">nonzero_denominator</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
@@ -967,7 +994,7 @@
             <span class="n">avg_weights</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">elif</span> <span class="n">multioutput</span> <span class="o">==</span> <span class="s2">&quot;variance_weighted&quot;</span><span class="p">:</span>
             <span class="n">avg_weights</span> <span class="o">=</span> <span class="n">denominator</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">nonzero_denominator</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">xp</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">nonzero_denominator</span><span class="p">):</span>
                 <span class="c1"># All weights are zero, np.average would raise a ZeroDiv error.</span>
                 <span class="c1"># This only happens when all y are constant (or 1-element long)</span>
                 <span class="c1"># Since weights are all equal, fall back to uniform weights.</span>
@@ -975,7 +1002,10 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">avg_weights</span> <span class="o">=</span> <span class="n">multioutput</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">output_scores</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">avg_weights</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">_average</span><span class="p">(</span><span class="n">output_scores</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">avg_weights</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">size</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
 
 
 <span class="nd">@validate_params</span><span class="p">(</span>
@@ -1113,10 +1143,15 @@
         <span class="n">n_outputs</span><span class="o">=</span><span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
         <span class="n">multioutput</span><span class="o">=</span><span class="n">multioutput</span><span class="p">,</span>
         <span class="n">force_finite</span><span class="o">=</span><span class="n">force_finite</span><span class="p">,</span>
+        <span class="n">xp</span><span class="o">=</span><span class="n">get_namespace</span><span class="p">(</span><span class="n">y_true</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="c1"># TODO: update once Array API support is added to explained_variance_score.</span>
+        <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span>
 
 
-<div class="viewcode-block" id="r2_score"><a class="viewcode-back" href="../../../accuracy.html#accuracy.r2_score">[docs]</a><span class="nd">@validate_params</span><span class="p">(</span>
+<div class="viewcode-block" id="r2_score">
+<a class="viewcode-back" href="../../../accuracy.html#accuracy.r2_score">[docs]</a>
+<span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
         <span class="s2">&quot;y_pred&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
@@ -1257,8 +1292,14 @@
 <span class="sd">    &gt;&gt;&gt; r2_score(y_true, y_pred, force_finite=False)</span>
 <span class="sd">    -inf</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">y_type</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span> <span class="o">=</span> <span class="n">_check_reg_targets</span><span class="p">(</span>
-        <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span>
+    <span class="n">xp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">device_</span> <span class="o">=</span> <span class="n">get_namespace_and_device</span><span class="p">(</span>
+        <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">,</span> <span class="n">multioutput</span>
+    <span class="p">)</span>
+
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">_find_matching_floating_dtype</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">,</span> <span class="n">xp</span><span class="o">=</span><span class="n">xp</span><span class="p">)</span>
+
+    <span class="n">_</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span> <span class="o">=</span> <span class="n">_check_reg_targets</span><span class="p">(</span>
+        <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">xp</span><span class="o">=</span><span class="n">xp</span>
     <span class="p">)</span>
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
 
@@ -1268,15 +1309,16 @@
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;nan&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">sample_weight</span> <span class="o">=</span> <span class="n">column_or_1d</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">)</span>
-        <span class="n">weight</span> <span class="o">=</span> <span class="n">sample_weight</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+        <span class="n">sample_weight</span> <span class="o">=</span> <span class="n">column_or_1d</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">sample_weight</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">weight</span> <span class="o">=</span> <span class="mf">1.0</span>
 
-    <span class="n">numerator</span> <span class="o">=</span> <span class="p">(</span><span class="n">weight</span> <span class="o">*</span> <span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-    <span class="n">denominator</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">weight</span> <span class="o">*</span> <span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">numerator</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weight</span> <span class="o">*</span> <span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+        <span class="n">weight</span> <span class="o">*</span> <span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">_average</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">xp</span><span class="o">=</span><span class="n">xp</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">_assemble_r2_explained_variance</span><span class="p">(</span>
         <span class="n">numerator</span><span class="o">=</span><span class="n">numerator</span><span class="p">,</span>
@@ -1284,7 +1326,10 @@
         <span class="n">n_outputs</span><span class="o">=</span><span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
         <span class="n">multioutput</span><span class="o">=</span><span class="n">multioutput</span><span class="p">,</span>
         <span class="n">force_finite</span><span class="o">=</span><span class="n">force_finite</span><span class="p">,</span>
+        <span class="n">xp</span><span class="o">=</span><span class="n">xp</span><span class="p">,</span>
+        <span class="n">device</span><span class="o">=</span><span class="n">device_</span><span class="p">,</span>
     <span class="p">)</span></div>
+
 
 
 <span class="nd">@validate_params</span><span class="p">(</span>

@@ -8,7 +8,7 @@ readme = "README.md"
 packages = [{include = "mindsdb_evaluator"}]
 
 [tool.poetry.dependencies]
-python = ">=3.8.1,<3.12"
+python = ">=3.8,<3.12"
 type-infer = ">=0.0.15"
 numpy = "^1"
 pandas = "^2"

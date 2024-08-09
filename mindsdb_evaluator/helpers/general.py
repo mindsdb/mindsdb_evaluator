@@ -20,3 +20,11 @@ def filter_fn_args(fn: Callable, args: Dict) -> Dict:
         if k in inspect.signature(fn).parameters:
             filtered[k] = v
     return filtered
+
+
+def is_llm(metric: str) -> bool:
+    if metric in ['rag_faithfulness', 'rag_answer_relevancy', 'rag_context_precision', 'rag_context_recall']:
+        return True
+    else:
+        return False
+

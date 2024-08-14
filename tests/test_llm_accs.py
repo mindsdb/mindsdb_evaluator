@@ -1,3 +1,4 @@
+import importlib
 import unittest
 import os
 
@@ -5,7 +6,8 @@ from mindsdb_evaluator.accuracy.llm_generation import evaluate_rag
 
 
 class TestLLM(unittest.TestCase):
-    @unittest.skipIf(os.environ.get('OPENAI_API_KEY') is None, reason='Missing API key!')
+    # @unittest.skipIf(importlib.util.find_spec('ragas') is None, "`ragas` is not available, skipping RAG tests.")
+    # @unittest.skipIf(os.environ.get('OPENAI_API_KEY') is None, reason='Missing API key!')
     def test_evaluate_rag(self):
         data = {
             'question': 'What is the capital of France?',

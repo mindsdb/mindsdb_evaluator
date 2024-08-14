@@ -1,13 +1,5 @@
 import numpy as np
 import pandas as pd
-from datasets import Dataset, Features, Sequence, Value
-from ragas import evaluate
-from ragas.metrics import (
-    faithfulness,
-    answer_relevancy,
-    context_precision,
-    context_recall
-)
 
 
 def _setup_rag_eval(data: pd.DataFrame, predictions: pd.Series) -> dict:
@@ -31,6 +23,18 @@ def evaluate_rag(metric: str,
     param fields: contains the input fields for RAGAS
     return: score
     """
+    try:
+        # ugly workaround, see `pyproject.toml` for why
+        from datasets import Dataset, Features, Sequence, Value
+        from ragas import evaluate
+        from ragas.metrics import (
+            faithfulness,
+            answer_relevancy,
+            context_precision,
+            context_recall
+        )
+    except Exception:
+        raise Exception("Dependencies for RAG metrics are not available. Re-install using `pip install mindsdb-evaluator[rag] and try again.")  # noqa
 
     new_context = [[str(entry)] for entry in [fields['contexts']]]
 

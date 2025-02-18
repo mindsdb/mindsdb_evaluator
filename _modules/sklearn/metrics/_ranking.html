@@ -1,25 +1,23 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sklearn.metrics._ranking &mdash; mindsdb_evaluator 0.0.15 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+  <title>sklearn.metrics._ranking &mdash; mindsdb_evaluator 0.0.16 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
       <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=f0357c94"></script>
-        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=c7cdf6fe"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -37,9 +35,6 @@
             
               <img src="../../../_static/mindsdblogo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                0.0.15
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -87,42 +82,34 @@
 <span class="sd">the lower the better.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="c1"># Authors: Alexandre Gramfort &lt;alexandre.gramfort@inria.fr&gt;</span>
-<span class="c1">#          Mathieu Blondel &lt;mathieu@mblondel.org&gt;</span>
-<span class="c1">#          Olivier Grisel &lt;olivier.grisel@ensta.org&gt;</span>
-<span class="c1">#          Arnaud Joly &lt;a.joly@ulg.ac.be&gt;</span>
-<span class="c1">#          Jochen Wersdorfer &lt;jochen@wersdoerfer.de&gt;</span>
-<span class="c1">#          Lars Buitinck</span>
-<span class="c1">#          Joel Nothman &lt;joel.nothman@gmail.com&gt;</span>
-<span class="c1">#          Noel Dawe &lt;noel@dawe.me&gt;</span>
-<span class="c1">#          Michal Karbownik &lt;michakarbownik@gmail.com&gt;</span>
-<span class="c1"># License: BSD 3 clause</span>
+<span class="c1"># Authors: The scikit-learn developers</span>
+<span class="c1"># SPDX-License-Identifier: BSD-3-Clause</span>
 
 
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
-<span class="kn">from</span> <span class="nn">numbers</span> <span class="kn">import</span> <span class="n">Integral</span><span class="p">,</span> <span class="n">Real</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numbers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Integral</span><span class="p">,</span> <span class="n">Real</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csr_matrix</span><span class="p">,</span> <span class="n">issparse</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">rankdata</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">trapezoid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">csr_matrix</span><span class="p">,</span> <span class="n">issparse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">rankdata</span>
 
-<span class="kn">from</span> <span class="nn">..exceptions</span> <span class="kn">import</span> <span class="n">UndefinedMetricWarning</span>
-<span class="kn">from</span> <span class="nn">..preprocessing</span> <span class="kn">import</span> <span class="n">label_binarize</span>
-<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">UndefinedMetricWarning</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">label_binarize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">assert_all_finite</span><span class="p">,</span>
     <span class="n">check_array</span><span class="p">,</span>
     <span class="n">check_consistent_length</span><span class="p">,</span>
     <span class="n">column_or_1d</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">..utils._encode</span> <span class="kn">import</span> <span class="n">_encode</span><span class="p">,</span> <span class="n">_unique</span>
-<span class="kn">from</span> <span class="nn">..utils._param_validation</span> <span class="kn">import</span> <span class="n">Hidden</span><span class="p">,</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">StrOptions</span><span class="p">,</span> <span class="n">validate_params</span>
-<span class="kn">from</span> <span class="nn">..utils.extmath</span> <span class="kn">import</span> <span class="n">stable_cumsum</span>
-<span class="kn">from</span> <span class="nn">..utils.fixes</span> <span class="kn">import</span> <span class="n">trapezoid</span>
-<span class="kn">from</span> <span class="nn">..utils.multiclass</span> <span class="kn">import</span> <span class="n">type_of_target</span>
-<span class="kn">from</span> <span class="nn">..utils.sparsefuncs</span> <span class="kn">import</span> <span class="n">count_nonzero</span>
-<span class="kn">from</span> <span class="nn">..utils.validation</span> <span class="kn">import</span> <span class="n">_check_pos_label_consistency</span><span class="p">,</span> <span class="n">_check_sample_weight</span>
-<span class="kn">from</span> <span class="nn">._base</span> <span class="kn">import</span> <span class="n">_average_binary_score</span><span class="p">,</span> <span class="n">_average_multiclass_ovo_score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils._encode</span><span class="w"> </span><span class="kn">import</span> <span class="n">_encode</span><span class="p">,</span> <span class="n">_unique</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils._param_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">Hidden</span><span class="p">,</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">StrOptions</span><span class="p">,</span> <span class="n">validate_params</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.extmath</span><span class="w"> </span><span class="kn">import</span> <span class="n">stable_cumsum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.multiclass</span><span class="w"> </span><span class="kn">import</span> <span class="n">type_of_target</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.sparsefuncs</span><span class="w"> </span><span class="kn">import</span> <span class="n">count_nonzero</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">_check_pos_label_consistency</span><span class="p">,</span> <span class="n">_check_sample_weight</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._base</span><span class="w"> </span><span class="kn">import</span> <span class="n">_average_binary_score</span><span class="p">,</span> <span class="n">_average_multiclass_ovo_score</span>
 
 
 <div class="viewcode-block" id="auc">
@@ -131,7 +118,7 @@
     <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">]},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">auc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">auc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Area Under the Curve (AUC) using the trapezoidal rule.</span>
 
 <span class="sd">    This is a general function, given points on a curve.  For computing the</span>
@@ -167,7 +154,7 @@
 <span class="sd">    &gt;&gt;&gt; pred = np.array([0.1, 0.4, 0.35, 0.8])</span>
 <span class="sd">    &gt;&gt;&gt; fpr, tpr, thresholds = metrics.roc_curve(y, pred, pos_label=2)</span>
 <span class="sd">    &gt;&gt;&gt; metrics.auc(fpr, tpr)</span>
-<span class="sd">    0.75</span>
+<span class="sd">    np.float64(0.75)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">column_or_1d</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -209,7 +196,7 @@
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">average_precision_score</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">average_precision_score</span><span class="p">(</span>
     <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s2">&quot;macro&quot;</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute average precision (AP) from prediction scores.</span>
@@ -238,6 +225,8 @@
 <span class="sd">        Target scores, can either be probability estimates of the positive</span>
 <span class="sd">        class, confidence values, or non-thresholded measure of decisions</span>
 <span class="sd">        (as returned by :term:`decision_function` on some classifiers).</span>
+<span class="sd">        For :term:`decision_function` scores, values greater than or equal to</span>
+<span class="sd">        zero should indicate the positive class.</span>
 
 <span class="sd">    average : {&#39;micro&#39;, &#39;samples&#39;, &#39;weighted&#39;, &#39;macro&#39;} or None, \</span>
 <span class="sd">            default=&#39;macro&#39;</span>
@@ -295,7 +284,7 @@
 <span class="sd">    &gt;&gt;&gt; y_true = np.array([0, 0, 1, 1])</span>
 <span class="sd">    &gt;&gt;&gt; y_scores = np.array([0.1, 0.4, 0.35, 0.8])</span>
 <span class="sd">    &gt;&gt;&gt; average_precision_score(y_true, y_scores)</span>
-<span class="sd">    0.83...</span>
+<span class="sd">    np.float64(0.83...)</span>
 <span class="sd">    &gt;&gt;&gt; y_true = np.array([0, 0, 1, 1, 2, 2])</span>
 <span class="sd">    &gt;&gt;&gt; y_scores = np.array([</span>
 <span class="sd">    ...     [0.7, 0.2, 0.1],</span>
@@ -306,10 +295,10 @@
 <span class="sd">    ...     [0.1, 0.2, 0.7],</span>
 <span class="sd">    ... ])</span>
 <span class="sd">    &gt;&gt;&gt; average_precision_score(y_true, y_scores)</span>
-<span class="sd">    0.77...</span>
+<span class="sd">    np.float64(0.77...)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">_binary_uninterpolated_average_precision</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_binary_uninterpolated_average_precision</span><span class="p">(</span>
         <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span>
     <span class="p">):</span>
         <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">precision_recall_curve</span><span class="p">(</span>
@@ -317,8 +306,9 @@
         <span class="p">)</span>
         <span class="c1"># Return the step function integral</span>
         <span class="c1"># The following works because the last entry of precision is</span>
-        <span class="c1"># guaranteed to be 1, as returned by precision_recall_curve</span>
-        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">recall</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">precision</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># guaranteed to be 1, as returned by precision_recall_curve.</span>
+        <span class="c1"># Due to numerical error, we can get `-0.0` and we therefore clip it.</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">recall</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">precision</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
 
     <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">&quot;y_true&quot;</span><span class="p">)</span>
 
@@ -365,7 +355,7 @@
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">det_curve</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">det_curve</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute error rates for different probability thresholds.</span>
 
 <span class="sd">    .. note::</span>
@@ -386,6 +376,8 @@
 <span class="sd">        Target scores, can either be probability estimates of the positive</span>
 <span class="sd">        class, confidence values, or non-thresholded measure of decisions</span>
 <span class="sd">        (as returned by &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        For :term:`decision_function` scores, values greater than or equal to</span>
+<span class="sd">        zero should indicate the positive class.</span>
 
 <span class="sd">    pos_label : int, float, bool or str, default=None</span>
 <span class="sd">        The label of the positive class.</span>
@@ -440,7 +432,7 @@
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Only one class present in y_true. Detection error &quot;</span>
+            <span class="s2">&quot;Only one class is present in y_true. Detection error &quot;</span>
             <span class="s2">&quot;tradeoff curve is not defined in that case.&quot;</span>
         <span class="p">)</span>
 
@@ -462,13 +454,17 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">fps</span><span class="p">[</span><span class="n">sl</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">n_count</span><span class="p">,</span> <span class="n">fns</span><span class="p">[</span><span class="n">sl</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">p_count</span><span class="p">,</span> <span class="n">thresholds</span><span class="p">[</span><span class="n">sl</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
 
-<span class="k">def</span> <span class="nf">_binary_roc_auc_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_fpr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_binary_roc_auc_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_fpr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Binary roc auc score.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Only one class present in y_true. ROC AUC score &quot;</span>
-            <span class="s2">&quot;is not defined in that case.&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="s2">&quot;Only one class is present in y_true. ROC AUC score &quot;</span>
+                <span class="s2">&quot;is not defined in that case.&quot;</span>
+            <span class="p">),</span>
+            <span class="n">UndefinedMetricWarning</span><span class="p">,</span>
         <span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 
     <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">max_fpr</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">max_fpr</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -505,7 +501,7 @@
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">roc_auc_score</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">roc_auc_score</span><span class="p">(</span>
     <span class="n">y_true</span><span class="p">,</span>
     <span class="n">y_score</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -670,9 +666,9 @@
 <span class="sd">    &gt;&gt;&gt; X, y = load_breast_cancer(return_X_y=True)</span>
 <span class="sd">    &gt;&gt;&gt; clf = LogisticRegression(solver=&quot;liblinear&quot;, random_state=0).fit(X, y)</span>
 <span class="sd">    &gt;&gt;&gt; roc_auc_score(y, clf.predict_proba(X)[:, 1])</span>
-<span class="sd">    0.99...</span>
+<span class="sd">    np.float64(0.99...)</span>
 <span class="sd">    &gt;&gt;&gt; roc_auc_score(y, clf.decision_function(X))</span>
-<span class="sd">    0.99...</span>
+<span class="sd">    np.float64(0.99...)</span>
 
 <span class="sd">    Multiclass case:</span>
 
@@ -680,7 +676,7 @@
 <span class="sd">    &gt;&gt;&gt; X, y = load_iris(return_X_y=True)</span>
 <span class="sd">    &gt;&gt;&gt; clf = LogisticRegression(solver=&quot;liblinear&quot;).fit(X, y)</span>
 <span class="sd">    &gt;&gt;&gt; roc_auc_score(y, clf.predict_proba(X), multi_class=&#39;ovr&#39;)</span>
-<span class="sd">    0.99...</span>
+<span class="sd">    np.float64(0.99...)</span>
 
 <span class="sd">    Multilabel case:</span>
 
@@ -743,7 +739,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_multiclass_roc_auc_score</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_multiclass_roc_auc_score</span><span class="p">(</span>
     <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">multi_class</span><span class="p">,</span> <span class="n">average</span><span class="p">,</span> <span class="n">sample_weight</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Multiclass roc auc score.</span>
@@ -866,7 +862,7 @@
         <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_binary_clf_curve</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_binary_clf_curve</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate true and false positives per binary classification threshold.</span>
 
 <span class="sd">    Parameters</span>
@@ -965,7 +961,7 @@
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">precision_recall_curve</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">precision_recall_curve</span><span class="p">(</span>
     <span class="n">y_true</span><span class="p">,</span>
     <span class="n">y_score</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -1006,6 +1002,8 @@
 <span class="sd">        Target scores, can either be probability estimates of the positive</span>
 <span class="sd">        class, or non-thresholded measure of decisions (as returned by</span>
 <span class="sd">        `decision_function` on some classifiers).</span>
+<span class="sd">        For :term:`decision_function` scores, values greater than or equal to</span>
+<span class="sd">        zero should indicate the positive class.</span>
 
 <span class="sd">    pos_label : int, float, bool or str, default=None</span>
 <span class="sd">        The label of the positive class.</span>
@@ -1139,7 +1137,7 @@
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">roc_curve</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">roc_curve</span><span class="p">(</span>
     <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">drop_intermediate</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Receiver operating characteristic (ROC).</span>
@@ -1158,6 +1156,8 @@
 <span class="sd">        Target scores, can either be probability estimates of the positive</span>
 <span class="sd">        class, confidence values, or non-thresholded measure of decisions</span>
 <span class="sd">        (as returned by &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        For :term:`decision_function` scores, values greater than or equal to</span>
+<span class="sd">        zero should indicate the positive class.</span>
 
 <span class="sd">    pos_label : int, float, bool or str, default=None</span>
 <span class="sd">        The label of the positive class.</span>
@@ -1288,7 +1288,7 @@
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">label_ranking_average_precision_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">label_ranking_average_precision_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute ranking-based average precision.</span>
 
 <span class="sd">    Label ranking average precision (LRAP) is the average over each ground</span>
@@ -1312,6 +1312,8 @@
 <span class="sd">        Target scores, can either be probability estimates of the positive</span>
 <span class="sd">        class, confidence values, or non-thresholded measure of decisions</span>
 <span class="sd">        (as returned by &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        For :term:`decision_function` scores, values greater than or equal to</span>
+<span class="sd">        zero should indicate the positive class.</span>
 
 <span class="sd">    sample_weight : array-like of shape (n_samples,), default=None</span>
 <span class="sd">        Sample weights.</span>
@@ -1330,7 +1332,7 @@
 <span class="sd">    &gt;&gt;&gt; y_true = np.array([[1, 0, 0], [0, 0, 1]])</span>
 <span class="sd">    &gt;&gt;&gt; y_score = np.array([[0.75, 0.5, 1], [1, 0.2, 0.1]])</span>
 <span class="sd">    &gt;&gt;&gt; label_ranking_average_precision_score(y_true, y_score)</span>
-<span class="sd">    0.416...</span>
+<span class="sd">    np.float64(0.416...)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s2">&quot;csr&quot;</span><span class="p">)</span>
@@ -1387,7 +1389,7 @@
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">coverage_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">coverage_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Coverage error measure.</span>
 
 <span class="sd">    Compute how far we need to go through the ranked scores to cover all</span>
@@ -1412,6 +1414,8 @@
 <span class="sd">        Target scores, can either be probability estimates of the positive</span>
 <span class="sd">        class, confidence values, or non-thresholded measure of decisions</span>
 <span class="sd">        (as returned by &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        For :term:`decision_function` scores, values greater than or equal to</span>
+<span class="sd">        zero should indicate the positive class.</span>
 
 <span class="sd">    sample_weight : array-like of shape (n_samples,), default=None</span>
 <span class="sd">        Sample weights.</span>
@@ -1433,7 +1437,7 @@
 <span class="sd">    &gt;&gt;&gt; y_true = [[1, 0, 0], [0, 1, 1]]</span>
 <span class="sd">    &gt;&gt;&gt; y_score = [[1, 0, 0], [0, 1, 1]]</span>
 <span class="sd">    &gt;&gt;&gt; coverage_error(y_true, y_score)</span>
-<span class="sd">    1.5</span>
+<span class="sd">    np.float64(1.5)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">y_score</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1462,7 +1466,7 @@
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">label_ranking_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">label_ranking_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Ranking loss measure.</span>
 
 <span class="sd">    Compute the average number of label pairs that are incorrectly ordered</span>
@@ -1487,6 +1491,8 @@
 <span class="sd">        Target scores, can either be probability estimates of the positive</span>
 <span class="sd">        class, confidence values, or non-thresholded measure of decisions</span>
 <span class="sd">        (as returned by &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        For :term:`decision_function` scores, values greater than or equal to</span>
+<span class="sd">        zero should indicate the positive class.</span>
 
 <span class="sd">    sample_weight : array-like of shape (n_samples,), default=None</span>
 <span class="sd">        Sample weights.</span>
@@ -1510,7 +1516,7 @@
 <span class="sd">    &gt;&gt;&gt; y_true = [[1, 0, 0], [0, 0, 1]]</span>
 <span class="sd">    &gt;&gt;&gt; y_score = [[0.75, 0.5, 1], [1, 0.2, 0.1]]</span>
 <span class="sd">    &gt;&gt;&gt; label_ranking_loss(y_true, y_score)</span>
-<span class="sd">    0.75...</span>
+<span class="sd">    np.float64(0.75...)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s2">&quot;csr&quot;</span><span class="p">)</span>
     <span class="n">y_score</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1554,7 +1560,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_dcg_sample_scores</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">log_base</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_dcg_sample_scores</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">log_base</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Discounted Cumulative Gain.</span>
 
 <span class="sd">    Sum the true scores ranked in the order induced by the predicted scores,</span>
@@ -1614,7 +1620,7 @@
     <span class="k">return</span> <span class="n">cumulative_gains</span>
 
 
-<span class="k">def</span> <span class="nf">_tie_averaged_dcg</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">discount_cumsum</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_tie_averaged_dcg</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">discount_cumsum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute DCG by averaging over possible permutations of ties.</span>
 
@@ -1662,7 +1668,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">ranked</span> <span class="o">*</span> <span class="n">discount_sums</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">_check_dcg_target_type</span><span class="p">(</span><span class="n">y_true</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_dcg_target_type</span><span class="p">(</span><span class="n">y_true</span><span class="p">):</span>
     <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">&quot;y_true&quot;</span><span class="p">)</span>
     <span class="n">supported_fmt</span> <span class="o">=</span> <span class="p">(</span>
         <span class="s2">&quot;multilabel-indicator&quot;</span><span class="p">,</span>
@@ -1688,7 +1694,7 @@
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">dcg_score</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dcg_score</span><span class="p">(</span>
     <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">log_base</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Discounted Cumulative Gain.</span>
@@ -1766,22 +1772,22 @@
 <span class="sd">    &gt;&gt;&gt; # we predict scores for the answers</span>
 <span class="sd">    &gt;&gt;&gt; scores = np.asarray([[.1, .2, .3, 4, 70]])</span>
 <span class="sd">    &gt;&gt;&gt; dcg_score(true_relevance, scores)</span>
-<span class="sd">    9.49...</span>
+<span class="sd">    np.float64(9.49...)</span>
 <span class="sd">    &gt;&gt;&gt; # we can set k to truncate the sum; only top k answers contribute</span>
 <span class="sd">    &gt;&gt;&gt; dcg_score(true_relevance, scores, k=2)</span>
-<span class="sd">    5.63...</span>
+<span class="sd">    np.float64(5.63...)</span>
 <span class="sd">    &gt;&gt;&gt; # now we have some ties in our prediction</span>
 <span class="sd">    &gt;&gt;&gt; scores = np.asarray([[1, 0, 0, 0, 1]])</span>
 <span class="sd">    &gt;&gt;&gt; # by default ties are averaged, so here we get the average true</span>
 <span class="sd">    &gt;&gt;&gt; # relevance of our top predictions: (10 + 5) / 2 = 7.5</span>
 <span class="sd">    &gt;&gt;&gt; dcg_score(true_relevance, scores, k=1)</span>
-<span class="sd">    7.5</span>
+<span class="sd">    np.float64(7.5)</span>
 <span class="sd">    &gt;&gt;&gt; # we can choose to ignore ties for faster results, but only</span>
 <span class="sd">    &gt;&gt;&gt; # if we know there aren&#39;t ties in our scores, otherwise we get</span>
 <span class="sd">    &gt;&gt;&gt; # wrong results:</span>
 <span class="sd">    &gt;&gt;&gt; dcg_score(true_relevance,</span>
 <span class="sd">    ...           scores, k=1, ignore_ties=True)</span>
-<span class="sd">    5.0</span>
+<span class="sd">    np.float64(5.0)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">y_score</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1795,7 +1801,7 @@
     <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_ndcg_sample_scores</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_ndcg_sample_scores</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Normalized Discounted Cumulative Gain.</span>
 
 <span class="sd">    Sum the true scores ranked in the order induced by the predicted scores,</span>
@@ -1856,7 +1862,7 @@
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">ndcg_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ndcg_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Normalized Discounted Cumulative Gain.</span>
 
 <span class="sd">    Sum the true scores ranked in the order induced by the predicted scores,</span>
@@ -1926,29 +1932,29 @@
 <span class="sd">    &gt;&gt;&gt; # we predict some scores (relevance) for the answers</span>
 <span class="sd">    &gt;&gt;&gt; scores = np.asarray([[.1, .2, .3, 4, 70]])</span>
 <span class="sd">    &gt;&gt;&gt; ndcg_score(true_relevance, scores)</span>
-<span class="sd">    0.69...</span>
+<span class="sd">    np.float64(0.69...)</span>
 <span class="sd">    &gt;&gt;&gt; scores = np.asarray([[.05, 1.1, 1., .5, .0]])</span>
 <span class="sd">    &gt;&gt;&gt; ndcg_score(true_relevance, scores)</span>
-<span class="sd">    0.49...</span>
+<span class="sd">    np.float64(0.49...)</span>
 <span class="sd">    &gt;&gt;&gt; # we can set k to truncate the sum; only top k answers contribute.</span>
 <span class="sd">    &gt;&gt;&gt; ndcg_score(true_relevance, scores, k=4)</span>
-<span class="sd">    0.35...</span>
+<span class="sd">    np.float64(0.35...)</span>
 <span class="sd">    &gt;&gt;&gt; # the normalization takes k into account so a perfect answer</span>
 <span class="sd">    &gt;&gt;&gt; # would still get 1.0</span>
 <span class="sd">    &gt;&gt;&gt; ndcg_score(true_relevance, true_relevance, k=4)</span>
-<span class="sd">    1.0...</span>
+<span class="sd">    np.float64(1.0...)</span>
 <span class="sd">    &gt;&gt;&gt; # now we have some ties in our prediction</span>
 <span class="sd">    &gt;&gt;&gt; scores = np.asarray([[1, 0, 0, 0, 1]])</span>
 <span class="sd">    &gt;&gt;&gt; # by default ties are averaged, so here we get the average (normalized)</span>
 <span class="sd">    &gt;&gt;&gt; # true relevance of our top predictions: (10 / 10 + 5 / 10) / 2 = .75</span>
 <span class="sd">    &gt;&gt;&gt; ndcg_score(true_relevance, scores, k=1)</span>
-<span class="sd">    0.75...</span>
+<span class="sd">    np.float64(0.75...)</span>
 <span class="sd">    &gt;&gt;&gt; # we can choose to ignore ties for faster results, but only</span>
 <span class="sd">    &gt;&gt;&gt; # if we know there aren&#39;t ties in our scores, otherwise we get</span>
 <span class="sd">    &gt;&gt;&gt; # wrong results:</span>
 <span class="sd">    &gt;&gt;&gt; ndcg_score(true_relevance,</span>
 <span class="sd">    ...           scores, k=1, ignore_ties=True)</span>
-<span class="sd">    0.5...</span>
+<span class="sd">    np.float64(0.5...)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">y_score</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1979,7 +1985,7 @@
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">top_k_accuracy_score</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">top_k_accuracy_score</span><span class="p">(</span>
     <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Top-k Accuracy classification score.</span>
@@ -2053,10 +2059,10 @@
 <span class="sd">    ...                     [0.2, 0.4, 0.3],  # 2 is in top 2</span>
 <span class="sd">    ...                     [0.7, 0.2, 0.1]]) # 2 isn&#39;t in top 2</span>
 <span class="sd">    &gt;&gt;&gt; top_k_accuracy_score(y_true, y_score, k=2)</span>
-<span class="sd">    0.75</span>
+<span class="sd">    np.float64(0.75)</span>
 <span class="sd">    &gt;&gt;&gt; # Not normalizing gives the number of &quot;correctly&quot; classified samples</span>
 <span class="sd">    &gt;&gt;&gt; top_k_accuracy_score(y_true, y_score, k=2, normalize=False)</span>
-<span class="sd">    3</span>
+<span class="sd">    np.int64(3)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">column_or_1d</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>

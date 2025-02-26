@@ -82,15 +82,27 @@
 <span class="sd">the lower the better.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="c1"># Authors: The scikit-learn developers</span>
-<span class="c1"># SPDX-License-Identifier: BSD-3-Clause</span>
+<span class="c1"># Authors: Alexandre Gramfort &lt;alexandre.gramfort@inria.fr&gt;</span>
+<span class="c1">#          Mathieu Blondel &lt;mathieu@mblondel.org&gt;</span>
+<span class="c1">#          Olivier Grisel &lt;olivier.grisel@ensta.org&gt;</span>
+<span class="c1">#          Arnaud Joly &lt;a.joly@ulg.ac.be&gt;</span>
+<span class="c1">#          Jochen Wersdorfer &lt;jochen@wersdoerfer.de&gt;</span>
+<span class="c1">#          Lars Buitinck</span>
+<span class="c1">#          Joel Nothman &lt;joel.nothman@gmail.com&gt;</span>
+<span class="c1">#          Noel Dawe &lt;noel@dawe.me&gt;</span>
+<span class="c1">#          Jatin Shah &lt;jatindshah@gmail.com&gt;</span>
+<span class="c1">#          Saurabh Jha &lt;saurabh.jhaa@gmail.com&gt;</span>
+<span class="c1">#          Bernardo Stein &lt;bernardovstein@gmail.com&gt;</span>
+<span class="c1">#          Shangwu Yao &lt;shangwuyao@gmail.com&gt;</span>
+<span class="c1">#          Michal Karbownik &lt;michakarbownik@gmail.com&gt;</span>
+<span class="c1"># License: BSD 3 clause</span>
 
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numbers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Integral</span><span class="p">,</span> <span class="n">Real</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">coo_matrix</span><span class="p">,</span> <span class="n">csr_matrix</span><span class="p">,</span> <span class="n">issparse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">coo_matrix</span><span class="p">,</span> <span class="n">csr_matrix</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">xlogy</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">UndefinedMetricWarning</span>
@@ -103,15 +115,9 @@
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..utils._array_api</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">_average</span><span class="p">,</span>
-    <span class="n">_bincount</span><span class="p">,</span>
     <span class="n">_count_nonzero</span><span class="p">,</span>
-    <span class="n">_find_matching_floating_dtype</span><span class="p">,</span>
     <span class="n">_is_numpy_namespace</span><span class="p">,</span>
-    <span class="n">_searchsorted</span><span class="p">,</span>
-    <span class="n">_setdiff1d</span><span class="p">,</span>
-    <span class="n">_tolist</span><span class="p">,</span>
     <span class="n">_union1d</span><span class="p">,</span>
-    <span class="n">device</span><span class="p">,</span>
     <span class="n">get_namespace</span><span class="p">,</span>
     <span class="n">get_namespace_and_device</span><span class="p">,</span>
 <span class="p">)</span>
@@ -122,7 +128,6 @@
     <span class="n">StrOptions</span><span class="p">,</span>
     <span class="n">validate_params</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">..utils._unique</span><span class="w"> </span><span class="kn">import</span> <span class="n">attach_unique</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..utils.extmath</span><span class="w"> </span><span class="kn">import</span> <span class="n">_nanaverage</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..utils.multiclass</span><span class="w"> </span><span class="kn">import</span> <span class="n">type_of_target</span><span class="p">,</span> <span class="n">unique_labels</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..utils.sparsefuncs</span><span class="w"> </span><span class="kn">import</span> <span class="n">count_nonzero</span>
@@ -300,10 +305,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">xp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">device</span> <span class="o">=</span> <span class="n">get_namespace_and_device</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
     <span class="c1"># Compute accuracy for each possible representation</span>
-    <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">attach_unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">y_type</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">_check_targets</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
-
     <span class="k">if</span> <span class="n">y_type</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;multilabel&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">_is_numpy_namespace</span><span class="p">(</span><span class="n">xp</span><span class="p">):</span>
             <span class="n">differing_labels</span> <span class="o">=</span> <span class="n">count_nonzero</span><span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -414,7 +417,6 @@
 <span class="sd">    &gt;&gt;&gt; (tn, fp, fn, tp)</span>
 <span class="sd">    (np.int64(0), np.int64(2), np.int64(1), np.int64(1))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">attach_unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">y_type</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">_check_targets</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">y_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;multiclass&quot;</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> is not supported&quot;</span> <span class="o">%</span> <span class="n">y_type</span><span class="p">)</span>
@@ -604,12 +606,9 @@
 <span class="sd">           [[2, 1],</span>
 <span class="sd">            [1, 2]]])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">attach_unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">xp</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_namespace</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">device_</span> <span class="o">=</span> <span class="n">device</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">y_type</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">_check_targets</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">sample_weight</span> <span class="o">=</span> <span class="n">column_or_1d</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device_</span><span class="p">)</span>
+        <span class="n">sample_weight</span> <span class="o">=</span> <span class="n">column_or_1d</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">)</span>
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">y_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;multiclass&quot;</span><span class="p">,</span> <span class="s2">&quot;multilabel-indicator&quot;</span><span class="p">):</span>
@@ -620,11 +619,9 @@
         <span class="n">labels</span> <span class="o">=</span> <span class="n">present_labels</span>
         <span class="n">n_labels</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">labels</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device_</span><span class="p">)</span>
-        <span class="n">n_labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">labels</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">labels</span><span class="p">,</span> <span class="n">_setdiff1d</span><span class="p">(</span><span class="n">present_labels</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">assume_unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xp</span><span class="o">=</span><span class="n">xp</span><span class="p">)],</span>
-            <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">n_labels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">labels</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">present_labels</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">assume_unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">y_true</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -644,102 +641,77 @@
         <span class="n">tp</span> <span class="o">=</span> <span class="n">y_true</span> <span class="o">==</span> <span class="n">y_pred</span>
         <span class="n">tp_bins</span> <span class="o">=</span> <span class="n">y_true</span><span class="p">[</span><span class="n">tp</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">tp_bins_weights</span> <span class="o">=</span> <span class="n">sample_weight</span><span class="p">[</span><span class="n">tp</span><span class="p">]</span>
+            <span class="n">tp_bins_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">)[</span><span class="n">tp</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">tp_bins_weights</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="k">if</span> <span class="n">tp_bins</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="n">tp_sum</span> <span class="o">=</span> <span class="n">_bincount</span><span class="p">(</span>
-                <span class="n">tp_bins</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">tp_bins_weights</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xp</span><span class="o">=</span><span class="n">xp</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tp_bins</span><span class="p">):</span>
+            <span class="n">tp_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span>
+                <span class="n">tp_bins</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">tp_bins_weights</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Pathological case</span>
-            <span class="n">true_sum</span> <span class="o">=</span> <span class="n">pred_sum</span> <span class="o">=</span> <span class="n">tp_sum</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="n">pred_sum</span> <span class="o">=</span> <span class="n">_bincount</span><span class="p">(</span>
-                <span class="n">y_pred</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xp</span><span class="o">=</span><span class="n">xp</span>
-            <span class="p">)</span>
-        <span class="k">if</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="n">true_sum</span> <span class="o">=</span> <span class="n">_bincount</span><span class="p">(</span>
-                <span class="n">y_true</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xp</span><span class="o">=</span><span class="n">xp</span>
-            <span class="p">)</span>
+            <span class="n">true_sum</span> <span class="o">=</span> <span class="n">pred_sum</span> <span class="o">=</span> <span class="n">tp_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_pred</span><span class="p">):</span>
+            <span class="n">pred_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_true</span><span class="p">):</span>
+            <span class="n">true_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
 
         <span class="c1"># Retain only selected labels</span>
-        <span class="n">indices</span> <span class="o">=</span> <span class="n">_searchsorted</span><span class="p">(</span><span class="n">sorted_labels</span><span class="p">,</span> <span class="n">labels</span><span class="p">[:</span><span class="n">n_labels</span><span class="p">],</span> <span class="n">xp</span><span class="o">=</span><span class="n">xp</span><span class="p">)</span>
-        <span class="n">tp_sum</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">tp_sum</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">true_sum</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">true_sum</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">pred_sum</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">pred_sum</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">sorted_labels</span><span class="p">,</span> <span class="n">labels</span><span class="p">[:</span><span class="n">n_labels</span><span class="p">])</span>
+        <span class="n">tp_sum</span> <span class="o">=</span> <span class="n">tp_sum</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+        <span class="n">true_sum</span> <span class="o">=</span> <span class="n">true_sum</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+        <span class="n">pred_sum</span> <span class="o">=</span> <span class="n">pred_sum</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
 
     <span class="k">else</span><span class="p">:</span>
         <span class="n">sum_axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">samplewise</span> <span class="k">else</span> <span class="mi">0</span>
 
         <span class="c1"># All labels are index integers for multilabel.</span>
         <span class="c1"># Select labels:</span>
-        <span class="k">if</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">present_labels</span><span class="o">.</span><span class="n">shape</span> <span class="ow">or</span> <span class="n">xp</span><span class="o">.</span><span class="n">any</span><span class="p">(</span>
-            <span class="n">xp</span><span class="o">.</span><span class="n">not_equal</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">present_labels</span><span class="p">)</span>
-        <span class="p">):</span>
-            <span class="k">if</span> <span class="n">xp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">xp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">present_labels</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">present_labels</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">present_labels</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="s2">&quot;All labels must be in [0, n labels) for &quot;</span>
                     <span class="s2">&quot;multilabel targets. &quot;</span>
-                    <span class="s2">&quot;Got </span><span class="si">%d</span><span class="s2"> &gt; </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">xp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">present_labels</span><span class="p">))</span>
+                    <span class="s2">&quot;Got </span><span class="si">%d</span><span class="s2"> &gt; </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">present_labels</span><span class="p">))</span>
                 <span class="p">)</span>
-            <span class="k">if</span> <span class="n">xp</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="s2">&quot;All labels must be in [0, n labels) for &quot;</span>
                     <span class="s2">&quot;multilabel targets. &quot;</span>
-                    <span class="s2">&quot;Got </span><span class="si">%d</span><span class="s2"> &lt; 0&quot;</span> <span class="o">%</span> <span class="n">xp</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+                    <span class="s2">&quot;Got </span><span class="si">%d</span><span class="s2"> &lt; 0&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
                 <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">n_labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">y_true</span> <span class="o">=</span> <span class="n">y_true</span><span class="p">[:,</span> <span class="n">labels</span><span class="p">[:</span><span class="n">n_labels</span><span class="p">]]</span>
             <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_pred</span><span class="p">[:,</span> <span class="n">labels</span><span class="p">[:</span><span class="n">n_labels</span><span class="p">]]</span>
 
-        <span class="k">if</span> <span class="n">issparse</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span> <span class="ow">or</span> <span class="n">issparse</span><span class="p">(</span><span class="n">y_pred</span><span class="p">):</span>
-            <span class="n">true_and_pred</span> <span class="o">=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">true_and_pred</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-
         <span class="c1"># calculate weighted counts</span>
-        <span class="n">tp_sum</span> <span class="o">=</span> <span class="n">_count_nonzero</span><span class="p">(</span>
-            <span class="n">true_and_pred</span><span class="p">,</span>
-            <span class="n">axis</span><span class="o">=</span><span class="n">sum_axis</span><span class="p">,</span>
-            <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span>
-            <span class="n">xp</span><span class="o">=</span><span class="n">xp</span><span class="p">,</span>
-            <span class="n">device</span><span class="o">=</span><span class="n">device_</span><span class="p">,</span>
+        <span class="n">true_and_pred</span> <span class="o">=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+        <span class="n">tp_sum</span> <span class="o">=</span> <span class="n">count_nonzero</span><span class="p">(</span>
+            <span class="n">true_and_pred</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">sum_axis</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span>
         <span class="p">)</span>
-        <span class="n">pred_sum</span> <span class="o">=</span> <span class="n">_count_nonzero</span><span class="p">(</span>
-            <span class="n">y_pred</span><span class="p">,</span>
-            <span class="n">axis</span><span class="o">=</span><span class="n">sum_axis</span><span class="p">,</span>
-            <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span>
-            <span class="n">xp</span><span class="o">=</span><span class="n">xp</span><span class="p">,</span>
-            <span class="n">device</span><span class="o">=</span><span class="n">device_</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">true_sum</span> <span class="o">=</span> <span class="n">_count_nonzero</span><span class="p">(</span>
-            <span class="n">y_true</span><span class="p">,</span>
-            <span class="n">axis</span><span class="o">=</span><span class="n">sum_axis</span><span class="p">,</span>
-            <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span>
-            <span class="n">xp</span><span class="o">=</span><span class="n">xp</span><span class="p">,</span>
-            <span class="n">device</span><span class="o">=</span><span class="n">device_</span><span class="p">,</span>
-        <span class="p">)</span>
+        <span class="n">pred_sum</span> <span class="o">=</span> <span class="n">count_nonzero</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">sum_axis</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span>
+        <span class="n">true_sum</span> <span class="o">=</span> <span class="n">count_nonzero</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">sum_axis</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span>
 
     <span class="n">fp</span> <span class="o">=</span> <span class="n">pred_sum</span> <span class="o">-</span> <span class="n">tp_sum</span>
     <span class="n">fn</span> <span class="o">=</span> <span class="n">true_sum</span> <span class="o">-</span> <span class="n">tp_sum</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">tp_sum</span>
 
     <span class="k">if</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">samplewise</span><span class="p">:</span>
-        <span class="n">tp</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tp</span><span class="p">)</span>
-        <span class="n">fp</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
-        <span class="n">fn</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+        <span class="n">sample_weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">)</span>
+        <span class="n">tp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tp</span><span class="p">)</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
         <span class="n">tn</span> <span class="o">=</span> <span class="n">sample_weight</span> <span class="o">*</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tp</span> <span class="o">-</span> <span class="n">fp</span> <span class="o">-</span> <span class="n">fn</span>
     <span class="k">elif</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">tn</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">)</span> <span class="o">-</span> <span class="n">tp</span> <span class="o">-</span> <span class="n">fp</span> <span class="o">-</span> <span class="n">fn</span>
+        <span class="n">tn</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">)</span> <span class="o">-</span> <span class="n">tp</span> <span class="o">-</span> <span class="n">fp</span> <span class="o">-</span> <span class="n">fn</span>
     <span class="k">elif</span> <span class="n">samplewise</span><span class="p">:</span>
         <span class="n">tn</span> <span class="o">=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tp</span> <span class="o">-</span> <span class="n">fp</span> <span class="o">-</span> <span class="n">fn</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">tn</span> <span class="o">=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">tp</span> <span class="o">-</span> <span class="n">fp</span> <span class="o">-</span> <span class="n">fn</span>
 
-    <span class="k">return</span> <span class="n">xp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">tn</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tp</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">tn</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tp</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
 
 <span class="nd">@validate_params</span><span class="p">(</span>
@@ -785,8 +757,8 @@
 <span class="sd">        ``y1`` or ``y2`` are used.</span>
 
 <span class="sd">    weights : {&#39;linear&#39;, &#39;quadratic&#39;}, default=None</span>
-<span class="sd">        Weighting type to calculate the score. `None` means not weighted;</span>
-<span class="sd">        &quot;linear&quot; means linear weighting; &quot;quadratic&quot; means quadratic weighting.</span>
+<span class="sd">        Weighting type to calculate the score. `None` means no weighted;</span>
+<span class="sd">        &quot;linear&quot; means linear weighted; &quot;quadratic&quot; means quadratic weighted.</span>
 
 <span class="sd">    sample_weight : array-like of shape (n_samples,), default=None</span>
 <span class="sd">        Sample weights.</span>
@@ -935,8 +907,6 @@
 <span class="sd">        Sets the value to return when there is a zero division, i.e. when there</span>
 <span class="sd">        there are no negative values in predictions and labels. If set to</span>
 <span class="sd">        &quot;warn&quot;, this acts like 0, but a warning is also raised.</span>
-
-<span class="sd">        .. versionadded:: 0.24</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1108,7 +1078,6 @@
 <span class="sd">    &gt;&gt;&gt; matthews_corrcoef(y_true, y_pred)</span>
 <span class="sd">    np.float64(-0.33...)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">attach_unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">y_type</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">_check_targets</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">y_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;multiclass&quot;</span><span class="p">}:</span>
@@ -1306,7 +1275,7 @@
 <span class="sd">    average : {&#39;micro&#39;, &#39;macro&#39;, &#39;samples&#39;, &#39;weighted&#39;, &#39;binary&#39;} or None, \</span>
 <span class="sd">            default=&#39;binary&#39;</span>
 <span class="sd">        This parameter is required for multiclass/multilabel targets.</span>
-<span class="sd">        If ``None``, the metrics for each class are returned. Otherwise, this</span>
+<span class="sd">        If ``None``, the scores for each class are returned. Otherwise, this</span>
 <span class="sd">        determines the type of averaging performed on the data:</span>
 
 <span class="sd">        ``&#39;binary&#39;``:</span>
@@ -1377,11 +1346,11 @@
 <span class="sd">    &gt;&gt;&gt; y_true = [0, 1, 2, 0, 1, 2]</span>
 <span class="sd">    &gt;&gt;&gt; y_pred = [0, 2, 1, 0, 0, 1]</span>
 <span class="sd">    &gt;&gt;&gt; f1_score(y_true, y_pred, average=&#39;macro&#39;)</span>
-<span class="sd">    0.26...</span>
+<span class="sd">    np.float64(0.26...)</span>
 <span class="sd">    &gt;&gt;&gt; f1_score(y_true, y_pred, average=&#39;micro&#39;)</span>
-<span class="sd">    0.33...</span>
+<span class="sd">    np.float64(0.33...)</span>
 <span class="sd">    &gt;&gt;&gt; f1_score(y_true, y_pred, average=&#39;weighted&#39;)</span>
-<span class="sd">    0.26...</span>
+<span class="sd">    np.float64(0.26...)</span>
 <span class="sd">    &gt;&gt;&gt; f1_score(y_true, y_pred, average=None)</span>
 <span class="sd">    array([0.8, 0. , 0. ])</span>
 
@@ -1389,9 +1358,9 @@
 <span class="sd">    &gt;&gt;&gt; y_true_empty = [0, 0, 0, 0, 0, 0]</span>
 <span class="sd">    &gt;&gt;&gt; y_pred_empty = [0, 0, 0, 0, 0, 0]</span>
 <span class="sd">    &gt;&gt;&gt; f1_score(y_true_empty, y_pred_empty)</span>
-<span class="sd">    0.0...</span>
+<span class="sd">    np.float64(0.0...)</span>
 <span class="sd">    &gt;&gt;&gt; f1_score(y_true_empty, y_pred_empty, zero_division=1.0)</span>
-<span class="sd">    1.0...</span>
+<span class="sd">    np.float64(1.0...)</span>
 <span class="sd">    &gt;&gt;&gt; f1_score(y_true_empty, y_pred_empty, zero_division=np.nan)</span>
 <span class="sd">    nan...</span>
 
@@ -1510,7 +1479,7 @@
 <span class="sd">    average : {&#39;micro&#39;, &#39;macro&#39;, &#39;samples&#39;, &#39;weighted&#39;, &#39;binary&#39;} or None, \</span>
 <span class="sd">            default=&#39;binary&#39;</span>
 <span class="sd">        This parameter is required for multiclass/multilabel targets.</span>
-<span class="sd">        If ``None``, the metrics for each class are returned. Otherwise, this</span>
+<span class="sd">        If ``None``, the scores for each class are returned. Otherwise, this</span>
 <span class="sd">        determines the type of averaging performed on the data:</span>
 
 <span class="sd">        ``&#39;binary&#39;``:</span>
@@ -1540,7 +1509,6 @@
 <span class="sd">        predictions and labels are negative.</span>
 
 <span class="sd">        Notes:</span>
-
 <span class="sd">        - If set to &quot;warn&quot;, this acts like 0, but a warning is also raised.</span>
 <span class="sd">        - If set to `np.nan`, such values will be excluded from the average.</span>
 
@@ -1582,17 +1550,17 @@
 <span class="sd">    &gt;&gt;&gt; y_true = [0, 1, 2, 0, 1, 2]</span>
 <span class="sd">    &gt;&gt;&gt; y_pred = [0, 2, 1, 0, 0, 1]</span>
 <span class="sd">    &gt;&gt;&gt; fbeta_score(y_true, y_pred, average=&#39;macro&#39;, beta=0.5)</span>
-<span class="sd">    0.23...</span>
+<span class="sd">    np.float64(0.23...)</span>
 <span class="sd">    &gt;&gt;&gt; fbeta_score(y_true, y_pred, average=&#39;micro&#39;, beta=0.5)</span>
-<span class="sd">    0.33...</span>
+<span class="sd">    np.float64(0.33...)</span>
 <span class="sd">    &gt;&gt;&gt; fbeta_score(y_true, y_pred, average=&#39;weighted&#39;, beta=0.5)</span>
-<span class="sd">    0.23...</span>
+<span class="sd">    np.float64(0.23...)</span>
 <span class="sd">    &gt;&gt;&gt; fbeta_score(y_true, y_pred, average=None, beta=0.5)</span>
 <span class="sd">    array([0.71..., 0.        , 0.        ])</span>
 <span class="sd">    &gt;&gt;&gt; y_pred_empty = [0, 0, 0, 0, 0, 0]</span>
 <span class="sd">    &gt;&gt;&gt; fbeta_score(y_true, y_pred_empty,</span>
 <span class="sd">    ...             average=&quot;macro&quot;, zero_division=np.nan, beta=0.5)</span>
-<span class="sd">    0.12...</span>
+<span class="sd">    np.float64(0.12...)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">precision_recall_fscore_support</span><span class="p">(</span>
@@ -1621,14 +1589,12 @@
 <span class="sd">    The metric, modifier and average arguments are used only for determining</span>
 <span class="sd">    an appropriate warning.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">xp</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_namespace</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">)</span>
-    <span class="n">dtype_float</span> <span class="o">=</span> <span class="n">_find_matching_floating_dtype</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">,</span> <span class="n">xp</span><span class="o">=</span><span class="n">xp</span><span class="p">)</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="n">denominator</span> <span class="o">==</span> <span class="mi">0</span>
-    <span class="n">denominator</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">denominator</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_float</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">denominator</span> <span class="o">==</span> <span class="mf">0.0</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="n">denominator</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">denominator</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># avoid infs/nans</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_float</span><span class="p">)</span> <span class="o">/</span> <span class="n">denominator</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">xp</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">mask</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">mask</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="c1"># set those with 0 denominator to `zero_division`, and 0 when &quot;warn&quot;</span>
@@ -1673,11 +1639,10 @@
     <span class="k">if</span> <span class="n">average</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">average_options</span> <span class="ow">and</span> <span class="n">average</span> <span class="o">!=</span> <span class="s2">&quot;binary&quot;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;average has to be one of &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">average_options</span><span class="p">))</span>
 
-    <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">attach_unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">y_type</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">_check_targets</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="c1"># Convert to Python primitive type to avoid NumPy type / Python str</span>
     <span class="c1"># comparison. See https://github.com/numpy/numpy/issues/6784</span>
-    <span class="n">present_labels</span> <span class="o">=</span> <span class="n">_tolist</span><span class="p">(</span><span class="n">unique_labels</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+    <span class="n">present_labels</span> <span class="o">=</span> <span class="n">unique_labels</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">average</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">pos_label</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">present_labels</span><span class="p">:</span>
@@ -1789,18 +1754,14 @@
 <span class="sd">        &quot;assigned&quot; 0 samples. For multilabel targets, labels are column indices.</span>
 <span class="sd">        By default, all labels in `y_true` and `y_pred` are used in sorted order.</span>
 
-<span class="sd">        .. versionchanged:: 0.17</span>
-<span class="sd">           Parameter `labels` improved for multiclass problem.</span>
-
 <span class="sd">    pos_label : int, float, bool or str, default=1</span>
 <span class="sd">        The class to report if `average=&#39;binary&#39;` and the data is binary,</span>
 <span class="sd">        otherwise this parameter is ignored.</span>
 <span class="sd">        For multiclass or multilabel targets, set `labels=[pos_label]` and</span>
 <span class="sd">        `average != &#39;binary&#39;` to report metrics for one label only.</span>
 
-<span class="sd">    average : {&#39;micro&#39;, &#39;macro&#39;, &#39;samples&#39;, &#39;weighted&#39;, &#39;binary&#39;} or None, \</span>
-<span class="sd">            default=&#39;binary&#39;</span>
-<span class="sd">        This parameter is required for multiclass/multilabel targets.</span>
+<span class="sd">    average : {&#39;binary&#39;, &#39;micro&#39;, &#39;macro&#39;, &#39;samples&#39;, &#39;weighted&#39;}, \</span>
+<span class="sd">            default=None</span>
 <span class="sd">        If ``None``, the metrics for each class are returned. Otherwise, this</span>
 <span class="sd">        determines the type of averaging performed on the data:</span>
 
@@ -1832,13 +1793,11 @@
 
 <span class="sd">    zero_division : {&quot;warn&quot;, 0.0, 1.0, np.nan}, default=&quot;warn&quot;</span>
 <span class="sd">        Sets the value to return when there is a zero division:</span>
-
-<span class="sd">        - recall: when there are no positive labels</span>
-<span class="sd">        - precision: when there are no positive predictions</span>
-<span class="sd">        - f-score: both</span>
+<span class="sd">           - recall: when there are no positive labels</span>
+<span class="sd">           - precision: when there are no positive predictions</span>
+<span class="sd">           - f-score: both</span>
 
 <span class="sd">        Notes:</span>
-
 <span class="sd">        - If set to &quot;warn&quot;, this acts like 0, but a warning is also raised.</span>
 <span class="sd">        - If set to `np.nan`, such values will be excluded from the average.</span>
 
@@ -1892,11 +1851,11 @@
 <span class="sd">    &gt;&gt;&gt; y_true = np.array([&#39;cat&#39;, &#39;dog&#39;, &#39;pig&#39;, &#39;cat&#39;, &#39;dog&#39;, &#39;pig&#39;])</span>
 <span class="sd">    &gt;&gt;&gt; y_pred = np.array([&#39;cat&#39;, &#39;pig&#39;, &#39;dog&#39;, &#39;cat&#39;, &#39;cat&#39;, &#39;dog&#39;])</span>
 <span class="sd">    &gt;&gt;&gt; precision_recall_fscore_support(y_true, y_pred, average=&#39;macro&#39;)</span>
-<span class="sd">    (0.22..., 0.33..., 0.26..., None)</span>
+<span class="sd">    (np.float64(0.22...), np.float64(0.33...), np.float64(0.26...), None)</span>
 <span class="sd">    &gt;&gt;&gt; precision_recall_fscore_support(y_true, y_pred, average=&#39;micro&#39;)</span>
-<span class="sd">    (0.33..., 0.33..., 0.33..., None)</span>
+<span class="sd">    (np.float64(0.33...), np.float64(0.33...), np.float64(0.33...), None)</span>
 <span class="sd">    &gt;&gt;&gt; precision_recall_fscore_support(y_true, y_pred, average=&#39;weighted&#39;)</span>
-<span class="sd">    (0.22..., 0.33..., 0.26..., None)</span>
+<span class="sd">    (np.float64(0.22...), np.float64(0.33...), np.float64(0.26...), None)</span>
 
 <span class="sd">    It is possible to compute per-label precisions, recalls, F1-scores and</span>
 <span class="sd">    supports instead of averaging:</span>
@@ -1923,11 +1882,10 @@
     <span class="n">pred_sum</span> <span class="o">=</span> <span class="n">tp_sum</span> <span class="o">+</span> <span class="n">MCM</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
     <span class="n">true_sum</span> <span class="o">=</span> <span class="n">tp_sum</span> <span class="o">+</span> <span class="n">MCM</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 
-    <span class="n">xp</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_namespace</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">average</span> <span class="o">==</span> <span class="s2">&quot;micro&quot;</span><span class="p">:</span>
-        <span class="n">tp_sum</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">tp_sum</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
-        <span class="n">pred_sum</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pred_sum</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
-        <span class="n">true_sum</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">true_sum</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
+        <span class="n">tp_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">tp_sum</span><span class="o">.</span><span class="n">sum</span><span class="p">()])</span>
+        <span class="n">pred_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">pred_sum</span><span class="o">.</span><span class="n">sum</span><span class="p">()])</span>
+        <span class="n">true_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">true_sum</span><span class="o">.</span><span class="n">sum</span><span class="p">()])</span>
 
     <span class="c1"># Finally, we have all our sufficient statistics. Divide! #</span>
     <span class="n">beta2</span> <span class="o">=</span> <span class="n">beta</span><span class="o">**</span><span class="mi">2</span>
@@ -1970,10 +1928,10 @@
         <span class="n">weights</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">if</span> <span class="n">average</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">assert</span> <span class="n">average</span> <span class="o">!=</span> <span class="s2">&quot;binary&quot;</span> <span class="ow">or</span> <span class="n">precision</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
-        <span class="n">precision</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">_nanaverage</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">))</span>
-        <span class="n">recall</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">_nanaverage</span><span class="p">(</span><span class="n">recall</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">))</span>
-        <span class="n">f_score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">_nanaverage</span><span class="p">(</span><span class="n">f_score</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">))</span>
+        <span class="k">assert</span> <span class="n">average</span> <span class="o">!=</span> <span class="s2">&quot;binary&quot;</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="n">precision</span> <span class="o">=</span> <span class="n">_nanaverage</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
+        <span class="n">recall</span> <span class="o">=</span> <span class="n">_nanaverage</span><span class="p">(</span><span class="n">recall</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
+        <span class="n">f_score</span> <span class="o">=</span> <span class="n">_nanaverage</span><span class="p">(</span><span class="n">f_score</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
         <span class="n">true_sum</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># return no support</span>
 
     <span class="k">return</span> <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">f_score</span><span class="p">,</span> <span class="n">true_sum</span>
@@ -2096,7 +2054,7 @@
 <span class="sd">    &gt;&gt;&gt; class_likelihood_ratios(y_true, y_pred, labels=[&quot;non-cat&quot;, &quot;cat&quot;])</span>
 <span class="sd">    (np.float64(1.5), np.float64(0.75))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">attach_unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
     <span class="n">y_type</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">_check_targets</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">y_type</span> <span class="o">!=</span> <span class="s2">&quot;binary&quot;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -2237,7 +2195,7 @@
 <span class="sd">    average : {&#39;micro&#39;, &#39;macro&#39;, &#39;samples&#39;, &#39;weighted&#39;, &#39;binary&#39;} or None, \</span>
 <span class="sd">            default=&#39;binary&#39;</span>
 <span class="sd">        This parameter is required for multiclass/multilabel targets.</span>
-<span class="sd">        If ``None``, the metrics for each class are returned. Otherwise, this</span>
+<span class="sd">        If ``None``, the scores for each class are returned. Otherwise, this</span>
 <span class="sd">        determines the type of averaging performed on the data:</span>
 
 <span class="sd">        ``&#39;binary&#39;``:</span>
@@ -2266,7 +2224,6 @@
 <span class="sd">        Sets the value to return when there is a zero division.</span>
 
 <span class="sd">        Notes:</span>
-
 <span class="sd">        - If set to &quot;warn&quot;, this acts like 0, but a warning is also raised.</span>
 <span class="sd">        - If set to `np.nan`, such values will be excluded from the average.</span>
 
@@ -2306,11 +2263,11 @@
 <span class="sd">    &gt;&gt;&gt; y_true = [0, 1, 2, 0, 1, 2]</span>
 <span class="sd">    &gt;&gt;&gt; y_pred = [0, 2, 1, 0, 0, 1]</span>
 <span class="sd">    &gt;&gt;&gt; precision_score(y_true, y_pred, average=&#39;macro&#39;)</span>
-<span class="sd">    0.22...</span>
+<span class="sd">    np.float64(0.22...)</span>
 <span class="sd">    &gt;&gt;&gt; precision_score(y_true, y_pred, average=&#39;micro&#39;)</span>
-<span class="sd">    0.33...</span>
+<span class="sd">    np.float64(0.33...)</span>
 <span class="sd">    &gt;&gt;&gt; precision_score(y_true, y_pred, average=&#39;weighted&#39;)</span>
-<span class="sd">    0.22...</span>
+<span class="sd">    np.float64(0.22...)</span>
 <span class="sd">    &gt;&gt;&gt; precision_score(y_true, y_pred, average=None)</span>
 <span class="sd">    array([0.66..., 0.        , 0.        ])</span>
 <span class="sd">    &gt;&gt;&gt; y_pred = [0, 0, 0, 0, 0, 0]</span>
@@ -2419,7 +2376,7 @@
 <span class="sd">    average : {&#39;micro&#39;, &#39;macro&#39;, &#39;samples&#39;, &#39;weighted&#39;, &#39;binary&#39;} or None, \</span>
 <span class="sd">            default=&#39;binary&#39;</span>
 <span class="sd">        This parameter is required for multiclass/multilabel targets.</span>
-<span class="sd">        If ``None``, the metrics for each class are returned. Otherwise, this</span>
+<span class="sd">        If ``None``, the scores for each class are returned. Otherwise, this</span>
 <span class="sd">        determines the type of averaging performed on the data:</span>
 
 <span class="sd">        ``&#39;binary&#39;``:</span>
@@ -2449,7 +2406,6 @@
 <span class="sd">        Sets the value to return when there is a zero division.</span>
 
 <span class="sd">        Notes:</span>
-
 <span class="sd">        - If set to &quot;warn&quot;, this acts like 0, but a warning is also raised.</span>
 <span class="sd">        - If set to `np.nan`, such values will be excluded from the average.</span>
 
@@ -2491,11 +2447,11 @@
 <span class="sd">    &gt;&gt;&gt; y_true = [0, 1, 2, 0, 1, 2]</span>
 <span class="sd">    &gt;&gt;&gt; y_pred = [0, 2, 1, 0, 0, 1]</span>
 <span class="sd">    &gt;&gt;&gt; recall_score(y_true, y_pred, average=&#39;macro&#39;)</span>
-<span class="sd">    0.33...</span>
+<span class="sd">    np.float64(0.33...)</span>
 <span class="sd">    &gt;&gt;&gt; recall_score(y_true, y_pred, average=&#39;micro&#39;)</span>
-<span class="sd">    0.33...</span>
+<span class="sd">    np.float64(0.33...)</span>
 <span class="sd">    &gt;&gt;&gt; recall_score(y_true, y_pred, average=&#39;weighted&#39;)</span>
-<span class="sd">    0.33...</span>
+<span class="sd">    np.float64(0.33...)</span>
 <span class="sd">    &gt;&gt;&gt; recall_score(y_true, y_pred, average=None)</span>
 <span class="sd">    array([1., 0., 0.])</span>
 <span class="sd">    &gt;&gt;&gt; y_true = [0, 0, 0, 0, 0, 0]</span>
@@ -2757,7 +2713,6 @@
 <span class="sd">    &lt;BLANKLINE&gt;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">attach_unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">y_type</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">_check_targets</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -2946,7 +2901,7 @@
 <span class="sd">    &gt;&gt;&gt; hamming_loss(np.array([[0, 1], [1, 1]]), np.zeros((2, 2)))</span>
 <span class="sd">    0.75</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">attach_unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
     <span class="n">y_type</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">_check_targets</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
 

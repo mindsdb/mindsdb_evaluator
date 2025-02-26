@@ -8,11 +8,11 @@ readme = "README.md"
 packages = [{include = "mindsdb_evaluator"}]
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.12"
+python = ">=3.9,<3.12"
 type-infer = "0.0.21"
 numpy = "^1"
 pandas = "^2"
-scikit-learn = ">=1.0"
+scikit-learn = "1.5.2"
 dataprep-ml = "25.2.3.0"
 
 # dependencies for optional packages

@@ -20,6 +20,7 @@ h11 = ">=0.16.0"
 # dependencies for optional packages
 datasets = {version = "^2.20.0", optional = true}
 ragas = {version = "^0.1.13", optional = true}    # see note about this at the bottom of this file
+langchain = "0.2.5"
 
 [tool.poetry.extras]
 rag = [

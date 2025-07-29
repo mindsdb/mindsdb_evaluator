@@ -9,7 +9,7 @@ packages = [{include = "mindsdb_evaluator"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
-type-infer = "0.0.22"
+type-infer = "0.0.23"
 numpy = "^1"
 pandas = "^2"
 scikit-learn = "1.5.2"

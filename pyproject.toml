@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mindsdb-evaluator"
-version = "0.0.18"
+version = "0.0.19"
 description = "Model evaluation for Machine Learning pipelines."
 authors = ["MindsDB Inc. <hello@mindsdb.com>"]
 license = "GPL-3.0"
@@ -8,12 +8,12 @@ readme = "README.md"
 packages = [{include = "mindsdb_evaluator"}]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.13"
-type-infer = "0.0.23"
+python = ">=3.10,<=3.13"
+type-infer = "0.0.25"
 numpy = "^1"
 pandas = "^2"
 scikit-learn = "1.5.2"
-dataprep-ml = "0.0.24"
+dataprep-ml = "0.0.25"
 # indirect dependency (from ragas). Set strict version to fix vulnerability, while it is not fixed in other dependencies.
 h11 = ">=0.16.0"
 

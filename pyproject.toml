@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mindsdb-evaluator"
-version = "0.0.20"
+version = "0.0.21"
 description = "Model evaluation for Machine Learning pipelines."
 authors = ["MindsDB Inc. <hello@mindsdb.com>"]
 license = "GPL-3.0"
@@ -9,19 +9,19 @@ packages = [{include = "mindsdb_evaluator"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.14"
-type-infer = "0.0.25"
-numpy = "^1"
+type-infer = "0.0.26"
+numpy = "^2"
 pandas = "^2"
 scikit-learn = "1.5.2"
-dataprep-ml = "0.0.25"
+dataprep-ml = "0.0.26"
 # indirect dependency (from ragas). Set strict version to fix vulnerability, while it is not fixed in other dependencies.
 h11 = ">=0.16.0"
 
 # dependencies for optional packages
 datasets = {version = "^2.20.0", optional = true}
 ragas = {version = "^0.1.13", optional = true}    # see note about this at the bottom of this file
-langchain = {version = "0.2.17", optional = true}
-langchain-community = {version = "0.2.19", optional = true}
+langchain = {version = "0.3.27", optional = true}
+langchain-community = {version = "0.3.27", optional = true}
 
 [tool.poetry.extras]
 rag = [

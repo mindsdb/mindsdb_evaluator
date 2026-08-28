@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>mindsdb_evaluator.accuracy.forecasting &mdash; mindsdb_evaluator 0.0.21 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
 
@@ -15,8 +15,8 @@
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../../_static/documentation_options.js?v=a11416ff"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -88,11 +88,11 @@
         <span class="n">y_pred</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
         <span class="n">base_acc_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Default forecasting accuracy metric.</span>
 <span class="sd">    </span>
 <span class="sd">    Yields mean score over all timesteps in the forecast, as determined by the `base_acc_fn` (R2 score by default).</span>
-<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+<span class="sd">    """</span>  <span class="c1"># noqa</span>
 
     <span class="n">base_acc_fn</span> <span class="o">=</span> <span class="n">base_acc_fn</span> <span class="k">if</span> <span class="n">base_acc_fn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
     <span class="n">fh</span> <span class="o">=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -110,12 +110,12 @@
         <span class="n">y_true</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
         <span class="n">y_pred</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Numerical forecast accuracy metric.</span>
 
 <span class="sd">    Scores are computed for each array index (as determined by the forecast length),</span>
 <span class="sd">    and the final accuracy is the reciprocal of the average R2 score through all steps.</span>
-<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+<span class="sd">    """</span>  <span class="c1"># noqa</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_naive</span><span class="p">(</span><span class="n">yt</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">yp</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="n">nan_mask</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">yt</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
@@ -136,15 +136,15 @@
         <span class="n">y_pred</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
         <span class="n">ts_analysis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Categorical forecast accuracy metric.</span>
 
 <span class="sd">    Balanced accuracy is computed for each timestep (as determined by the forecast length)</span>
 <span class="sd">    and the final accuracy is the reciprocal of the average score through all timesteps.</span>
-<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+<span class="sd">    """</span>  <span class="c1"># noqa</span>
 
-    <span class="k">if</span> <span class="n">ts_analysis</span> <span class="ow">and</span> <span class="n">ts_analysis</span><span class="p">[</span><span class="s1">&#39;tss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">group_by</span><span class="p">:</span>
-        <span class="p">[</span><span class="n">y_true</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">gby_col</span><span class="p">)</span> <span class="k">for</span> <span class="n">gby_col</span> <span class="ow">in</span> <span class="n">ts_analysis</span><span class="p">[</span><span class="s1">&#39;tss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">group_by</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">ts_analysis</span> <span class="ow">and</span> <span class="n">ts_analysis</span><span class="p">[</span><span class="s1">'tss'</span><span class="p">]</span><span class="o">.</span><span class="n">group_by</span><span class="p">:</span>
+        <span class="p">[</span><span class="n">y_true</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">gby_col</span><span class="p">)</span> <span class="k">for</span> <span class="n">gby_col</span> <span class="ow">in</span> <span class="n">ts_analysis</span><span class="p">[</span><span class="s1">'tss'</span><span class="p">]</span><span class="o">.</span><span class="n">group_by</span><span class="p">]</span>
 
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
@@ -162,25 +162,25 @@
         <span class="n">y_pred</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
         <span class="n">ts_analysis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Forecast accuracy metric. </span>
 <span class="sd">    </span>
 <span class="sd">    It returns ``1 - (sMAPE/2)``, where ``sMAPE`` is the symmetrical mean absolute percentage error of the forecast versus actual measurements in the time series.</span>
 
 <span class="sd">    As such, its domain is 0-1 bounded.</span>
-<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+<span class="sd">    """</span>  <span class="c1"># noqa</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">tss</span> <span class="o">=</span> <span class="n">ts_analysis</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tss&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">tss</span> <span class="o">=</span> <span class="n">ts_analysis</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'tss'</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">tss</span> <span class="ow">and</span> <span class="n">tss</span><span class="o">.</span><span class="n">group_by</span><span class="p">:</span>
-        <span class="p">[</span><span class="n">y_true</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">gby_col</span><span class="p">)</span> <span class="k">for</span> <span class="n">gby_col</span> <span class="ow">in</span> <span class="n">ts_analysis</span><span class="p">[</span><span class="s1">&#39;tss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">group_by</span><span class="p">]</span>
+        <span class="p">[</span><span class="n">y_true</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">gby_col</span><span class="p">)</span> <span class="k">for</span> <span class="n">gby_col</span> <span class="ow">in</span> <span class="n">ts_analysis</span><span class="p">[</span><span class="s1">'tss'</span><span class="p">]</span><span class="o">.</span><span class="n">group_by</span><span class="p">]</span>
 
     <span class="c1"># nan check</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">values</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">values</span>
     <span class="n">nans</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">nans</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
-        <span class="c1"># convert all nan indexes to non-zero equal pairs that don&#39;t contribute to the metric</span>
+        <span class="c1"># convert all nan indexes to non-zero equal pairs that don't contribute to the metric</span>
         <span class="n">y_true</span><span class="p">[</span><span class="n">nans</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="n">y_pred</span><span class="p">[</span><span class="n">nans</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
@@ -191,7 +191,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">smape</span><span class="p">(</span><span class="n">y_true</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Symmetrical mean absolute percentage error. &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+<span class="w">    </span><span class="sd">""" Symmetrical mean absolute percentage error. """</span>  <span class="c1"># noqa</span>
     <span class="n">thres</span> <span class="o">=</span> <span class="mf">1e9</span>
     <span class="n">num</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y_true</span><span class="p">)</span>
     <span class="n">den</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y_pred</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>

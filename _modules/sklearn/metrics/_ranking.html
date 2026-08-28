@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>sklearn.metrics._ranking &mdash; mindsdb_evaluator 0.0.21 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
 
@@ -15,8 +15,8 @@
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../../_static/documentation_options.js?v=a11416ff"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -73,14 +73,14 @@
            <div itemprop="articleBody">
              
   <h1>Source code for sklearn.metrics._ranking</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Metrics to assess performance on classification task given scores.</span>
+<span></span><span class="sd">"""Metrics to assess performance on classification task given scores.</span>
 
 <span class="sd">Functions named as ``*_score`` return a scalar value to maximize: the higher</span>
 <span class="sd">the better.</span>
 
 <span class="sd">Function named as ``*_error`` or ``*_loss`` return a scalar value to minimize:</span>
 <span class="sd">the lower the better.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="c1"># Authors: Alexandre Gramfort &lt;alexandre.gramfort@inria.fr&gt;</span>
 <span class="c1">#          Mathieu Blondel &lt;mathieu@mblondel.org&gt;</span>
@@ -123,11 +123,11 @@
 <div class="viewcode-block" id="auc">
 <a class="viewcode-back" href="../../../accuracy.html#accuracy.auc">[docs]</a>
 <span class="nd">@validate_params</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s2">"x"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span> <span class="s2">"y"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">]},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">auc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Area Under the Curve (AUC) using the trapezoidal rule.</span>
+<span class="w">    </span><span class="sd">"""Compute Area Under the Curve (AUC) using the trapezoidal rule.</span>
 
 <span class="sd">    This is a general function, given points on a curve.  For computing the</span>
 <span class="sd">    area under the ROC-curve, see :func:`roc_auc_score`.  For an alternative</span>
@@ -163,14 +163,14 @@
 <span class="sd">    &gt;&gt;&gt; fpr, tpr, thresholds = metrics.roc_curve(y, pred, pos_label=2)</span>
 <span class="sd">    &gt;&gt;&gt; metrics.auc(fpr, tpr)</span>
 <span class="sd">    np.float64(0.75)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">column_or_1d</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">column_or_1d</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;At least 2 points are needed to compute area under curve, but x.shape = </span><span class="si">%s</span><span class="s2">&quot;</span>
+            <span class="s2">"At least 2 points are needed to compute area under curve, but x.shape = </span><span class="si">%s</span><span class="s2">"</span>
             <span class="o">%</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
         <span class="p">)</span>
 
@@ -180,7 +180,7 @@
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">dx</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
             <span class="n">direction</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;x is neither increasing nor decreasing : </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"x is neither increasing nor decreasing : </span><span class="si">{}</span><span class="s2">."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
     <span class="n">area</span> <span class="o">=</span> <span class="n">direction</span> <span class="o">*</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">memmap</span><span class="p">):</span>
@@ -196,18 +196,18 @@
 <a class="viewcode-back" href="../../../accuracy.html#accuracy.average_precision_score">[docs]</a>
 <span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;y_score&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">StrOptions</span><span class="p">({</span><span class="s2">&quot;micro&quot;</span><span class="p">,</span> <span class="s2">&quot;samples&quot;</span><span class="p">,</span> <span class="s2">&quot;weighted&quot;</span><span class="p">,</span> <span class="s2">&quot;macro&quot;</span><span class="p">}),</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;pos_label&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Real</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;boolean&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;sample_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"y_true"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"y_score"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"average"</span><span class="p">:</span> <span class="p">[</span><span class="n">StrOptions</span><span class="p">({</span><span class="s2">"micro"</span><span class="p">,</span> <span class="s2">"samples"</span><span class="p">,</span> <span class="s2">"weighted"</span><span class="p">,</span> <span class="s2">"macro"</span><span class="p">}),</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"pos_label"</span><span class="p">:</span> <span class="p">[</span><span class="n">Real</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">"boolean"</span><span class="p">],</span>
+        <span class="s2">"sample_weight"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">average_precision_score</span><span class="p">(</span>
-    <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s2">&quot;macro&quot;</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span>
+    <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s2">"macro"</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute average precision (AP) from prediction scores.</span>
+<span class="w">    </span><span class="sd">"""Compute average precision (AP) from prediction scores.</span>
 
 <span class="sd">    AP summarizes a precision-recall curve as the weighted mean of precisions</span>
 <span class="sd">    achieved at each threshold, with the increase in recall from the previous</span>
@@ -234,21 +234,21 @@
 <span class="sd">        class, confidence values, or non-thresholded measure of decisions</span>
 <span class="sd">        (as returned by :term:`decision_function` on some classifiers).</span>
 
-<span class="sd">    average : {&#39;micro&#39;, &#39;samples&#39;, &#39;weighted&#39;, &#39;macro&#39;} or None, \</span>
-<span class="sd">            default=&#39;macro&#39;</span>
+<span class="sd">    average : {'micro', 'samples', 'weighted', 'macro'} or None, \</span>
+<span class="sd">            default='macro'</span>
 <span class="sd">        If ``None``, the scores for each class are returned. Otherwise,</span>
 <span class="sd">        this determines the type of averaging performed on the data:</span>
 
-<span class="sd">        ``&#39;micro&#39;``:</span>
+<span class="sd">        ``'micro'``:</span>
 <span class="sd">            Calculate metrics globally by considering each element of the label</span>
 <span class="sd">            indicator matrix as a label.</span>
-<span class="sd">        ``&#39;macro&#39;``:</span>
+<span class="sd">        ``'macro'``:</span>
 <span class="sd">            Calculate metrics for each label, and find their unweighted</span>
 <span class="sd">            mean.  This does not take label imbalance into account.</span>
-<span class="sd">        ``&#39;weighted&#39;``:</span>
+<span class="sd">        ``'weighted'``:</span>
 <span class="sd">            Calculate metrics for each label, and find their average, weighted</span>
 <span class="sd">            by support (the number of true instances for each label).</span>
-<span class="sd">        ``&#39;samples&#39;``:</span>
+<span class="sd">        ``'samples'``:</span>
 <span class="sd">            Calculate metrics for each instance, and find their average.</span>
 
 <span class="sd">        Will be ignored when ``y_true`` is binary.</span>
@@ -302,7 +302,7 @@
 <span class="sd">    ... ])</span>
 <span class="sd">    &gt;&gt;&gt; average_precision_score(y_true, y_scores)</span>
 <span class="sd">    np.float64(0.77...)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_binary_uninterpolated_average_precision</span><span class="p">(</span>
         <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span>
@@ -315,30 +315,30 @@
         <span class="c1"># guaranteed to be 1, as returned by precision_recall_curve</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">recall</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">precision</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
-    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">&quot;y_true&quot;</span><span class="p">)</span>
+    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">"y_true"</span><span class="p">)</span>
 
     <span class="c1"># Convert to Python primitive type to avoid NumPy type / Python str</span>
     <span class="c1"># comparison. See https://github.com/numpy/numpy/issues/6784</span>
     <span class="n">present_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
-    <span class="k">if</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">"binary"</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">present_labels</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">pos_label</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">present_labels</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;pos_label=</span><span class="si">{</span><span class="n">pos_label</span><span class="si">}</span><span class="s2"> is not a valid label. It should be &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;one of </span><span class="si">{</span><span class="n">present_labels</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"pos_label=</span><span class="si">{</span><span class="n">pos_label</span><span class="si">}</span><span class="s2"> is not a valid label. It should be "</span>
+                <span class="sa">f</span><span class="s2">"one of </span><span class="si">{</span><span class="n">present_labels</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;multilabel-indicator&quot;</span> <span class="ow">and</span> <span class="n">pos_label</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">"multilabel-indicator"</span> <span class="ow">and</span> <span class="n">pos_label</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Parameter pos_label is fixed to 1 for multilabel-indicator y_true. &quot;</span>
-            <span class="s2">&quot;Do not set pos_label or set pos_label to 1.&quot;</span>
+            <span class="s2">"Parameter pos_label is fixed to 1 for multilabel-indicator y_true. "</span>
+            <span class="s2">"Do not set pos_label or set pos_label to 1."</span>
         <span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;multiclass&quot;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">"multiclass"</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">pos_label</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Parameter pos_label is fixed to 1 for multiclass y_true. &quot;</span>
-                <span class="s2">&quot;Do not set pos_label or set pos_label to 1.&quot;</span>
+                <span class="s2">"Parameter pos_label is fixed to 1 for multiclass y_true. "</span>
+                <span class="s2">"Do not set pos_label or set pos_label to 1."</span>
             <span class="p">)</span>
         <span class="n">y_true</span> <span class="o">=</span> <span class="n">label_binarize</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="n">present_labels</span><span class="p">)</span>
 
@@ -353,15 +353,15 @@
 
 <span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;y_score&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;pos_label&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Real</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;boolean&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;sample_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"y_true"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"y_score"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"pos_label"</span><span class="p">:</span> <span class="p">[</span><span class="n">Real</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">"boolean"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"sample_weight"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">det_curve</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute error rates for different probability thresholds.</span>
+<span class="w">    </span><span class="sd">"""Compute error rates for different probability thresholds.</span>
 
 <span class="sd">    .. note::</span>
 <span class="sd">       This metric is used for evaluation of ranking and error tradeoffs of</span>
@@ -380,7 +380,7 @@
 <span class="sd">    y_score : ndarray of shape of (n_samples,)</span>
 <span class="sd">        Target scores, can either be probability estimates of the positive</span>
 <span class="sd">        class, confidence values, or non-thresholded measure of decisions</span>
-<span class="sd">        (as returned by &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        (as returned by "decision_function" on some classifiers).</span>
 
 <span class="sd">    pos_label : int, float, bool or str, default=None</span>
 <span class="sd">        The label of the positive class.</span>
@@ -428,15 +428,15 @@
 <span class="sd">    array([0. , 0.5, 0.5])</span>
 <span class="sd">    &gt;&gt;&gt; thresholds</span>
 <span class="sd">    array([0.35, 0.4 , 0.8 ])</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">fps</span><span class="p">,</span> <span class="n">tps</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">_binary_clf_curve</span><span class="p">(</span>
         <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="n">pos_label</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span>
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Only one class present in y_true. Detection error &quot;</span>
-            <span class="s2">&quot;tradeoff curve is not defined in that case.&quot;</span>
+            <span class="s2">"Only one class present in y_true. Detection error "</span>
+            <span class="s2">"tradeoff curve is not defined in that case."</span>
         <span class="p">)</span>
 
     <span class="n">fns</span> <span class="o">=</span> <span class="n">tps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tps</span>
@@ -445,8 +445,8 @@
 
     <span class="c1"># start with false positives zero</span>
     <span class="n">first_ind</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">fps</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">fps</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">side</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="n">fps</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">fps</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">side</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">fps</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">fps</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">side</span><span class="o">=</span><span class="s2">"right"</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">fps</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">fps</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">side</span><span class="o">=</span><span class="s2">"right"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
         <span class="k">else</span> <span class="kc">None</span>
     <span class="p">)</span>
     <span class="c1"># stop with false negatives zero</span>
@@ -458,21 +458,21 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_binary_roc_auc_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_fpr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Binary roc auc score.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Binary roc auc score."""</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Only one class present in y_true. ROC AUC score &quot;</span>
-            <span class="s2">&quot;is not defined in that case.&quot;</span>
+            <span class="s2">"Only one class present in y_true. ROC AUC score "</span>
+            <span class="s2">"is not defined in that case."</span>
         <span class="p">)</span>
 
     <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">max_fpr</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">max_fpr</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">max_fpr</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">max_fpr</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Expected max_fpr in range (0, 1], got: </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">max_fpr</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Expected max_fpr in range (0, 1], got: </span><span class="si">%r</span><span class="s2">"</span> <span class="o">%</span> <span class="n">max_fpr</span><span class="p">)</span>
 
     <span class="c1"># Add a single point at max_fpr by linear interpolation</span>
-    <span class="n">stop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">max_fpr</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">)</span>
+    <span class="n">stop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">max_fpr</span><span class="p">,</span> <span class="s2">"right"</span><span class="p">)</span>
     <span class="n">x_interp</span> <span class="o">=</span> <span class="p">[</span><span class="n">fpr</span><span class="p">[</span><span class="n">stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">fpr</span><span class="p">[</span><span class="n">stop</span><span class="p">]]</span>
     <span class="n">y_interp</span> <span class="o">=</span> <span class="p">[</span><span class="n">tpr</span><span class="p">[</span><span class="n">stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="n">stop</span><span class="p">]]</span>
     <span class="n">tpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tpr</span><span class="p">[:</span><span class="n">stop</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">max_fpr</span><span class="p">,</span> <span class="n">x_interp</span><span class="p">,</span> <span class="n">y_interp</span><span class="p">))</span>
@@ -490,13 +490,13 @@
 <a class="viewcode-back" href="../../../accuracy.html#accuracy.roc_auc_score">[docs]</a>
 <span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;y_score&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">StrOptions</span><span class="p">({</span><span class="s2">&quot;micro&quot;</span><span class="p">,</span> <span class="s2">&quot;macro&quot;</span><span class="p">,</span> <span class="s2">&quot;samples&quot;</span><span class="p">,</span> <span class="s2">&quot;weighted&quot;</span><span class="p">}),</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;sample_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;max_fpr&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Real</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;multi_class&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">StrOptions</span><span class="p">({</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span> <span class="s2">&quot;ovr&quot;</span><span class="p">,</span> <span class="s2">&quot;ovo&quot;</span><span class="p">})],</span>
-        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"y_true"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"y_score"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"average"</span><span class="p">:</span> <span class="p">[</span><span class="n">StrOptions</span><span class="p">({</span><span class="s2">"micro"</span><span class="p">,</span> <span class="s2">"macro"</span><span class="p">,</span> <span class="s2">"samples"</span><span class="p">,</span> <span class="s2">"weighted"</span><span class="p">}),</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"sample_weight"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"max_fpr"</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Real</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">"right"</span><span class="p">),</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"multi_class"</span><span class="p">:</span> <span class="p">[</span><span class="n">StrOptions</span><span class="p">({</span><span class="s2">"raise"</span><span class="p">,</span> <span class="s2">"ovr"</span><span class="p">,</span> <span class="s2">"ovo"</span><span class="p">})],</span>
+        <span class="s2">"labels"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
@@ -504,13 +504,13 @@
     <span class="n">y_true</span><span class="p">,</span>
     <span class="n">y_score</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">average</span><span class="o">=</span><span class="s2">&quot;macro&quot;</span><span class="p">,</span>
+    <span class="n">average</span><span class="o">=</span><span class="s2">"macro"</span><span class="p">,</span>
     <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">max_fpr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">multi_class</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+    <span class="n">multi_class</span><span class="o">=</span><span class="s2">"raise"</span><span class="p">,</span>
     <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Area Under the Receiver Operating Characteristic Curve (ROC AUC) \</span>
+<span class="w">    </span><span class="sd">"""Compute Area Under the Receiver Operating Characteristic Curve (ROC AUC) \</span>
 <span class="sd">    from prediction scores.</span>
 
 <span class="sd">    Note: this implementation can be used with binary, multiclass and</span>
@@ -552,25 +552,25 @@
 <span class="sd">          output** of the classifier. See more information in the</span>
 <span class="sd">          :ref:`User guide &lt;roc_auc_multilabel&gt;`.</span>
 
-<span class="sd">    average : {&#39;micro&#39;, &#39;macro&#39;, &#39;samples&#39;, &#39;weighted&#39;} or None, \</span>
-<span class="sd">            default=&#39;macro&#39;</span>
+<span class="sd">    average : {'micro', 'macro', 'samples', 'weighted'} or None, \</span>
+<span class="sd">            default='macro'</span>
 <span class="sd">        If ``None``, the scores for each class are returned.</span>
 <span class="sd">        Otherwise, this determines the type of averaging performed on the data.</span>
-<span class="sd">        Note: multiclass ROC AUC currently only handles the &#39;macro&#39; and</span>
-<span class="sd">        &#39;weighted&#39; averages. For multiclass targets, `average=None` is only</span>
-<span class="sd">        implemented for `multi_class=&#39;ovr&#39;` and `average=&#39;micro&#39;` is only</span>
-<span class="sd">        implemented for `multi_class=&#39;ovr&#39;`.</span>
+<span class="sd">        Note: multiclass ROC AUC currently only handles the 'macro' and</span>
+<span class="sd">        'weighted' averages. For multiclass targets, `average=None` is only</span>
+<span class="sd">        implemented for `multi_class='ovr'` and `average='micro'` is only</span>
+<span class="sd">        implemented for `multi_class='ovr'`.</span>
 
-<span class="sd">        ``&#39;micro&#39;``:</span>
+<span class="sd">        ``'micro'``:</span>
 <span class="sd">            Calculate metrics globally by considering each element of the label</span>
 <span class="sd">            indicator matrix as a label.</span>
-<span class="sd">        ``&#39;macro&#39;``:</span>
+<span class="sd">        ``'macro'``:</span>
 <span class="sd">            Calculate metrics for each label, and find their unweighted</span>
 <span class="sd">            mean.  This does not take label imbalance into account.</span>
-<span class="sd">        ``&#39;weighted&#39;``:</span>
+<span class="sd">        ``'weighted'``:</span>
 <span class="sd">            Calculate metrics for each label, and find their average, weighted</span>
 <span class="sd">            by support (the number of true instances for each label).</span>
-<span class="sd">        ``&#39;samples&#39;``:</span>
+<span class="sd">        ``'samples'``:</span>
 <span class="sd">            Calculate metrics for each instance, and find their average.</span>
 
 <span class="sd">        Will be ignored when ``y_true`` is binary.</span>
@@ -584,23 +584,23 @@
 <span class="sd">        should be either equal to ``None`` or ``1.0`` as AUC ROC partial</span>
 <span class="sd">        computation currently is not supported for multiclass.</span>
 
-<span class="sd">    multi_class : {&#39;raise&#39;, &#39;ovr&#39;, &#39;ovo&#39;}, default=&#39;raise&#39;</span>
+<span class="sd">    multi_class : {'raise', 'ovr', 'ovo'}, default='raise'</span>
 <span class="sd">        Only used for multiclass targets. Determines the type of configuration</span>
 <span class="sd">        to use. The default value raises an error, so either</span>
-<span class="sd">        ``&#39;ovr&#39;`` or ``&#39;ovo&#39;`` must be passed explicitly.</span>
+<span class="sd">        ``'ovr'`` or ``'ovo'`` must be passed explicitly.</span>
 
-<span class="sd">        ``&#39;ovr&#39;``:</span>
+<span class="sd">        ``'ovr'``:</span>
 <span class="sd">            Stands for One-vs-rest. Computes the AUC of each class</span>
 <span class="sd">            against the rest [3]_ [4]_. This</span>
 <span class="sd">            treats the multiclass case in the same way as the multilabel case.</span>
-<span class="sd">            Sensitive to class imbalance even when ``average == &#39;macro&#39;``,</span>
+<span class="sd">            Sensitive to class imbalance even when ``average == 'macro'``,</span>
 <span class="sd">            because class imbalance affects the composition of each of the</span>
-<span class="sd">            &#39;rest&#39; groupings.</span>
-<span class="sd">        ``&#39;ovo&#39;``:</span>
+<span class="sd">            'rest' groupings.</span>
+<span class="sd">        ``'ovo'``:</span>
 <span class="sd">            Stands for One-vs-one. Computes the average AUC of all</span>
 <span class="sd">            possible pairwise combinations of classes [5]_.</span>
 <span class="sd">            Insensitive to class imbalance when</span>
-<span class="sd">            ``average == &#39;macro&#39;``.</span>
+<span class="sd">            ``average == 'macro'``.</span>
 
 <span class="sd">    labels : array-like of shape (n_classes,), default=None</span>
 <span class="sd">        Only used for multiclass targets. List of labels that index the</span>
@@ -663,7 +663,7 @@
 <span class="sd">    &gt;&gt;&gt; from sklearn.linear_model import LogisticRegression</span>
 <span class="sd">    &gt;&gt;&gt; from sklearn.metrics import roc_auc_score</span>
 <span class="sd">    &gt;&gt;&gt; X, y = load_breast_cancer(return_X_y=True)</span>
-<span class="sd">    &gt;&gt;&gt; clf = LogisticRegression(solver=&quot;liblinear&quot;, random_state=0).fit(X, y)</span>
+<span class="sd">    &gt;&gt;&gt; clf = LogisticRegression(solver="liblinear", random_state=0).fit(X, y)</span>
 <span class="sd">    &gt;&gt;&gt; roc_auc_score(y, clf.predict_proba(X)[:, 1])</span>
 <span class="sd">    np.float64(0.99...)</span>
 <span class="sd">    &gt;&gt;&gt; roc_auc_score(y, clf.decision_function(X))</span>
@@ -673,8 +673,8 @@
 
 <span class="sd">    &gt;&gt;&gt; from sklearn.datasets import load_iris</span>
 <span class="sd">    &gt;&gt;&gt; X, y = load_iris(return_X_y=True)</span>
-<span class="sd">    &gt;&gt;&gt; clf = LogisticRegression(solver=&quot;liblinear&quot;).fit(X, y)</span>
-<span class="sd">    &gt;&gt;&gt; roc_auc_score(y, clf.predict_proba(X), multi_class=&#39;ovr&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; clf = LogisticRegression(solver="liblinear").fit(X, y)</span>
+<span class="sd">    &gt;&gt;&gt; roc_auc_score(y, clf.predict_proba(X), multi_class='ovr')</span>
 <span class="sd">    np.float64(0.99...)</span>
 
 <span class="sd">    Multilabel case:</span>
@@ -695,29 +695,29 @@
 <span class="sd">    &gt;&gt;&gt; clf = RidgeClassifierCV().fit(X, y)</span>
 <span class="sd">    &gt;&gt;&gt; roc_auc_score(y, clf.decision_function(X), average=None)</span>
 <span class="sd">    array([0.81..., 0.84... , 0.93..., 0.87..., 0.94...])</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">&quot;y_true&quot;</span><span class="p">)</span>
+    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">"y_true"</span><span class="p">)</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">y_score</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;multiclass&quot;</span> <span class="ow">or</span> <span class="p">(</span>
-        <span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span> <span class="ow">and</span> <span class="n">y_score</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">"multiclass"</span> <span class="ow">or</span> <span class="p">(</span>
+        <span class="n">y_type</span> <span class="o">==</span> <span class="s2">"binary"</span> <span class="ow">and</span> <span class="n">y_score</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2</span>
     <span class="p">):</span>
         <span class="c1"># do not support partial ROC computation for multiclass</span>
         <span class="k">if</span> <span class="n">max_fpr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">max_fpr</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Partial AUC computation not available in &quot;</span>
-                <span class="s2">&quot;multiclass setting, &#39;max_fpr&#39; must be&quot;</span>
-                <span class="s2">&quot; set to `None`, received `max_fpr=</span><span class="si">{0}</span><span class="s2">` &quot;</span>
-                <span class="s2">&quot;instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_fpr</span><span class="p">)</span>
+                <span class="s2">"Partial AUC computation not available in "</span>
+                <span class="s2">"multiclass setting, 'max_fpr' must be"</span>
+                <span class="s2">" set to `None`, received `max_fpr=</span><span class="si">{0}</span><span class="s2">` "</span>
+                <span class="s2">"instead"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_fpr</span><span class="p">)</span>
             <span class="p">)</span>
-        <span class="k">if</span> <span class="n">multi_class</span> <span class="o">==</span> <span class="s2">&quot;raise&quot;</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;multi_class must be in (&#39;ovo&#39;, &#39;ovr&#39;)&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">multi_class</span> <span class="o">==</span> <span class="s2">"raise"</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"multi_class must be in ('ovo', 'ovr')"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_multiclass_roc_auc_score</span><span class="p">(</span>
             <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">multi_class</span><span class="p">,</span> <span class="n">average</span><span class="p">,</span> <span class="n">sample_weight</span>
         <span class="p">)</span>
-    <span class="k">elif</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">"binary"</span><span class="p">:</span>
         <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
         <span class="n">y_true</span> <span class="o">=</span> <span class="n">label_binarize</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="n">labels</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">_average_binary_score</span><span class="p">(</span>
@@ -741,7 +741,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_multiclass_roc_auc_score</span><span class="p">(</span>
     <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">multi_class</span><span class="p">,</span> <span class="n">average</span><span class="p">,</span> <span class="n">sample_weight</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Multiclass roc auc score.</span>
+<span class="w">    </span><span class="sd">"""Multiclass roc auc score.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -756,93 +756,93 @@
 <span class="sd">        List of labels to index ``y_score`` used for multiclass. If ``None``,</span>
 <span class="sd">        the lexical order of ``y_true`` is used to index ``y_score``.</span>
 
-<span class="sd">    multi_class : {&#39;ovr&#39;, &#39;ovo&#39;}</span>
+<span class="sd">    multi_class : {'ovr', 'ovo'}</span>
 <span class="sd">        Determines the type of multiclass configuration to use.</span>
-<span class="sd">        ``&#39;ovr&#39;``:</span>
+<span class="sd">        ``'ovr'``:</span>
 <span class="sd">            Calculate metrics for the multiclass case using the one-vs-rest</span>
 <span class="sd">            approach.</span>
-<span class="sd">        ``&#39;ovo&#39;``:</span>
+<span class="sd">        ``'ovo'``:</span>
 <span class="sd">            Calculate metrics for the multiclass case using the one-vs-one</span>
 <span class="sd">            approach.</span>
 
-<span class="sd">    average : {&#39;micro&#39;, &#39;macro&#39;, &#39;weighted&#39;}</span>
+<span class="sd">    average : {'micro', 'macro', 'weighted'}</span>
 <span class="sd">        Determines the type of averaging performed on the pairwise binary</span>
 <span class="sd">        metric scores</span>
-<span class="sd">        ``&#39;micro&#39;``:</span>
+<span class="sd">        ``'micro'``:</span>
 <span class="sd">            Calculate metrics for the binarized-raveled classes. Only supported</span>
-<span class="sd">            for `multi_class=&#39;ovr&#39;`.</span>
+<span class="sd">            for `multi_class='ovr'`.</span>
 
 <span class="sd">        .. versionadded:: 1.2</span>
 
-<span class="sd">        ``&#39;macro&#39;``:</span>
+<span class="sd">        ``'macro'``:</span>
 <span class="sd">            Calculate metrics for each label, and find their unweighted</span>
 <span class="sd">            mean. This does not take label imbalance into account. Classes</span>
 <span class="sd">            are assumed to be uniformly distributed.</span>
-<span class="sd">        ``&#39;weighted&#39;``:</span>
+<span class="sd">        ``'weighted'``:</span>
 <span class="sd">            Calculate metrics for each label, taking into account the</span>
 <span class="sd">            prevalence of the classes.</span>
 
 <span class="sd">    sample_weight : array-like of shape (n_samples,) or None</span>
 <span class="sd">        Sample weights.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># validation of the input y_score</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">y_score</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Target scores need to be probabilities for multiclass &quot;</span>
-            <span class="s2">&quot;roc_auc, i.e. they should sum up to 1.0 over classes&quot;</span>
+            <span class="s2">"Target scores need to be probabilities for multiclass "</span>
+            <span class="s2">"roc_auc, i.e. they should sum up to 1.0 over classes"</span>
         <span class="p">)</span>
 
     <span class="c1"># validation for multiclass parameter specifications</span>
-    <span class="n">average_options</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;macro&quot;</span><span class="p">,</span> <span class="s2">&quot;weighted&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">multi_class</span> <span class="o">==</span> <span class="s2">&quot;ovr&quot;</span><span class="p">:</span>
-        <span class="n">average_options</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;micro&quot;</span><span class="p">,)</span> <span class="o">+</span> <span class="n">average_options</span>
+    <span class="n">average_options</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"macro"</span><span class="p">,</span> <span class="s2">"weighted"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">multi_class</span> <span class="o">==</span> <span class="s2">"ovr"</span><span class="p">:</span>
+        <span class="n">average_options</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"micro"</span><span class="p">,)</span> <span class="o">+</span> <span class="n">average_options</span>
     <span class="k">if</span> <span class="n">average</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">average_options</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;average must be one of </span><span class="si">{0}</span><span class="s2"> for multiclass problems&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">average_options</span><span class="p">)</span>
+            <span class="s2">"average must be one of </span><span class="si">{0}</span><span class="s2"> for multiclass problems"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">average_options</span><span class="p">)</span>
         <span class="p">)</span>
 
-    <span class="n">multiclass_options</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;ovo&quot;</span><span class="p">,</span> <span class="s2">&quot;ovr&quot;</span><span class="p">)</span>
+    <span class="n">multiclass_options</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"ovo"</span><span class="p">,</span> <span class="s2">"ovr"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">multi_class</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">multiclass_options</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;multi_class=&#39;</span><span class="si">{0}</span><span class="s2">&#39; is not supported &quot;</span>
-            <span class="s2">&quot;for multiclass ROC AUC, multi_class must be &quot;</span>
-            <span class="s2">&quot;in </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">multi_class</span><span class="p">,</span> <span class="n">multiclass_options</span><span class="p">)</span>
+            <span class="s2">"multi_class='</span><span class="si">{0}</span><span class="s2">' is not supported "</span>
+            <span class="s2">"for multiclass ROC AUC, multi_class must be "</span>
+            <span class="s2">"in </span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">multi_class</span><span class="p">,</span> <span class="n">multiclass_options</span><span class="p">)</span>
         <span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">average</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">multi_class</span> <span class="o">==</span> <span class="s2">&quot;ovo&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">average</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">multi_class</span> <span class="o">==</span> <span class="s2">"ovo"</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-            <span class="s2">&quot;average=None is not implemented for multi_class=&#39;ovo&#39;.&quot;</span>
+            <span class="s2">"average=None is not implemented for multi_class='ovo'."</span>
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">labels</span> <span class="o">=</span> <span class="n">column_or_1d</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
         <span class="n">classes</span> <span class="o">=</span> <span class="n">_unique</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Parameter &#39;labels&#39; must be unique&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Parameter 'labels' must be unique"</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Parameter &#39;labels&#39; must be ordered&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Parameter 'labels' must be ordered"</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span> <span class="o">!=</span> <span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Number of given labels, </span><span class="si">{0}</span><span class="s2">, not equal to the number &quot;</span>
-                <span class="s2">&quot;of columns in &#39;y_score&#39;, </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">),</span> <span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="s2">"Number of given labels, </span><span class="si">{0}</span><span class="s2">, not equal to the number "</span>
+                <span class="s2">"of columns in 'y_score', </span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">),</span> <span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">classes</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;y_true&#39; contains labels not in parameter &#39;labels&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"'y_true' contains labels not in parameter 'labels'"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">classes</span> <span class="o">=</span> <span class="n">_unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span> <span class="o">!=</span> <span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Number of classes in y_true not equal to the number of &quot;</span>
-                <span class="s2">&quot;columns in &#39;y_score&#39;&quot;</span>
+                <span class="s2">"Number of classes in y_true not equal to the number of "</span>
+                <span class="s2">"columns in 'y_score'"</span>
             <span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">multi_class</span> <span class="o">==</span> <span class="s2">&quot;ovo&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">multi_class</span> <span class="o">==</span> <span class="s2">"ovo"</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;sample_weight is not supported &quot;</span>
-                <span class="s2">&quot;for multiclass one-vs-one ROC AUC, &quot;</span>
-                <span class="s2">&quot;&#39;sample_weight&#39; must be None in this case.&quot;</span>
+                <span class="s2">"sample_weight is not supported "</span>
+                <span class="s2">"for multiclass one-vs-one ROC AUC, "</span>
+                <span class="s2">"'sample_weight' must be None in this case."</span>
             <span class="p">)</span>
         <span class="n">y_true_encoded</span> <span class="o">=</span> <span class="n">_encode</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">uniques</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
         <span class="c1"># Hand &amp; Till (2001) implementation (ovo)</span>
@@ -862,7 +862,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_binary_clf_curve</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate true and false positives per binary classification threshold.</span>
+<span class="w">    </span><span class="sd">"""Calculate true and false positives per binary classification threshold.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -894,11 +894,11 @@
 
 <span class="sd">    thresholds : ndarray of shape (n_thresholds,)</span>
 <span class="sd">        Decreasing score values.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Check to make sure y_true is valid</span>
-    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">&quot;y_true&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span> <span class="ow">or</span> <span class="p">(</span><span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;multiclass&quot;</span> <span class="ow">and</span> <span class="n">pos_label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> format is not supported&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_type</span><span class="p">))</span>
+    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">"y_true"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">y_type</span> <span class="o">==</span> <span class="s2">"binary"</span> <span class="ow">or</span> <span class="p">(</span><span class="n">y_type</span> <span class="o">==</span> <span class="s2">"multiclass"</span> <span class="ow">and</span> <span class="n">pos_label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"</span><span class="si">{0}</span><span class="s2"> format is not supported"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_type</span><span class="p">))</span>
 
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">column_or_1d</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
@@ -921,7 +921,7 @@
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">y_true</span> <span class="o">==</span> <span class="n">pos_label</span>
 
     <span class="c1"># sort scores and corresponding truth values</span>
-    <span class="n">desc_score_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;mergesort&quot;</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">desc_score_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"mergesort"</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">y_score</span> <span class="o">=</span> <span class="n">y_score</span><span class="p">[</span><span class="n">desc_score_indices</span><span class="p">]</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">y_true</span><span class="p">[</span><span class="n">desc_score_indices</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -948,14 +948,14 @@
 
 <span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;y_score&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="n">Hidden</span><span class="p">(</span><span class="kc">None</span><span class="p">)],</span>
-        <span class="s2">&quot;pos_label&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Real</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;boolean&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;sample_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;drop_intermediate&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;boolean&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;probas_pred&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;array-like&quot;</span><span class="p">,</span>
-            <span class="n">Hidden</span><span class="p">(</span><span class="n">StrOptions</span><span class="p">({</span><span class="s2">&quot;deprecated&quot;</span><span class="p">})),</span>
+        <span class="s2">"y_true"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"y_score"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="n">Hidden</span><span class="p">(</span><span class="kc">None</span><span class="p">)],</span>
+        <span class="s2">"pos_label"</span><span class="p">:</span> <span class="p">[</span><span class="n">Real</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">"boolean"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"sample_weight"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"drop_intermediate"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"boolean"</span><span class="p">],</span>
+        <span class="s2">"probas_pred"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"array-like"</span><span class="p">,</span>
+            <span class="n">Hidden</span><span class="p">(</span><span class="n">StrOptions</span><span class="p">({</span><span class="s2">"deprecated"</span><span class="p">})),</span>
         <span class="p">],</span>
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -967,9 +967,9 @@
     <span class="n">pos_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">drop_intermediate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">probas_pred</span><span class="o">=</span><span class="s2">&quot;deprecated&quot;</span><span class="p">,</span>
+    <span class="n">probas_pred</span><span class="o">=</span><span class="s2">"deprecated"</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute precision-recall pairs for different probability thresholds.</span>
+<span class="w">    </span><span class="sd">"""Compute precision-recall pairs for different probability thresholds.</span>
 
 <span class="sd">    Note: this implementation is restricted to the binary classification task.</span>
 
@@ -1064,20 +1064,20 @@
 <span class="sd">    array([1. , 1. , 0.5, 0.5, 0. ])</span>
 <span class="sd">    &gt;&gt;&gt; thresholds</span>
 <span class="sd">    array([0.1 , 0.35, 0.4 , 0.8 ])</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># TODO(1.7): remove in 1.7 and reset y_score to be required</span>
     <span class="c1"># Note: validate params will raise an error if probas_pred is not array-like,</span>
-    <span class="c1"># or &quot;deprecated&quot;</span>
+    <span class="c1"># or "deprecated"</span>
     <span class="k">if</span> <span class="n">y_score</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">probas_pred</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;`probas_pred` and `y_score` cannot be both specified. Please use `y_score`&quot;</span>
-            <span class="s2">&quot; only as `probas_pred` is deprecated in v1.5 and will be removed in v1.7.&quot;</span>
+            <span class="s2">"`probas_pred` and `y_score` cannot be both specified. Please use `y_score`"</span>
+            <span class="s2">" only as `probas_pred` is deprecated in v1.5 and will be removed in v1.7."</span>
         <span class="p">)</span>
     <span class="k">if</span> <span class="n">y_score</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
             <span class="p">(</span>
-                <span class="s2">&quot;probas_pred was deprecated in version 1.5 and will be removed in 1.7.&quot;</span>
-                <span class="s2">&quot;Please use ``y_score`` instead.&quot;</span>
+                <span class="s2">"probas_pred was deprecated in version 1.5 and will be removed in 1.7."</span>
+                <span class="s2">"Please use ``y_score`` instead."</span>
             <span class="p">),</span>
             <span class="ne">FutureWarning</span><span class="p">,</span>
         <span class="p">)</span>
@@ -1112,8 +1112,8 @@
     <span class="c1"># tps[-1] == 0 &lt;=&gt; y_true == all negative labels</span>
     <span class="k">if</span> <span class="n">tps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;No positive class found in y_true, &quot;</span>
-            <span class="s2">&quot;recall is set to one for all thresholds.&quot;</span>
+            <span class="s2">"No positive class found in y_true, "</span>
+            <span class="s2">"recall is set to one for all thresholds."</span>
         <span class="p">)</span>
         <span class="n">recall</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">tps</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -1126,18 +1126,18 @@
 
 <span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;y_score&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;pos_label&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Real</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;boolean&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;sample_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;drop_intermediate&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;boolean&quot;</span><span class="p">],</span>
+        <span class="s2">"y_true"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"y_score"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"pos_label"</span><span class="p">:</span> <span class="p">[</span><span class="n">Real</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">"boolean"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"sample_weight"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"drop_intermediate"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"boolean"</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">roc_curve</span><span class="p">(</span>
     <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">drop_intermediate</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Receiver operating characteristic (ROC).</span>
+<span class="w">    </span><span class="sd">"""Compute Receiver operating characteristic (ROC).</span>
 
 <span class="sd">    Note: this implementation is restricted to the binary classification task.</span>
 
@@ -1152,7 +1152,7 @@
 <span class="sd">    y_score : array-like of shape (n_samples,)</span>
 <span class="sd">        Target scores, can either be probability estimates of the positive</span>
 <span class="sd">        class, confidence values, or non-thresholded measure of decisions</span>
-<span class="sd">        (as returned by &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        (as returned by "decision_function" on some classifiers).</span>
 
 <span class="sd">    pos_label : int, float, bool or str, default=None</span>
 <span class="sd">        The label of the positive class.</span>
@@ -1225,7 +1225,7 @@
 <span class="sd">    array([0. , 0.5, 0.5, 1. , 1. ])</span>
 <span class="sd">    &gt;&gt;&gt; thresholds</span>
 <span class="sd">    array([ inf, 0.8 , 0.4 , 0.35, 0.1 ])</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">fps</span><span class="p">,</span> <span class="n">tps</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">_binary_clf_curve</span><span class="p">(</span>
         <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="n">pos_label</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span>
     <span class="p">)</span>
@@ -1233,7 +1233,7 @@
     <span class="c1"># Attempt to drop thresholds corresponding to points in between and</span>
     <span class="c1"># collinear with other points. These are always suboptimal and do not</span>
     <span class="c1"># appear on a plotted ROC curve (and thus do not affect the AUC).</span>
-    <span class="c1"># Here np.diff(_, 2) is used as a &quot;second derivative&quot; to tell if there</span>
+    <span class="c1"># Here np.diff(_, 2) is used as a "second derivative" to tell if there</span>
     <span class="c1"># is a corner at the point. Both fps and tps must be tested to handle</span>
     <span class="c1"># thresholds with multiple data points (which are combined in</span>
     <span class="c1"># _binary_clf_curve). This keeps all cases where the point should be kept,</span>
@@ -1256,7 +1256,7 @@
 
     <span class="k">if</span> <span class="n">fps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;No negative samples in y_true, false positive value should be meaningless&quot;</span><span class="p">,</span>
+            <span class="s2">"No negative samples in y_true, false positive value should be meaningless"</span><span class="p">,</span>
             <span class="n">UndefinedMetricWarning</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">fpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">fps</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -1265,7 +1265,7 @@
 
     <span class="k">if</span> <span class="n">tps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;No positive samples in y_true, true positive value should be meaningless&quot;</span><span class="p">,</span>
+            <span class="s2">"No positive samples in y_true, true positive value should be meaningless"</span><span class="p">,</span>
             <span class="n">UndefinedMetricWarning</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">tpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">tps</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -1277,14 +1277,14 @@
 
 <span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="s2">&quot;sparse matrix&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;y_score&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;sample_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"y_true"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="s2">"sparse matrix"</span><span class="p">],</span>
+        <span class="s2">"y_score"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"sample_weight"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">label_ranking_average_precision_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute ranking-based average precision.</span>
+<span class="w">    </span><span class="sd">"""Compute ranking-based average precision.</span>
 
 <span class="sd">    Label ranking average precision (LRAP) is the average over each ground</span>
 <span class="sd">    truth label assigned to each sample, of the ratio of true vs. total</span>
@@ -1306,7 +1306,7 @@
 <span class="sd">    y_score : array-like of shape (n_samples, n_labels)</span>
 <span class="sd">        Target scores, can either be probability estimates of the positive</span>
 <span class="sd">        class, confidence values, or non-thresholded measure of decisions</span>
-<span class="sd">        (as returned by &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        (as returned by "decision_function" on some classifiers).</span>
 
 <span class="sd">    sample_weight : array-like of shape (n_samples,), default=None</span>
 <span class="sd">        Sample weights.</span>
@@ -1326,20 +1326,20 @@
 <span class="sd">    &gt;&gt;&gt; y_score = np.array([[0.75, 0.5, 1], [1, 0.2, 0.1]])</span>
 <span class="sd">    &gt;&gt;&gt; label_ranking_average_precision_score(y_true, y_score)</span>
 <span class="sd">    np.float64(0.416...)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
-    <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s2">&quot;csr&quot;</span><span class="p">)</span>
+    <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s2">"csr"</span><span class="p">)</span>
     <span class="n">y_score</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;y_true and y_score have different shape&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"y_true and y_score have different shape"</span><span class="p">)</span>
 
     <span class="c1"># Handle badly formatted array and the degenerate case with one label</span>
-    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">&quot;y_true&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">y_type</span> <span class="o">!=</span> <span class="s2">&quot;multilabel-indicator&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span>
-        <span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span> <span class="ow">and</span> <span class="n">y_true</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span>
+    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">"y_true"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">y_type</span> <span class="o">!=</span> <span class="s2">"multilabel-indicator"</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span>
+        <span class="n">y_type</span> <span class="o">==</span> <span class="s2">"binary"</span> <span class="ow">and</span> <span class="n">y_true</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span>
     <span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> format is not supported&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_type</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"</span><span class="si">{0}</span><span class="s2"> format is not supported"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_type</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">issparse</span><span class="p">(</span><span class="n">y_true</span><span class="p">):</span>
         <span class="n">y_true</span> <span class="o">=</span> <span class="n">csr_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
@@ -1358,8 +1358,8 @@
             <span class="n">aux</span> <span class="o">=</span> <span class="mf">1.0</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">scores_i</span> <span class="o">=</span> <span class="n">y_score</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="n">rank</span> <span class="o">=</span> <span class="n">rankdata</span><span class="p">(</span><span class="n">scores_i</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">)[</span><span class="n">relevant</span><span class="p">]</span>
-            <span class="n">L</span> <span class="o">=</span> <span class="n">rankdata</span><span class="p">(</span><span class="n">scores_i</span><span class="p">[</span><span class="n">relevant</span><span class="p">],</span> <span class="s2">&quot;max&quot;</span><span class="p">)</span>
+            <span class="n">rank</span> <span class="o">=</span> <span class="n">rankdata</span><span class="p">(</span><span class="n">scores_i</span><span class="p">,</span> <span class="s2">"max"</span><span class="p">)[</span><span class="n">relevant</span><span class="p">]</span>
+            <span class="n">L</span> <span class="o">=</span> <span class="n">rankdata</span><span class="p">(</span><span class="n">scores_i</span><span class="p">[</span><span class="n">relevant</span><span class="p">],</span> <span class="s2">"max"</span><span class="p">)</span>
             <span class="n">aux</span> <span class="o">=</span> <span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="n">rank</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1376,14 +1376,14 @@
 
 <span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;y_score&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;sample_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"y_true"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"y_score"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"sample_weight"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">coverage_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Coverage error measure.</span>
+<span class="w">    </span><span class="sd">"""Coverage error measure.</span>
 
 <span class="sd">    Compute how far we need to go through the ranked scores to cover all</span>
 <span class="sd">    true labels. The best value is equal to the average number</span>
@@ -1392,7 +1392,7 @@
 <span class="sd">    Ties in ``y_scores`` are broken by giving maximal rank that would have</span>
 <span class="sd">    been assigned to all tied values.</span>
 
-<span class="sd">    Note: Our implementation&#39;s score is 1 greater than the one given in</span>
+<span class="sd">    Note: Our implementation's score is 1 greater than the one given in</span>
 <span class="sd">    Tsoumakas et al., 2010. This extends it to handle the degenerate case</span>
 <span class="sd">    in which an instance has 0 true labels.</span>
 
@@ -1406,7 +1406,7 @@
 <span class="sd">    y_score : array-like of shape (n_samples, n_labels)</span>
 <span class="sd">        Target scores, can either be probability estimates of the positive</span>
 <span class="sd">        class, confidence values, or non-thresholded measure of decisions</span>
-<span class="sd">        (as returned by &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        (as returned by "decision_function" on some classifiers).</span>
 
 <span class="sd">    sample_weight : array-like of shape (n_samples,), default=None</span>
 <span class="sd">        Sample weights.</span>
@@ -1429,17 +1429,17 @@
 <span class="sd">    &gt;&gt;&gt; y_score = [[1, 0, 0], [0, 1, 1]]</span>
 <span class="sd">    &gt;&gt;&gt; coverage_error(y_true, y_score)</span>
 <span class="sd">    np.float64(1.5)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">y_score</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
 
-    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">&quot;y_true&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">y_type</span> <span class="o">!=</span> <span class="s2">&quot;multilabel-indicator&quot;</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> format is not supported&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_type</span><span class="p">))</span>
+    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">"y_true"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">y_type</span> <span class="o">!=</span> <span class="s2">"multilabel-indicator"</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"</span><span class="si">{0}</span><span class="s2"> format is not supported"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_type</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;y_true and y_score have different shape&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"y_true and y_score have different shape"</span><span class="p">)</span>
 
     <span class="n">y_score_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">y_true</span><span class="p">))</span>
     <span class="n">y_min_relevant</span> <span class="o">=</span> <span class="n">y_score_mask</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
@@ -1451,14 +1451,14 @@
 
 <span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="s2">&quot;sparse matrix&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;y_score&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;sample_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"y_true"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="s2">"sparse matrix"</span><span class="p">],</span>
+        <span class="s2">"y_score"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"sample_weight"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">label_ranking_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Ranking loss measure.</span>
+<span class="w">    </span><span class="sd">"""Compute Ranking loss measure.</span>
 
 <span class="sd">    Compute the average number of label pairs that are incorrectly ordered</span>
 <span class="sd">    given y_score weighted by the size of the label set and the number of</span>
@@ -1481,7 +1481,7 @@
 <span class="sd">    y_score : array-like of shape (n_samples, n_labels)</span>
 <span class="sd">        Target scores, can either be probability estimates of the positive</span>
 <span class="sd">        class, confidence values, or non-thresholded measure of decisions</span>
-<span class="sd">        (as returned by &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        (as returned by "decision_function" on some classifiers).</span>
 
 <span class="sd">    sample_weight : array-like of shape (n_samples,), default=None</span>
 <span class="sd">        Sample weights.</span>
@@ -1506,17 +1506,17 @@
 <span class="sd">    &gt;&gt;&gt; y_score = [[0.75, 0.5, 1], [1, 0.2, 0.1]]</span>
 <span class="sd">    &gt;&gt;&gt; label_ranking_loss(y_true, y_score)</span>
 <span class="sd">    np.float64(0.75...)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s2">&quot;csr&quot;</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s2">"csr"</span><span class="p">)</span>
     <span class="n">y_score</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
 
-    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">&quot;y_true&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">y_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;multilabel-indicator&quot;</span><span class="p">,):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> format is not supported&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_type</span><span class="p">))</span>
+    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">"y_true"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">y_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"multilabel-indicator"</span><span class="p">,):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"</span><span class="si">{0}</span><span class="s2"> format is not supported"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_type</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;y_true and y_score have different shape&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"y_true and y_score have different shape"</span><span class="p">)</span>
 
     <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_labels</span> <span class="o">=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shape</span>
 
@@ -1532,25 +1532,25 @@
         <span class="n">all_at_reversed_rank</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">unique_inverse</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_scores</span><span class="p">))</span>
         <span class="n">false_at_reversed_rank</span> <span class="o">=</span> <span class="n">all_at_reversed_rank</span> <span class="o">-</span> <span class="n">true_at_reversed_rank</span>
 
-        <span class="c1"># if the scores are ordered, it&#39;s possible to count the number of</span>
+        <span class="c1"># if the scores are ordered, it's possible to count the number of</span>
         <span class="c1"># incorrectly ordered paires in linear time by cumulatively counting</span>
         <span class="c1"># how many false labels of a given score have a score higher than the</span>
         <span class="c1"># accumulated true labels with lower score.</span>
         <span class="n">loss</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">true_at_reversed_rank</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(),</span> <span class="n">false_at_reversed_rank</span><span class="p">)</span>
 
     <span class="n">n_positives</span> <span class="o">=</span> <span class="n">count_nonzero</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
         <span class="n">loss</span> <span class="o">/=</span> <span class="p">(</span><span class="n">n_labels</span> <span class="o">-</span> <span class="n">n_positives</span><span class="p">)</span> <span class="o">*</span> <span class="n">n_positives</span>
 
     <span class="c1"># When there is no positive or no negative labels, those values should</span>
-    <span class="c1"># be consider as correct, i.e. the ranking doesn&#39;t matter.</span>
+    <span class="c1"># be consider as correct, i.e. the ranking doesn't matter.</span>
     <span class="n">loss</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">n_positives</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n_positives</span> <span class="o">==</span> <span class="n">n_labels</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.0</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_dcg_sample_scores</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">log_base</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Discounted Cumulative Gain.</span>
+<span class="w">    </span><span class="sd">"""Compute Discounted Cumulative Gain.</span>
 
 <span class="sd">    Sum the true scores ranked in the order induced by the predicted scores,</span>
 <span class="sd">    after applying a logarithmic discount.</span>
@@ -1567,7 +1567,7 @@
 <span class="sd">    y_score : ndarray of shape (n_samples, n_labels)</span>
 <span class="sd">        Target scores, can either be probability estimates, confidence values,</span>
 <span class="sd">        or non-thresholded measure of decisions (as returned by</span>
-<span class="sd">        &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        "decision_function" on some classifiers).</span>
 
 <span class="sd">    k : int, default=None</span>
 <span class="sd">        Only consider the highest k scores in the ranking. If `None`, use all</span>
@@ -1591,7 +1591,7 @@
 <span class="sd">    ndcg_score : The Discounted Cumulative Gain divided by the Ideal Discounted</span>
 <span class="sd">        Cumulative Gain (the DCG obtained for a perfect ranking), in order to</span>
 <span class="sd">        have a score between 0 and 1.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">discount</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">log_base</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">discount</span><span class="p">[</span><span class="n">k</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1610,7 +1610,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_tie_averaged_dcg</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">discount_cumsum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute DCG by averaging over possible permutations of ties.</span>
 
 <span class="sd">    The gain (`y_true`) of an index falling inside a tied group (in the order</span>
@@ -1645,7 +1645,7 @@
 <span class="sd">    performance measures efficiently in the presence of tied scores. In</span>
 <span class="sd">    European conference on information retrieval (pp. 414-421). Springer,</span>
 <span class="sd">    Berlin, Heidelberg.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">inv</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="o">-</span><span class="n">y_score</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">ranked</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">counts</span><span class="p">))</span>
     <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">ranked</span><span class="p">,</span> <span class="n">inv</span><span class="p">,</span> <span class="n">y_true</span><span class="p">)</span>
@@ -1658,15 +1658,15 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_check_dcg_target_type</span><span class="p">(</span><span class="n">y_true</span><span class="p">):</span>
-    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">&quot;y_true&quot;</span><span class="p">)</span>
+    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">"y_true"</span><span class="p">)</span>
     <span class="n">supported_fmt</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;multilabel-indicator&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;continuous-multioutput&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;multiclass-multioutput&quot;</span><span class="p">,</span>
+        <span class="s2">"multilabel-indicator"</span><span class="p">,</span>
+        <span class="s2">"continuous-multioutput"</span><span class="p">,</span>
+        <span class="s2">"multiclass-multioutput"</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">if</span> <span class="n">y_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">supported_fmt</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Only </span><span class="si">{}</span><span class="s2"> formats are supported. Got </span><span class="si">{}</span><span class="s2"> instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="s2">"Only </span><span class="si">{}</span><span class="s2"> formats are supported. Got </span><span class="si">{}</span><span class="s2"> instead"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="n">supported_fmt</span><span class="p">,</span> <span class="n">y_type</span>
             <span class="p">)</span>
         <span class="p">)</span>
@@ -1674,19 +1674,19 @@
 
 <span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;y_score&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Integral</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;log_base&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Real</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">&quot;neither&quot;</span><span class="p">)],</span>
-        <span class="s2">&quot;sample_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;ignore_ties&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;boolean&quot;</span><span class="p">],</span>
+        <span class="s2">"y_true"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"y_score"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"k"</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Integral</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">"left"</span><span class="p">),</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"log_base"</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Real</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">"neither"</span><span class="p">)],</span>
+        <span class="s2">"sample_weight"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"ignore_ties"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"boolean"</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">dcg_score</span><span class="p">(</span>
     <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">log_base</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Discounted Cumulative Gain.</span>
+<span class="w">    </span><span class="sd">"""Compute Discounted Cumulative Gain.</span>
 
 <span class="sd">    Sum the true scores ranked in the order induced by the predicted scores,</span>
 <span class="sd">    after applying a logarithmic discount.</span>
@@ -1706,7 +1706,7 @@
 <span class="sd">    y_score : array-like of shape (n_samples, n_labels)</span>
 <span class="sd">        Target scores, can either be probability estimates, confidence values,</span>
 <span class="sd">        or non-thresholded measure of decisions (as returned by</span>
-<span class="sd">        &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        "decision_function" on some classifiers).</span>
 
 <span class="sd">    k : int, default=None</span>
 <span class="sd">        Only consider the highest k scores in the ranking. If None, use all</span>
@@ -1772,12 +1772,12 @@
 <span class="sd">    &gt;&gt;&gt; dcg_score(true_relevance, scores, k=1)</span>
 <span class="sd">    np.float64(7.5)</span>
 <span class="sd">    &gt;&gt;&gt; # we can choose to ignore ties for faster results, but only</span>
-<span class="sd">    &gt;&gt;&gt; # if we know there aren&#39;t ties in our scores, otherwise we get</span>
+<span class="sd">    &gt;&gt;&gt; # if we know there aren't ties in our scores, otherwise we get</span>
 <span class="sd">    &gt;&gt;&gt; # wrong results:</span>
 <span class="sd">    &gt;&gt;&gt; dcg_score(true_relevance,</span>
 <span class="sd">    ...           scores, k=1, ignore_ties=True)</span>
 <span class="sd">    np.float64(5.0)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">y_score</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
@@ -1791,7 +1791,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_ndcg_sample_scores</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Normalized Discounted Cumulative Gain.</span>
+<span class="w">    </span><span class="sd">"""Compute Normalized Discounted Cumulative Gain.</span>
 
 <span class="sd">    Sum the true scores ranked in the order induced by the predicted scores,</span>
 <span class="sd">    after applying a logarithmic discount. Then divide by the best possible</span>
@@ -1810,7 +1810,7 @@
 <span class="sd">    y_score : ndarray of shape (n_samples, n_labels)</span>
 <span class="sd">        Target scores, can either be probability estimates, confidence values,</span>
 <span class="sd">        or non-thresholded measure of decisions (as returned by</span>
-<span class="sd">        &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        "decision_function" on some classifiers).</span>
 
 <span class="sd">    k : int, default=None</span>
 <span class="sd">        Only consider the highest k scores in the ranking. If None, use all</span>
@@ -1829,10 +1829,10 @@
 <span class="sd">    --------</span>
 <span class="sd">    dcg_score : Discounted Cumulative Gain (not normalized).</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">gain</span> <span class="o">=</span> <span class="n">_dcg_sample_scores</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="n">ignore_ties</span><span class="p">)</span>
     <span class="c1"># Here we use the order induced by y_true so we can ignore ties since</span>
-    <span class="c1"># the gain associated to tied indices is the same (permuting ties doesn&#39;t</span>
+    <span class="c1"># the gain associated to tied indices is the same (permuting ties doesn't</span>
     <span class="c1"># change the value of the re-ordered y_true)</span>
     <span class="n">normalizing_gain</span> <span class="o">=</span> <span class="n">_dcg_sample_scores</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">all_irrelevant</span> <span class="o">=</span> <span class="n">normalizing_gain</span> <span class="o">==</span> <span class="mi">0</span>
@@ -1843,16 +1843,16 @@
 
 <span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;y_score&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Integral</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;sample_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;ignore_ties&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;boolean&quot;</span><span class="p">],</span>
+        <span class="s2">"y_true"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"y_score"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"k"</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Integral</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">"left"</span><span class="p">),</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"sample_weight"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"ignore_ties"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"boolean"</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">ndcg_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Normalized Discounted Cumulative Gain.</span>
+<span class="w">    </span><span class="sd">"""Compute Normalized Discounted Cumulative Gain.</span>
 
 <span class="sd">    Sum the true scores ranked in the order induced by the predicted scores,</span>
 <span class="sd">    after applying a logarithmic discount. Then divide by the best possible</span>
@@ -1872,7 +1872,7 @@
 <span class="sd">    y_score : array-like of shape (n_samples, n_labels)</span>
 <span class="sd">        Target scores, can either be probability estimates, confidence values,</span>
 <span class="sd">        or non-thresholded measure of decisions (as returned by</span>
-<span class="sd">        &quot;decision_function&quot; on some classifiers).</span>
+<span class="sd">        "decision_function" on some classifiers).</span>
 
 <span class="sd">    k : int, default=None</span>
 <span class="sd">        Only consider the highest k scores in the ranking. If `None`, use all</span>
@@ -1939,22 +1939,22 @@
 <span class="sd">    &gt;&gt;&gt; ndcg_score(true_relevance, scores, k=1)</span>
 <span class="sd">    np.float64(0.75...)</span>
 <span class="sd">    &gt;&gt;&gt; # we can choose to ignore ties for faster results, but only</span>
-<span class="sd">    &gt;&gt;&gt; # if we know there aren&#39;t ties in our scores, otherwise we get</span>
+<span class="sd">    &gt;&gt;&gt; # if we know there aren't ties in our scores, otherwise we get</span>
 <span class="sd">    &gt;&gt;&gt; # wrong results:</span>
 <span class="sd">    &gt;&gt;&gt; ndcg_score(true_relevance,</span>
 <span class="sd">    ...           scores, k=1, ignore_ties=True)</span>
 <span class="sd">    np.float64(0.5...)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">y_score</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">y_true</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ndcg_score should not be used on negative y_true values.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"ndcg_score should not be used on negative y_true values."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">y_true</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Computing NDCG is only meaningful when there is more than 1 document. &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Got </span><span class="si">{</span><span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> instead.&quot;</span>
+            <span class="s2">"Computing NDCG is only meaningful when there is more than 1 document. "</span>
+            <span class="sa">f</span><span class="s2">"Got </span><span class="si">{</span><span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> instead."</span>
         <span class="p">)</span>
     <span class="n">_check_dcg_target_type</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
     <span class="n">gain</span> <span class="o">=</span> <span class="n">_ndcg_sample_scores</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">ignore_ties</span><span class="o">=</span><span class="n">ignore_ties</span><span class="p">)</span>
@@ -1965,23 +1965,23 @@
 <a class="viewcode-back" href="../../../accuracy.html#accuracy.top_k_accuracy_score">[docs]</a>
 <span class="nd">@validate_params</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;y_score&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Integral</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)],</span>
-        <span class="s2">&quot;normalize&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;boolean&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;sample_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"y_true"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"y_score"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">],</span>
+        <span class="s2">"k"</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Integral</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)],</span>
+        <span class="s2">"normalize"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"boolean"</span><span class="p">],</span>
+        <span class="s2">"sample_weight"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">"labels"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"array-like"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">top_k_accuracy_score</span><span class="p">(</span>
     <span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Top-k Accuracy classification score.</span>
+<span class="w">    </span><span class="sd">"""Top-k Accuracy classification score.</span>
 
 <span class="sd">    This metric computes the number of times where the correct label is among</span>
 <span class="sd">    the top `k` labels predicted (ranked by predicted scores). Note that the</span>
-<span class="sd">    multilabel case isn&#39;t covered here.</span>
+<span class="sd">    multilabel case isn't covered here.</span>
 
 <span class="sd">    Read more in the :ref:`User Guide &lt;top_k_accuracy_score&gt;`</span>
 
@@ -2046,29 +2046,29 @@
 <span class="sd">    &gt;&gt;&gt; y_score = np.array([[0.5, 0.2, 0.2],  # 0 is in top 2</span>
 <span class="sd">    ...                     [0.3, 0.4, 0.2],  # 1 is in top 2</span>
 <span class="sd">    ...                     [0.2, 0.4, 0.3],  # 2 is in top 2</span>
-<span class="sd">    ...                     [0.7, 0.2, 0.1]]) # 2 isn&#39;t in top 2</span>
+<span class="sd">    ...                     [0.7, 0.2, 0.1]]) # 2 isn't in top 2</span>
 <span class="sd">    &gt;&gt;&gt; top_k_accuracy_score(y_true, y_score, k=2)</span>
 <span class="sd">    np.float64(0.75)</span>
-<span class="sd">    &gt;&gt;&gt; # Not normalizing gives the number of &quot;correctly&quot; classified samples</span>
+<span class="sd">    &gt;&gt;&gt; # Not normalizing gives the number of "correctly" classified samples</span>
 <span class="sd">    &gt;&gt;&gt; top_k_accuracy_score(y_true, y_score, k=2, normalize=False)</span>
 <span class="sd">    np.int64(3)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">column_or_1d</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
-    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">&quot;y_true&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span> <span class="ow">and</span> <span class="n">labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">y_type</span> <span class="o">=</span> <span class="s2">&quot;multiclass&quot;</span>
-    <span class="k">if</span> <span class="n">y_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;multiclass&quot;</span><span class="p">}:</span>
+    <span class="n">y_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">"y_true"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">"binary"</span> <span class="ow">and</span> <span class="n">labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">y_type</span> <span class="o">=</span> <span class="s2">"multiclass"</span>
+    <span class="k">if</span> <span class="n">y_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">"binary"</span><span class="p">,</span> <span class="s2">"multiclass"</span><span class="p">}:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;y type must be &#39;binary&#39; or &#39;multiclass&#39;, got &#39;</span><span class="si">{</span><span class="n">y_type</span><span class="si">}</span><span class="s2">&#39; instead.&quot;</span>
+            <span class="sa">f</span><span class="s2">"y type must be 'binary' or 'multiclass', got '</span><span class="si">{</span><span class="n">y_type</span><span class="si">}</span><span class="s2">' instead."</span>
         <span class="p">)</span>
     <span class="n">y_score</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">"binary"</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">y_score</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;`y_true` is binary while y_score is 2d with&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> classes. If `y_true` does not contain all the&quot;</span>
-                <span class="s2">&quot; labels, `labels` must be provided.&quot;</span>
+                <span class="s2">"`y_true` is binary while y_score is 2d with"</span>
+                <span class="sa">f</span><span class="s2">" </span><span class="si">{</span><span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> classes. If `y_true` does not contain all the"</span>
+                <span class="s2">" labels, `labels` must be provided."</span>
             <span class="p">)</span>
         <span class="n">y_score</span> <span class="o">=</span> <span class="n">column_or_1d</span><span class="p">(</span><span class="n">y_score</span><span class="p">)</span>
 
@@ -2081,10 +2081,10 @@
 
         <span class="k">if</span> <span class="n">n_classes</span> <span class="o">!=</span> <span class="n">y_score_n_classes</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Number of classes in &#39;y_true&#39; (</span><span class="si">{</span><span class="n">n_classes</span><span class="si">}</span><span class="s2">) not equal &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;to the number of classes in &#39;y_score&#39; (</span><span class="si">{</span><span class="n">y_score_n_classes</span><span class="si">}</span><span class="s2">).&quot;</span>
-                <span class="s2">&quot;You can provide a list of all known classes by assigning it &quot;</span>
-                <span class="s2">&quot;to the `labels` parameter.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Number of classes in 'y_true' (</span><span class="si">{</span><span class="n">n_classes</span><span class="si">}</span><span class="s2">) not equal "</span>
+                <span class="sa">f</span><span class="s2">"to the number of classes in 'y_score' (</span><span class="si">{</span><span class="n">y_score_n_classes</span><span class="si">}</span><span class="s2">)."</span>
+                <span class="s2">"You can provide a list of all known classes by assigning it "</span>
+                <span class="s2">"to the `labels` parameter."</span>
             <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">labels</span> <span class="o">=</span> <span class="n">column_or_1d</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
@@ -2093,40 +2093,40 @@
         <span class="n">n_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">n_classes</span> <span class="o">!=</span> <span class="n">n_labels</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Parameter &#39;labels&#39; must be unique.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Parameter 'labels' must be unique."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Parameter &#39;labels&#39; must be ordered.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Parameter 'labels' must be ordered."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">n_classes</span> <span class="o">!=</span> <span class="n">y_score_n_classes</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Number of given labels (</span><span class="si">{</span><span class="n">n_classes</span><span class="si">}</span><span class="s2">) not equal to the &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;number of classes in &#39;y_score&#39; (</span><span class="si">{</span><span class="n">y_score_n_classes</span><span class="si">}</span><span class="s2">).&quot;</span>
+                <span class="sa">f</span><span class="s2">"Number of given labels (</span><span class="si">{</span><span class="n">n_classes</span><span class="si">}</span><span class="s2">) not equal to the "</span>
+                <span class="sa">f</span><span class="s2">"number of classes in 'y_score' (</span><span class="si">{</span><span class="n">y_score_n_classes</span><span class="si">}</span><span class="s2">)."</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">classes</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;y_true&#39; contains labels not in parameter &#39;labels&#39;.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"'y_true' contains labels not in parameter 'labels'."</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="n">n_classes</span><span class="p">:</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
             <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;&#39;k&#39; (</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">) greater than or equal to &#39;n_classes&#39; (</span><span class="si">{</span><span class="n">n_classes</span><span class="si">}</span><span class="s2">) &quot;</span>
-                <span class="s2">&quot;will result in a perfect score and is therefore meaningless.&quot;</span>
+                <span class="sa">f</span><span class="s2">"'k' (</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">) greater than or equal to 'n_classes' (</span><span class="si">{</span><span class="n">n_classes</span><span class="si">}</span><span class="s2">) "</span>
+                <span class="s2">"will result in a perfect score and is therefore meaningless."</span>
             <span class="p">),</span>
             <span class="n">UndefinedMetricWarning</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="n">y_true_encoded</span> <span class="o">=</span> <span class="n">_encode</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">uniques</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">"binary"</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="k">if</span> <span class="n">y_score</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">y_score</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
             <span class="n">y_pred</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_score</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
             <span class="n">hits</span> <span class="o">=</span> <span class="n">y_pred</span> <span class="o">==</span> <span class="n">y_true_encoded</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">hits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">&quot;multiclass&quot;</span><span class="p">:</span>
-        <span class="n">sorted_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;mergesort&quot;</span><span class="p">)[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">y_type</span> <span class="o">==</span> <span class="s2">"multiclass"</span><span class="p">:</span>
+        <span class="n">sorted_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">y_score</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"mergesort"</span><span class="p">)[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">hits</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_true_encoded</span> <span class="o">==</span> <span class="n">sorted_pred</span><span class="p">[:,</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">normalize</span><span class="p">:</span>

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>mindsdb_evaluator.accuracy.classification &mdash; mindsdb_evaluator 0.0.21 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
 
@@ -15,8 +15,8 @@
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../../_static/documentation_options.js?v=a11416ff"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -79,25 +79,25 @@
 <div class="viewcode-block" id="evaluate_multilabel_accuracy">
 <a class="viewcode-back" href="../../../accuracy.html#accuracy.evaluate_multilabel_accuracy">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_multilabel_accuracy</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Evaluates accuracy for multilabel/tag prediction.</span>
 
 <span class="sd">    :return: weighted f1 score of y_pred and ground truths.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pred_values</span> <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="s1">&#39;prediction&#39;</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pred_values</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">)</span></div>
+<span class="sd">    """</span>
+    <span class="n">pred_values</span> <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="s1">'prediction'</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pred_values</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">'weighted'</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="evaluate_top_k_accuracy">
 <a class="viewcode-back" href="../../../accuracy.html#accuracy.evaluate_top_k_accuracy">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_top_k_accuracy</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Evaluates the number of times where the correct label is among the top k labels</span>
 
 <span class="sd">    :return: top k accuracy score of y_pred and ground truths.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pred_values</span> <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="s1">&#39;prediction&#39;</span><span class="p">]</span>
+<span class="sd">    """</span>
+    <span class="n">pred_values</span> <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="s1">'prediction'</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">top_k_accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pred_values</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span></div>
 
 </pre></div>
